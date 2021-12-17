@@ -41,7 +41,7 @@ public:
             break;
         }
 
-        DatabaseHelper::LoadAllDatabase();
+        DatabaseHelper::LoadAllFxDatabase();
 
         mainWindow.reset(new MainWindow(getApplicationName()));
     }

@@ -42,7 +42,8 @@
   <EXPORTFORMATS>
     <VS2019 targetFolder="Builds/VisualStudio2019">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="PangApp"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="PangApp" headerPath="C:\dev\vcpkg\installed\x64-windows\include"
+                       libraryPath="C:\dev\vcpkg\installed\x64-windows\lib&#10;C:\dev\vcpkg\installed\x64-windows\debug\lib"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="PangApp"/>
       </CONFIGURATIONS>
       <MODULEPATHS>

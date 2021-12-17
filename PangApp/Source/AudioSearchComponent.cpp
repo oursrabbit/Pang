@@ -79,7 +79,7 @@ AudioSearchComponent::~AudioSearchComponent()
 
 void AudioSearchComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::green);
+    g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
 }
 
 void AudioSearchComponent::resized()
@@ -105,7 +105,6 @@ void AudioSearchComponent::resized()
     autoTranslateButton->setBounds(getWidth() - 200 - 10 - 100 - 10 - 100 - 10 - 100 - 10 - autoTranslateLabelWidth - 25, 0, 25, 30);
     //- WidthOfComboBox - 10 - WidthOfLabel
     fileMetadataLabel->setBounds(getWidth() - 200 - 10 - 100, 30 + 10, 200 + 10 + 100, getHeight()- 30 - 10);
-    fileMetadataLabel->setColour(fileMetadataLabel->backgroundColourId, juce::Colours::yellow);
     // Auto Resize
     //- WidthOfComboBox - 10 - WidthOfLabel - 10
     keywordsTextEditor->setBounds(0, 30 + 10, getWidth() - 200 - 10 - 100 - 10, 30);
@@ -115,24 +114,24 @@ void AudioSearchComponent::resized()
 void AudioSearchComponent::LoadDatabase()
 {
     databaseComboBox->clear();
-    for (int i = 0; i < DatabaseHelper::databaseFiles.size(); i++)
+    for (int i = 0; i < DatabaseHelper::DatabaseFiles.size(); i++)
     {
-        databaseComboBox->addItem(DatabaseHelper::databaseFiles[i].getFileNameWithoutExtension(), i + 1);
+        databaseComboBox->addItem(DatabaseHelper::DatabaseFiles[i].RowFile.getFileNameWithoutExtension(), DatabaseHelper::DatabaseFiles[i].ItemID);
     }
-    databaseComboBox->setSelectedId(1, juce::NotificationType::sendNotification);
+    databaseComboBox->setSelectedId(databaseComboBox->getNumItems() == 0 ? 0 : 1, juce::NotificationType::sendNotification);
 }
 
 void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 {
     if (buttonThatWasClicked == searchButton.get())
     {
-        keywordsTextEditor->setText(BaiduAIHelper::TextTrans(keywordsTextEditor->getText()));
-        auto text = keywordsTextEditor->getText();
-        juce::StringArray keyWords;
-        keyWords.addTokens(text, true);
-        for each (auto keyword in keyWords)
+        if (DatabaseHelper::CurrentFxDB != nullptr)
         {
-            
+            keywordsTextEditor->setText(BaiduAIHelper::TextTrans(keywordsTextEditor->getText()));
+            auto text = keywordsTextEditor->getText();
+            juce::StringArray keyWords;
+            keyWords.addTokens(text, true);
+            DatabaseHelper::CurrentFxDB->SetFilter(keyWords);
         }
     }
     else if (buttonThatWasClicked == resetKeywordsButton.get())
@@ -147,7 +146,7 @@ void AudioSearchComponent::comboBoxChanged(juce::ComboBox* comboBoxThatHasChange
 {
     if (comboBoxThatHasChanged == databaseComboBox.get())
     {
-        DatabaseHelper::LoadDatabase(databaseComboBox->getSelectedId() - 1);
+        DatabaseHelper::LoadFxDatabase(databaseComboBox->getSelectedId());
         fileListTable->Update();
     }
 }

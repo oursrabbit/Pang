@@ -30,11 +30,12 @@
 WaveMetadataTableListBoxModel::WaveMetadataTableListBoxModel()
 {
     addAndMakeVisible(table);
-
+    table.setColour(juce::ListBox::outlineColourId, juce::Colours::grey);      // [2]
+    table.setOutlineThickness(1);
     table.getHeader().removeAllColumns();
-    for each (auto header in DatabaseHelper::databaseHeaderIndexSchema)
+    for each (auto header in FxDB::DBSchema)
     {
-        table.getHeader().addColumn(TRANS(header.second), header.first, 100);
+        table.getHeader().addColumn(TRANS(header.HeaderName), header.ColumnIndex, 100);
     }
     table.autoSizeAllColumns();
     table.setModel(this);
@@ -77,26 +78,49 @@ void WaveMetadataTableListBoxModel::Update()
 
 int WaveMetadataTableListBoxModel::getNumRows()
 {
-    return DatabaseHelper::FilteredFxInfos.size();
+    return DatabaseHelper::CurrentFxDB == nullptr ? 0 : DatabaseHelper::CurrentFxDB->FilteredFxs.size();
 }
 
 void WaveMetadataTableListBoxModel::paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
 {
-    g.setColour(juce::Colours::white);
-    g.fillAll();
+    auto alternateColour = getLookAndFeel().findColour(juce::ListBox::backgroundColourId)
+        .interpolatedWith(getLookAndFeel().findColour(juce::ListBox::textColourId), 0.03f);
+    if (rowIsSelected)
+        g.fillAll(juce::Colours::lightblue);
+    else if (rowNumber % 2)
+        g.fillAll(alternateColour);
 }
 
 void WaveMetadataTableListBoxModel::paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
 {
-    g.setColour(juce::Colours::black);
-    auto FxInfo = DatabaseHelper::FilteredFxInfos[rowNumber];
-    auto Info = FxInfo.find(columnId);
-    g.drawText(Info->second, 2, 0, width, height, juce::Justification::centredLeft, true);
+    if (DatabaseHelper::CurrentFxDB != nullptr)
+    {
+        g.setColour(rowIsSelected ? juce::Colours::darkblue : getLookAndFeel().findColour(juce::ListBox::textColourId));  // [5]
+
+        auto fx = DatabaseHelper::CurrentFxDB->Fxs[rowNumber];
+        FxInfoHeader* info = fx.FindInfoByColumnID(columnId);
+        g.drawText(info->Value, 2, 0, width - 4, height, juce::Justification::centredLeft, true);
+
+        g.setColour(getLookAndFeel().findColour(juce::ListBox::backgroundColourId));
+        g.fillRect(width - 1, 0, 1, height);
+    }
+}
+
+juce::Component* WaveMetadataTableListBoxModel::refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/,
+    juce::Component* existingComponentToUpdate)
+{
+    auto* textLabel = static_cast<EditableTextCustomComponent*> (existingComponentToUpdate);
+
+    if (textLabel == nullptr)
+        textLabel = new EditableTextCustomComponent(*this);
+
+    textLabel->setRowAndColumn(rowNumber, columnId);
+    return textLabel;
 }
 
 void WaveMetadataTableListBoxModel::selectedRowsChanged(int lastRowSelected)
 {
-    if (Listener != NULL)
-        Listener->tableSelectedRowChanged(lastRowSelected);
+   // if (Listener != NULL)
+       // Listener->tableSelectedRowChanged(lastRowSelected);
 }
 

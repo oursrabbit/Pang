@@ -12,9 +12,9 @@
 
 std::unique_ptr<juce::ApplicationProperties> SystemSettingsHelper::AppProperties = nullptr;
 
+juce::String FxDB::SchemaPath = "\\Pang\\DB\\Template\\PXMLSchema.pxml";
+juce::String FxDB::DBPath = "\\Pang\\DB";
+std::vector<FxInfoHeader> FxDB::DBSchema = std::vector<FxInfoHeader>();
 
-juce::String DatabaseHelper::fileBasePath = "";
-std::map<int, juce::File> DatabaseHelper::databaseFiles = std::map<int, juce::File>();
-std::map<int, juce::String> DatabaseHelper::databaseHeaderIndexSchema = std::map<int, juce::String>();
-std::vector<std::map<int, juce::String>> DatabaseHelper::FXInfos = std::vector<std::map<int, juce::String>>();
-std::vector<std::map<int, juce::String>> DatabaseHelper::FilteredFxInfos = std::vector<std::map<int, juce::String>>();
+std::vector <FxDB> DatabaseHelper::DatabaseFiles = std::vector <FxDB>();
+FxDB* DatabaseHelper::CurrentFxDB = nullptr;

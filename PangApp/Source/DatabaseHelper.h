@@ -15,6 +15,140 @@
 #define SettingsKey_AppDataBasePath "AppDataBasePath"
 #define SettingsKey_AutoTranslate "AutoTranslate"
 
+class FxInfoHeader
+{
+public:
+    int ColumnIndex;
+    juce::String HeaderName;
+    juce::String Value;
+
+    FxInfoHeader(int index, juce::String name = "", juce::String value = "")
+    {
+        ColumnIndex = index;
+        HeaderName = name;
+        Value = value;
+    }
+};
+
+class FxInfo
+{
+public:
+    std::vector<FxInfoHeader> Infos;
+
+    FxInfoHeader* FindInfoByColumnID(int id)
+    {
+        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoHeader t) {return t.ColumnIndex == id;});
+        if (info != std::end(Infos))
+            return info._Ptr;
+        else
+            return nullptr;
+    }
+
+    FxInfoHeader* FindInfoByHeaderName(juce::String name)
+    {
+        auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfoHeader t) {return t.HeaderName == name;});
+        if (info != std::end(Infos))
+            return info._Ptr;
+        else
+            return nullptr;
+    }
+
+    std::vector<FxInfoHeader> FindInfoByKeywords(juce::StringArray name)
+    {
+        auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfoHeader t) {return t.HeaderName == name; });
+        if (info != std::end(Infos))
+        {
+            std::copy(info, filter)
+        }
+        else
+            return std::vector<FxInfoHeader>();
+    }
+
+    void SetValueByColumnID(int id, juce::String value)
+    {
+        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoHeader t) {return t.ColumnIndex == id; });
+        if (info != std::end(Infos))
+            info->Value = value;
+    }
+};
+
+class FxDB
+{
+public:
+    static juce::String SchemaPath;
+    static juce::String DBPath;
+    static std::vector<FxInfoHeader> DBSchema;
+    
+    int ItemID;
+    juce::String FileBasePath;
+    std::vector<FxInfo> Fxs;
+    std::vector<FxInfo> FilteredFxs;
+    juce::File RowFile;
+
+    FxDB(juce::File dbFile, int id)
+    {
+        ItemID = id;
+        RowFile = dbFile;
+        Fxs.clear();
+        FileBasePath = "";
+    }
+
+    void Load()
+    {
+        Fxs.clear();
+        FilteredFxs.clear();
+        FileBasePath = "";
+        if (RowFile.exists())
+        {
+            auto tutorialData = juce::XmlDocument::parse(RowFile);
+            FileBasePath = tutorialData->getChildByName("BasePath")->getAllSubText();
+            auto SoundEffectInfos = tutorialData->getChildByName("SoundEffectInfos");
+            for (auto FXInfoXML : SoundEffectInfos->getChildIterator())
+            {
+                FxInfo newFx;
+                newFx.Infos.clear();
+                for each (auto key in FxDB::DBSchema)
+                {
+                    auto childNode = FXInfoXML->getChildByName(key.HeaderName);
+                    if (childNode != nullptr)
+                    {
+                        newFx.Infos.push_back(FxInfoHeader(key.ColumnIndex, key.HeaderName, childNode->getAllSubText()));
+                    }
+                    else
+                    {
+                        newFx.Infos.push_back(FxInfoHeader(key.ColumnIndex, key.HeaderName));
+                    }
+                }
+                Fxs.push_back(newFx);
+                FilteredFxs.push_back(newFx);
+            }
+        }
+    }
+
+    void ResetFilter()
+    {
+        FilteredFxs = Fxs;
+        FilteredFxs.clear();
+    }
+
+    void SetFilter(juce::StringArray keywords)
+    {
+        auto res = std::find_if(FilteredFxs.begin(), FilteredFxs.end(), [keywords](FxInfo t) {
+            return t.FindInfoByKeywords(keywords).size() != 0; });
+        auto temp = std::vector<FxInfo>();
+        for (auto it = std::find_if(v.begin(), v.end(), IsOdd);
+            it != v.end();
+            it = std::find_if(++it, v.end(), IsOdd))
+        {
+            // ...
+        }
+        if (res == FilteredFxs.end())
+            FilteredFxs.clear();
+        else
+            FilteredFxs = *res._Ptr;
+    }
+};
+
 class SystemSettingsHelper
 {
 public:
@@ -91,89 +225,43 @@ public:
 class DatabaseHelper
 {
 public:
-    static std::map<int, juce::File> databaseFiles;
-    static std::map<int, juce::String> databaseHeaderIndexSchema;
+    static std::vector<FxDB> DatabaseFiles;
+    static FxDB* CurrentFxDB;
 
-    static juce::String fileBasePath;
-    // Start Form 1
-    static std::vector<std::map<int, juce::String>> FXInfos;
-    static std::vector<std::map<int, juce::String>> FilteredFxInfos;
-
-
-
-    static void LoadAllDatabase()
+    static void LoadAllFxDatabase()
     {
-        auto databaseSchemaFile = juce::File(SystemSettingsHelper::GetAppDataBasePath() + "\\Pang\\DB\\Template\\PXMLSchema.pxml");
+        // Load Schema
+        auto databaseSchemaFile = juce::File(SystemSettingsHelper::GetAppDataBasePath() + FxDB::SchemaPath);
         if (databaseSchemaFile.exists())
         {
             auto databaseSchema = juce::XmlDocument::parse(databaseSchemaFile);
 
             int columnIndex = 1;
-            databaseHeaderIndexSchema.clear();
+            FxDB::DBSchema.clear();
             for (auto tableHeader : databaseSchema->getChildByName("SoundEffect")->getChildIterator())
             {
-                DatabaseHelper::databaseHeaderIndexSchema[columnIndex++] = tableHeader->getTagName();
+                FxInfoHeader newHeader(columnIndex++, tableHeader->getTagName());
+                FxDB::DBSchema.push_back(newHeader);
             }
 
-            juce::File databasePath = juce::File(SystemSettingsHelper::GetAppDataBasePath() + "\\Pang\\DB\\");
+            // Load DatabaseList
+            juce::File databasePath = juce::File(SystemSettingsHelper::GetAppDataBasePath() + FxDB::DBPath);
             auto dbF = databasePath.findChildFiles(juce::File::findFiles, false, "*.pxml");
-            DatabaseHelper::databaseFiles.clear();
+            DatabaseHelper::DatabaseFiles.clear();
             for (int i = 0; i < dbF.size(); ++i)
             {
-                DatabaseHelper::databaseFiles[i] = dbF[i];
+                DatabaseHelper::DatabaseFiles.push_back(FxDB(dbF[i], i + 1));
             }
         }
     }
 
-    static void LoadDatabase(int index)
+    static void LoadFxDatabase(int id)
     {
-        auto databaseFile = databaseFiles[index];
-        if (databaseFile.exists())
+        auto fxdb = std::find_if(std::begin(DatabaseHelper::DatabaseFiles), std::end(DatabaseHelper::DatabaseFiles), [id](FxDB t) { return t.ItemID == id; });
+        if (fxdb != std::end(DatabaseHelper::DatabaseFiles))
         {
-            DatabaseHelper::FXInfos.clear();
-            DatabaseHelper::FilteredFxInfos.clear();
-            auto tutorialData = juce::XmlDocument::parse(databaseFile);
-
-            fileBasePath = tutorialData->getChildByName("BasePath")->getAllSubText();
-            auto SoundEffectInfos = tutorialData->getChildByName("SoundEffectInfos");
-            for (auto FXInfoXML : SoundEffectInfos->getChildIterator())
-            {
-                auto FXInfo = std::map<int, juce::String>();
-                for each (auto key in DatabaseHelper::databaseHeaderIndexSchema)
-                {
-                    auto childNode = FXInfoXML->getChildByName(key.second);
-                    if (childNode != nullptr)
-                    {
-                        FXInfo[key.first] = FXInfoXML->getChildByName(key.second)->getAllSubText();
-                    }
-                    else
-                    {
-                        FXInfo[key.first] = "";
-                    }
-                }
-                DatabaseHelper::FXInfos.push_back(FXInfo);
-                DatabaseHelper::FilteredFxInfos.push_back(FXInfo);
-            }
+            fxdb->Load();
+            CurrentFxDB = fxdb._Ptr;
         }
     }
-
-    //static void Find(juce::String keyword)
-    //{
-    //    std::vector<SoundEffectInfo> res;
-    //    for each (auto FX in DatabaseHelper::FilteredFxInfos)
-    //    {
-    //        if(FX.FileName.contains(keyword) || FX.Description.contains(keyword))
-    //            res.push_back(FX);
-    //    }
-    //    DatabaseHelper::FilteredFxInfos = res;
-    //}
-
-    //static void RsetDatabase()
-    //{
-    //    DatabaseHelper::FilteredFxInfos.clear();
-    //    for each (auto FX in DatabaseHelper::FXInfos)
-    //    {
-    //        DatabaseHelper::FilteredFxInfos.push_back(FX);
-    //    }
-    //}
 };

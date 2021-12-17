@@ -135,16 +135,11 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 
 void AudioExportComponent::selectedFileChanged(int lastRowSelected)
 {
-    auto FxInfo = DatabaseHelper::FilteredFxInfos[lastRowSelected];
-    juce::File file;
-    for each (auto header in DatabaseHelper::databaseHeaderIndexSchema)
-    {
-        if (header.second == "Filename")
-        {
-            file = juce::File(DatabaseHelper::fileBasePath + "\\" + FxInfo.find(header.first)->second);
-            break;
-        }
-    }
+    auto fx = DatabaseHelper::CurrentFxDB->Fxs[lastRowSelected];
+    auto info = fx.FindInfoByHeaderName("Filename");
+    //if (info == nullptr)
+        ///return;
+    juce::File file(DatabaseHelper::CurrentFxDB->FileBasePath + "\\" + info->Value);
     if (file.exists())
     {
         auto* reader = formatManager.createReaderFor(file);                 // [10]
