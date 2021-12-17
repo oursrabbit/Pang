@@ -98,7 +98,7 @@ void WaveMetadataTableListBoxModel::paintCell(juce::Graphics& g, int rowNumber, 
         g.setColour(rowIsSelected ? juce::Colours::darkblue : getLookAndFeel().findColour(juce::ListBox::textColourId));  // [5]
 
         auto fx = DatabaseHelper::CurrentFxDB->Fxs[rowNumber];
-        FxInfoHeader* info = fx.FindInfoByColumnID(columnId);
+        FxInfoElement* info = fx.FindInfoByColumnID(columnId);
         g.drawText(info->Value, 2, 0, width - 4, height, juce::Justification::centredLeft, true);
 
         g.setColour(getLookAndFeel().findColour(juce::ListBox::backgroundColourId));
@@ -120,7 +120,7 @@ juce::Component* WaveMetadataTableListBoxModel::refreshComponentForCell(int rowN
 
 void WaveMetadataTableListBoxModel::selectedRowsChanged(int lastRowSelected)
 {
-   // if (Listener != NULL)
-       // Listener->tableSelectedRowChanged(lastRowSelected);
+    if (Listener != NULL)
+        Listener->tableSelectedRowChanged(lastRowSelected);
 }
 

@@ -40,6 +40,8 @@ AudioSearchComponent::AudioSearchComponent()
         autoTranslateButton->addListener(this);
         autoTranslateButton->setToggleState(SystemSettingsHelper::GetAutoTranslate(), juce::NotificationType::dontSendNotification);
     }
+    else
+        autoTranslateButton->setToggleState(false, juce::NotificationType::dontSendNotification);
 
     currentDatabaseLabel.reset(new juce::Label("currentDatabaseLabel", TRANS("Current Database:")));
     addAndMakeVisible(currentDatabaseLabel.get());
@@ -127,15 +129,22 @@ void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     {
         if (DatabaseHelper::CurrentFxDB != nullptr)
         {
-            keywordsTextEditor->setText(BaiduAIHelper::TextTrans(keywordsTextEditor->getText()));
+            if (autoTranslateButton->getToggleState())
+                keywordsTextEditor->setText(BaiduAIHelper::TextTrans(keywordsTextEditor->getText()));
             auto text = keywordsTextEditor->getText();
             juce::StringArray keyWords;
             keyWords.addTokens(text, true);
             DatabaseHelper::CurrentFxDB->SetFilter(keyWords);
+            fileListTable->Update();
         }
     }
     else if (buttonThatWasClicked == resetKeywordsButton.get())
     {
+        if (DatabaseHelper::CurrentFxDB != nullptr)
+        {
+            DatabaseHelper::CurrentFxDB->ResetFilter();
+            fileListTable->Update();
+        }
     }
     else if (buttonThatWasClicked == autoTranslateButton.get())
     {
@@ -155,6 +164,7 @@ void AudioSearchComponent::tableSelectedRowChanged(int lastRowSelected)
 {
     if (Listener != nullptr)
     {
-        Listener->selectedFileChanged(lastRowSelected);
+        //Listener->selectedFileChanged(lastRowSelected);
+        fileMetadataLabel->setText(lastRowSelected + "", juce::NotificationType::dontSendNotification);
     }
 }

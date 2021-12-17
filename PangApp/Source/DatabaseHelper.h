@@ -15,58 +15,68 @@
 #define SettingsKey_AppDataBasePath "AppDataBasePath"
 #define SettingsKey_AutoTranslate "AutoTranslate"
 
-class FxInfoHeader
+class FxInfoElement
 {
 public:
     int ColumnIndex;
     juce::String HeaderName;
     juce::String Value;
 
-    FxInfoHeader(int index, juce::String name = "", juce::String value = "")
+    FxInfoElement(int index, juce::String name = "", juce::String value = "")
     {
         ColumnIndex = index;
         HeaderName = name;
         Value = value;
+    }
+
+    bool ContainKeywords(juce::StringArray keywords)
+    {
+        for each (auto kw in keywords)
+        {
+            return Value.containsIgnoreCase(kw);
+        }
+        return false;
     }
 };
 
 class FxInfo
 {
 public:
-    std::vector<FxInfoHeader> Infos;
+    std::vector<FxInfoElement> Infos;
+    juce::File AudioFile;
 
-    FxInfoHeader* FindInfoByColumnID(int id)
+    FxInfoElement* FindInfoByColumnID(int id)
     {
-        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoHeader t) {return t.ColumnIndex == id;});
+        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoElement t) {return t.ColumnIndex == id;});
         if (info != std::end(Infos))
             return info._Ptr;
         else
             return nullptr;
     }
 
-    FxInfoHeader* FindInfoByHeaderName(juce::String name)
+    FxInfoElement* FindInfoByHeaderName(juce::String name)
     {
-        auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfoHeader t) {return t.HeaderName == name;});
+        auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfoElement t) {return t.HeaderName == name;});
         if (info != std::end(Infos))
             return info._Ptr;
         else
             return nullptr;
     }
 
-    std::vector<FxInfoHeader> FindInfoByKeywords(juce::StringArray name)
+    std::vector<FxInfoElement> FindInfoElementsByKeywords(juce::StringArray keywords)
     {
-        auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfoHeader t) {return t.HeaderName == name; });
-        if (info != std::end(Infos))
+        auto res = std::vector<FxInfoElement>();
+        for each (auto element in Infos)
         {
-            std::copy(info, filter)
+            if (element.ContainKeywords(keywords))
+                res.push_back(element);
         }
-        else
-            return std::vector<FxInfoHeader>();
+        return res;
     }
 
     void SetValueByColumnID(int id, juce::String value)
     {
-        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoHeader t) {return t.ColumnIndex == id; });
+        auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfoElement t) {return t.ColumnIndex == id; });
         if (info != std::end(Infos))
             info->Value = value;
     }
@@ -77,7 +87,7 @@ class FxDB
 public:
     static juce::String SchemaPath;
     static juce::String DBPath;
-    static std::vector<FxInfoHeader> DBSchema;
+    static std::vector<FxInfoElement> DBSchema;
     
     int ItemID;
     juce::String FileBasePath;
@@ -112,11 +122,11 @@ public:
                     auto childNode = FXInfoXML->getChildByName(key.HeaderName);
                     if (childNode != nullptr)
                     {
-                        newFx.Infos.push_back(FxInfoHeader(key.ColumnIndex, key.HeaderName, childNode->getAllSubText()));
+                        newFx.Infos.push_back(FxInfoElement(key.ColumnIndex, key.HeaderName, childNode->getAllSubText()));
                     }
                     else
                     {
-                        newFx.Infos.push_back(FxInfoHeader(key.ColumnIndex, key.HeaderName));
+                        newFx.Infos.push_back(FxInfoElement(key.ColumnIndex, key.HeaderName));
                     }
                 }
                 Fxs.push_back(newFx);
@@ -128,24 +138,17 @@ public:
     void ResetFilter()
     {
         FilteredFxs = Fxs;
-        FilteredFxs.clear();
     }
 
     void SetFilter(juce::StringArray keywords)
     {
-        auto res = std::find_if(FilteredFxs.begin(), FilteredFxs.end(), [keywords](FxInfo t) {
-            return t.FindInfoByKeywords(keywords).size() != 0; });
-        auto temp = std::vector<FxInfo>();
-        for (auto it = std::find_if(v.begin(), v.end(), IsOdd);
-            it != v.end();
-            it = std::find_if(++it, v.end(), IsOdd))
+        auto res = std::vector<FxInfo>();
+        for each (auto info in FilteredFxs)
         {
-            // ...
+            if (info.FindInfoElementsByKeywords(keywords).size() != 0)
+                res.push_back(info);
         }
-        if (res == FilteredFxs.end())
-            FilteredFxs.clear();
-        else
-            FilteredFxs = *res._Ptr;
+        FilteredFxs = res;
     }
 };
 
@@ -227,6 +230,7 @@ class DatabaseHelper
 public:
     static std::vector<FxDB> DatabaseFiles;
     static FxDB* CurrentFxDB;
+    static FxInfo* CurrentFx;
 
     static void LoadAllFxDatabase()
     {
@@ -240,7 +244,7 @@ public:
             FxDB::DBSchema.clear();
             for (auto tableHeader : databaseSchema->getChildByName("SoundEffect")->getChildIterator())
             {
-                FxInfoHeader newHeader(columnIndex++, tableHeader->getTagName());
+                FxInfoElement newHeader(columnIndex++, tableHeader->getTagName());
                 FxDB::DBSchema.push_back(newHeader);
             }
 
@@ -262,6 +266,17 @@ public:
         {
             fxdb->Load();
             CurrentFxDB = fxdb._Ptr;
+        }
+    }
+
+    static void LoadFxFile(int index)
+    {
+        delete CurrentFx;
+        CurrentFx = nullptr;
+        if (CurrentFxDB != nullptr)
+        {
+            auto fx = CurrentFxDB->Fxs[index];
+            fx.OpenFlie();
         }
     }
 };

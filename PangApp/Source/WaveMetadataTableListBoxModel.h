@@ -62,7 +62,7 @@ public:
 
     juce::String getText(const int columnNumber, const int rowNumber) const
     {
-        FxInfoHeader* fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber].FindInfoByColumnID(columnNumber);
+        FxInfoElement* fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber].FindInfoByColumnID(columnNumber);
         return fx == nullptr ? "" : fx->Value;
     }
 
