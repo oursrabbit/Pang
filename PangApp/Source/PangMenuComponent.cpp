@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    PangMenuComponent.cpp
-    Created: 8 Dec 2021 1:39:49pm
-    Author:  庞兴庆
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "PangMenuComponent.h"
 
@@ -51,7 +41,7 @@ juce::StringArray PangMenuComponent::getMenuBarNames()
     return { TRANS("System") };
 }
 
-juce::PopupMenu PangMenuComponent::getMenuForIndex(int topLevelMenuIndex, const juce::String& menuName)
+juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menuName)
 {
     juce::PopupMenu menu;
     if (menuName == TRANS("System"))
@@ -61,11 +51,11 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int topLevelMenuIndex, const 
     return menu;
 }
 
-void PangMenuComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
+void PangMenuComponent::menuItemSelected(int menuItemID, int)
 {
     switch (menuItemID)
     {
-    case 101:
+    case 101: // System/System Settings...
         OpenSystemSettingsWindow();
     default:
         break;
@@ -77,5 +67,5 @@ void PangMenuComponent::OpenSystemSettingsWindow()
     juce::DialogWindow::LaunchOptions options;
     options.dialogTitle = TRANS("System Settings");
     options.content = juce::OptionalScopedPointer<juce::Component>(new ApplicationSettingComponent(), true);
-    auto settingWindow = options.launchAsync();
+    options.launchAsync();
 }

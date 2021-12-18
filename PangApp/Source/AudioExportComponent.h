@@ -1,18 +1,7 @@
-/*
-  ==============================================================================
-
-    AudioExportComponent.h
-    Created: 8 Dec 2021 11:11:31am
-    Author:  庞兴庆
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "AudioSearchComponent.h"
-#include "DatabaseHelper.h"
 
 //==============================================================================
 /*
@@ -28,7 +17,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
-    void selectedFileChanged(int lastRowSelected) override;
+    void selectedFileChanged() override;
     // 30 + 10 + 200
     const static int FIXHEIGHT = 240;
 private:

@@ -8,6 +8,9 @@
 
 #include <JuceHeader.h>
 #include "MainComponent.h"
+#include "TranslateHelper.h"
+#include "SystemSettingsHelper.h"
+#include "DatabaseHelper.h"
 
 //==============================================================================
 class PangAppApplication  : public juce::JUCEApplication
@@ -21,27 +24,20 @@ public:
     bool moreThanOneInstanceAllowed() override             { return true; }
 
     //==============================================================================
-    void initialise(const juce::String& commandLine) override
+    void initialise(const juce::String&) override
     {
         // This method is where you should put your application's initialisation code..
+        
+        //[Pang Initialize]
 #ifdef WIN32
         juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YeHei");
 #endif // WIN32
-        switch (SystemSettingsHelper::GetLanguage())
-        {
-        case SystemSettingsHelper::Chinese:
-        {
-            juce::File trans(SystemSettingsHelper::GetAppDataBasePath()+ "\\Pang\\TRANS\\zh.txt");
-            if (trans.existsAsFile())
-                juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(trans, false));
-            break;
-        }
-        default: // English
-            juce::LocalisedStrings::setCurrentMappings(nullptr);
-            break;
-        }
-
+        auto language = SystemSettingsHelper::GetLanguage();
+        auto languageFile = TranslateHelper::GetTransFileByLanguage(language);
+        if (languageFile.existsAsFile())
+            juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(languageFile, false));
         DatabaseHelper::LoadAllFxDatabase();
+        //[/Pang Initialize]
 
         mainWindow.reset(new MainWindow(getApplicationName()));
     }
@@ -51,7 +47,6 @@ public:
         // Add your application's shutdown code here..
 
         mainWindow = nullptr; // (deletes our window)
-        SystemSettingsHelper::AppProperties = nullptr;
     }
 
     //==============================================================================
@@ -62,7 +57,7 @@ public:
         quit();
     }
 
-    void anotherInstanceStarted (const juce::String& commandLine) override
+    void anotherInstanceStarted (const juce::String&) override
     {
         // When another instance of the app is launched while this one is running,
         // this method is invoked, and the commandLine parameter tells you what

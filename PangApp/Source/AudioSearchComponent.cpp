@@ -1,14 +1,7 @@
-/*
-  ==============================================================================
-
-    AudioSearchComponent.cpp
-    Created: 8 Dec 2021 11:11:53am
-    Author:  庞兴庆
-
-  ==============================================================================
-*/
-
 #include "AudioSearchComponent.h"
+#include "BaiduAIHelper.h"
+#include "SystemSettingsHelper.h"
+#include "DatabaseHelper.h"
 
 //==============================================================================
 AudioSearchComponent::AudioSearchComponent()
@@ -29,13 +22,13 @@ AudioSearchComponent::AudioSearchComponent()
     resetKeywordsButton->setButtonText(TRANS("Reset"));
     resetKeywordsButton->addListener(this);
 
+    autoTranslateLabel.reset(new juce::Label("autoTranslateLabel", TRANS("Auto-Translate")));
+    autoTranslateButton.reset(new juce::ToggleButton(""));
     if (BaiduAIHelper::GetAccess_Token() != "")
     {
-        autoTranslateLabel.reset(new juce::Label("autoTranslateLabel", TRANS("Auto-Translate")));
         addAndMakeVisible(autoTranslateLabel.get());
         autoTranslateLabelWidth = juce::LookAndFeel::getDefaultLookAndFeel().getLabelFont(*autoTranslateLabel.get()).getStringWidth(TRANS("Auto-Translate"));
 
-        autoTranslateButton.reset(new juce::ToggleButton(""));
         addAndMakeVisible(autoTranslateButton.get());
         autoTranslateButton->addListener(this);
         autoTranslateButton->setToggleState(SystemSettingsHelper::GetAutoTranslate(), juce::NotificationType::dontSendNotification);
@@ -55,9 +48,9 @@ AudioSearchComponent::AudioSearchComponent()
     fileMetadataLabel.reset(new juce::Label("fileMetadataLabel", TRANS("fileMetadataLabel")));
     addAndMakeVisible(fileMetadataLabel.get());
 
-    fileListTable.reset(new WaveMetadataTableListBoxModel());
-    addAndMakeVisible(fileListTable.get());
-    fileListTable->Listener = this;
+    fxListTable.reset(new FxTable());
+    addAndMakeVisible(fxListTable.get());
+    fxListTable->Listener = this;
 
     setSize(900, 600);
 
@@ -73,7 +66,7 @@ AudioSearchComponent::~AudioSearchComponent()
     currentDatabaseLabel = nullptr;
     databaseComboBox = nullptr;
     fileMetadataLabel = nullptr;
-    fileListTable = nullptr;
+    fxListTable = nullptr;
 
     autoTranslateLabel = nullptr;
     autoTranslateButton = nullptr;
@@ -110,7 +103,7 @@ void AudioSearchComponent::resized()
     // Auto Resize
     //- WidthOfComboBox - 10 - WidthOfLabel - 10
     keywordsTextEditor->setBounds(0, 30 + 10, getWidth() - 200 - 10 - 100 - 10, 30);
-    fileListTable->setBounds(0, 30 + 10 + 30 + 10, getWidth() - 200 - 10 - 100 - 10, getHeight() - 30 - 10 - 30 - 10);
+    fxListTable->setBounds(0, 30 + 10 + 30 + 10, getWidth() - 200 - 10 - 100 - 10, getHeight() - 30 - 10 - 30 - 10);
 }
 
 void AudioSearchComponent::LoadDatabase()
@@ -118,7 +111,7 @@ void AudioSearchComponent::LoadDatabase()
     databaseComboBox->clear();
     for (int i = 0; i < DatabaseHelper::DatabaseFiles.size(); i++)
     {
-        databaseComboBox->addItem(DatabaseHelper::DatabaseFiles[i].RowFile.getFileNameWithoutExtension(), DatabaseHelper::DatabaseFiles[i].ItemID);
+        databaseComboBox->addItem(DatabaseHelper::DatabaseFiles[i].DatabaseFile.getFileNameWithoutExtension(), DatabaseHelper::DatabaseFiles[i].ComboboxItemID);
     }
     databaseComboBox->setSelectedId(databaseComboBox->getNumItems() == 0 ? 0 : 1, juce::NotificationType::sendNotification);
 }
@@ -135,7 +128,7 @@ void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
             juce::StringArray keyWords;
             keyWords.addTokens(text, true);
             DatabaseHelper::CurrentFxDB->SetFilter(keyWords);
-            fileListTable->Update();
+            fxListTable->Update();
         }
     }
     else if (buttonThatWasClicked == resetKeywordsButton.get())
@@ -143,7 +136,7 @@ void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
         if (DatabaseHelper::CurrentFxDB != nullptr)
         {
             DatabaseHelper::CurrentFxDB->ResetFilter();
-            fileListTable->Update();
+            fxListTable->Update();
         }
     }
     else if (buttonThatWasClicked == autoTranslateButton.get())
@@ -156,15 +149,30 @@ void AudioSearchComponent::comboBoxChanged(juce::ComboBox* comboBoxThatHasChange
     if (comboBoxThatHasChanged == databaseComboBox.get())
     {
         DatabaseHelper::LoadFxDatabase(databaseComboBox->getSelectedId());
-        fileListTable->Update();
+        fxListTable->Update();
     }
 }
 
-void AudioSearchComponent::tableSelectedRowChanged(int lastRowSelected)
+void AudioSearchComponent::tableSelectedRowChanged()
 {
-    if (Listener != nullptr)
+    if (DatabaseHelper::CurrentFx != nullptr && DatabaseHelper::CurrentFx->AudioFile.existsAsFile() && DatabaseHelper::CurrentFx->AudioFile.getFileExtension() == ".wav" && DatabaseHelper::CurrentFxFileReader != nullptr)
     {
-        //Listener->selectedFileChanged(lastRowSelected);
-        fileMetadataLabel->setText(lastRowSelected + "", juce::NotificationType::dontSendNotification);
+        juce::String metaDataString = "There are more meta data except below:";
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavDescription) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavDescription];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginator) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginator];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginatorRef) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginatorRef];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationDate) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginationDate];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationTime) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginationTime];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavTimeReference) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavTimeReference];
+        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavCodingHistory) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavCodingHistory];
+        fileMetadataLabel->setText(metaDataString, juce::NotificationType::dontSendNotification);
+    }
+    else
+    {
+        fileMetadataLabel->setText("Open Failed", juce::NotificationType::dontSendNotification);
+    }
+    if (Listener != nullptr)
+    { 
+        Listener->selectedFileChanged();
     }
 }

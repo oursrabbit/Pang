@@ -143,15 +143,20 @@
     <Lib/>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\ApplicationSettingComponent.cpp"/>
-    <ClCompile Include="..\..\Source\AudioExportComponent.cpp"/>
-    <ClCompile Include="..\..\Source\AudioSearchComponent.cpp"/>
-    <ClCompile Include="..\..\Source\BaiduAIHelper.cpp"/>
-    <ClCompile Include="..\..\Source\Main.cpp"/>
-    <ClCompile Include="..\..\Source\MainComponent.cpp"/>
-    <ClCompile Include="..\..\Source\PangMenuComponent.cpp"/>
-    <ClCompile Include="..\..\Source\WaveMetadataTableListBoxModel.cpp"/>
+    <ClCompile Include="..\..\Source\TranslateHelper.cpp"/>
+    <ClCompile Include="..\..\Source\SystemSettingsHelper.cpp"/>
     <ClCompile Include="..\..\Source\DatabaseHelper.cpp"/>
+    <ClCompile Include="..\..\Source\BaiduAIHelper.cpp"/>
+    <ClCompile Include="..\..\Source\Fx.cpp"/>
+    <ClCompile Include="..\..\Source\FxDB.cpp"/>
+    <ClCompile Include="..\..\Source\FxInfo.cpp"/>
+    <ClCompile Include="..\..\Source\AudioExportComponent.cpp"/>
+    <ClCompile Include="..\..\Source\FxTable.cpp"/>
+    <ClCompile Include="..\..\Source\AudioSearchComponent.cpp"/>
+    <ClCompile Include="..\..\Source\PangMenuComponent.cpp"/>
+    <ClCompile Include="..\..\Source\ApplicationSettingComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MainComponent.cpp"/>
+    <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="F:\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -2096,15 +2101,20 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\ApplicationSettingComponent.h"/>
-    <ClInclude Include="..\..\Source\AudioExportComponent.h"/>
-    <ClInclude Include="..\..\Source\AudioSearchComponent.h"/>
+    <ClInclude Include="..\..\Source\TranslateHelper.h"/>
+    <ClInclude Include="..\..\Source\SystemSettingsHelper.h"/>
+    <ClInclude Include="..\..\Source\DatabaseHelper.h"/>
     <ClInclude Include="..\..\Source\BaiduAI.h"/>
     <ClInclude Include="..\..\Source\BaiduAIHelper.h"/>
-    <ClInclude Include="..\..\Source\DatabaseHelper.h"/>
-    <ClInclude Include="..\..\Source\MainComponent.h"/>
+    <ClInclude Include="..\..\Source\Fx.h"/>
+    <ClInclude Include="..\..\Source\FxDB.h"/>
+    <ClInclude Include="..\..\Source\FxInfo.h"/>
+    <ClInclude Include="..\..\Source\AudioExportComponent.h"/>
+    <ClInclude Include="..\..\Source\FxTable.h"/>
+    <ClInclude Include="..\..\Source\AudioSearchComponent.h"/>
     <ClInclude Include="..\..\Source\PangMenuComponent.h"/>
-    <ClInclude Include="..\..\Source\WaveMetadataTableListBoxModel.h"/>
+    <ClInclude Include="..\..\Source\ApplicationSettingComponent.h"/>
+    <ClInclude Include="..\..\Source\MainComponent.h"/>
     <ClInclude Include="F:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>
     <ClInclude Include="F:\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.h"/>
     <ClInclude Include="F:\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>

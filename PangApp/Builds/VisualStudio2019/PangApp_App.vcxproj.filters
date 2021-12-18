@@ -2,6 +2,27 @@
 
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="PangApp\Source\Utilities\BaiduAI">
+      <UniqueIdentifier>{795C21C9-205D-B604-0146-DFFFFD0DE1C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\Utilities">
+      <UniqueIdentifier>{76D01D8F-65B5-4D5A-A228-338B1F0FB1A7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\Model">
+      <UniqueIdentifier>{3F48B984-39B9-A88E-0978-5525326E7872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\UI\AudioPlayer">
+      <UniqueIdentifier>{EFA17848-7AE9-75D7-614C-754F8042587C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\UI\AudioSearch">
+      <UniqueIdentifier>{A8D87B84-5C38-40A3-9EDC-A8CB9374B533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\UI\Menu">
+      <UniqueIdentifier>{7249DC6C-722A-3A52-9593-00CBD45B5CCD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\UI">
+      <UniqueIdentifier>{887D02A3-D3F5-D91A-4021-A6338040A1EA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PangApp\Source">
       <UniqueIdentifier>{FF312E71-F53E-9121-B1CF-A82FD1B7A7DE}</UniqueIdentifier>
     </Filter>
@@ -439,31 +460,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\ApplicationSettingComponent.cpp">
-      <Filter>PangApp\Source</Filter>
+    <ClCompile Include="..\..\Source\TranslateHelper.cpp">
+      <Filter>PangApp\Source\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AudioExportComponent.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\AudioSearchComponent.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\BaiduAIHelper.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Main.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\MainComponent.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PangMenuComponent.cpp">
-      <Filter>PangApp\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\WaveMetadataTableListBoxModel.cpp">
-      <Filter>PangApp\Source</Filter>
+    <ClCompile Include="..\..\Source\SystemSettingsHelper.cpp">
+      <Filter>PangApp\Source\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\DatabaseHelper.cpp">
+      <Filter>PangApp\Source\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BaiduAIHelper.cpp">
+      <Filter>PangApp\Source\Utilities\BaiduAI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Fx.cpp">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FxDB.cpp">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FxInfo.cpp">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\AudioExportComponent.cpp">
+      <Filter>PangApp\Source\UI\AudioPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FxTable.cpp">
+      <Filter>PangApp\Source\UI\AudioSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\AudioSearchComponent.cpp">
+      <Filter>PangApp\Source\UI\AudioSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PangMenuComponent.cpp">
+      <Filter>PangApp\Source\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ApplicationSettingComponent.cpp">
+      <Filter>PangApp\Source\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MainComponent.cpp">
+      <Filter>PangApp\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>PangApp\Source</Filter>
     </ClCompile>
     <ClCompile Include="F:\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
@@ -2553,32 +2589,47 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\ApplicationSettingComponent.h">
-      <Filter>PangApp\Source</Filter>
+    <ClInclude Include="..\..\Source\TranslateHelper.h">
+      <Filter>PangApp\Source\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\AudioExportComponent.h">
-      <Filter>PangApp\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\AudioSearchComponent.h">
-      <Filter>PangApp\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\BaiduAI.h">
-      <Filter>PangApp\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\BaiduAIHelper.h">
-      <Filter>PangApp\Source</Filter>
+    <ClInclude Include="..\..\Source\SystemSettingsHelper.h">
+      <Filter>PangApp\Source\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\DatabaseHelper.h">
-      <Filter>PangApp\Source</Filter>
+      <Filter>PangApp\Source\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\MainComponent.h">
-      <Filter>PangApp\Source</Filter>
+    <ClInclude Include="..\..\Source\BaiduAI.h">
+      <Filter>PangApp\Source\Utilities\BaiduAI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BaiduAIHelper.h">
+      <Filter>PangApp\Source\Utilities\BaiduAI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Fx.h">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FxDB.h">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FxInfo.h">
+      <Filter>PangApp\Source\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\AudioExportComponent.h">
+      <Filter>PangApp\Source\UI\AudioPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FxTable.h">
+      <Filter>PangApp\Source\UI\AudioSearch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\AudioSearchComponent.h">
+      <Filter>PangApp\Source\UI\AudioSearch</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PangMenuComponent.h">
-      <Filter>PangApp\Source</Filter>
+      <Filter>PangApp\Source\UI\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\WaveMetadataTableListBoxModel.h">
-      <Filter>PangApp\Source</Filter>
+    <ClInclude Include="..\..\Source\ApplicationSettingComponent.h">
+      <Filter>PangApp\Source\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MainComponent.h">
+      <Filter>PangApp\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="F:\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>

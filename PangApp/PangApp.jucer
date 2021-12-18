@@ -4,38 +4,64 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="TJiJOX" name="PangApp">
     <GROUP id="{C11C12C5-C006-7AED-2A70-992C6D657A0E}" name="Source">
-      <FILE id="vks887" name="ApplicationSettingComponent.cpp" compile="1"
-            resource="0" file="Source/ApplicationSettingComponent.cpp"/>
-      <FILE id="aufwo2" name="ApplicationSettingComponent.h" compile="0"
-            resource="0" file="Source/ApplicationSettingComponent.h"/>
-      <FILE id="lK74hQ" name="AudioExportComponent.cpp" compile="1" resource="0"
-            file="Source/AudioExportComponent.cpp"/>
-      <FILE id="Zwp85v" name="AudioExportComponent.h" compile="0" resource="0"
-            file="Source/AudioExportComponent.h"/>
-      <FILE id="tIp9Iz" name="AudioSearchComponent.cpp" compile="1" resource="0"
-            file="Source/AudioSearchComponent.cpp"/>
-      <FILE id="Wg6Fd3" name="AudioSearchComponent.h" compile="0" resource="0"
-            file="Source/AudioSearchComponent.h"/>
-      <FILE id="BZoFwU" name="BaiduAI.h" compile="0" resource="0" file="Source/BaiduAI.h"/>
-      <FILE id="lyfI74" name="BaiduAIHelper.cpp" compile="1" resource="0"
-            file="Source/BaiduAIHelper.cpp"/>
-      <FILE id="TvSsbC" name="BaiduAIHelper.h" compile="0" resource="0" file="Source/BaiduAIHelper.h"/>
-      <FILE id="JAUNb8" name="DatabaseHelper.h" compile="0" resource="0"
-            file="Source/DatabaseHelper.h"/>
+      <GROUP id="{2BB6C9CA-2267-A8C8-FA4C-904C43862388}" name="Utilities">
+        <FILE id="aevekA" name="TranslateHelper.cpp" compile="1" resource="0"
+              file="Source/TranslateHelper.cpp"/>
+        <FILE id="G5avyq" name="TranslateHelper.h" compile="0" resource="0"
+              file="Source/TranslateHelper.h"/>
+        <FILE id="VmqACd" name="SystemSettingsHelper.cpp" compile="1" resource="0"
+              file="Source/SystemSettingsHelper.cpp"/>
+        <FILE id="yEeZBx" name="SystemSettingsHelper.h" compile="0" resource="0"
+              file="Source/SystemSettingsHelper.h"/>
+        <FILE id="q4rpi5" name="DatabaseHelper.cpp" compile="1" resource="0"
+              file="Source/DatabaseHelper.cpp"/>
+        <FILE id="JAUNb8" name="DatabaseHelper.h" compile="0" resource="0"
+              file="Source/DatabaseHelper.h"/>
+        <GROUP id="{BEE40439-EDDF-40A5-290A-E8DF619F564B}" name="BaiduAI">
+          <FILE id="BZoFwU" name="BaiduAI.h" compile="0" resource="0" file="Source/BaiduAI.h"/>
+          <FILE id="lyfI74" name="BaiduAIHelper.cpp" compile="1" resource="0"
+                file="Source/BaiduAIHelper.cpp"/>
+          <FILE id="TvSsbC" name="BaiduAIHelper.h" compile="0" resource="0" file="Source/BaiduAIHelper.h"/>
+        </GROUP>
+      </GROUP>
+      <GROUP id="{146ADE16-0A32-872E-8C18-F4C52E3D09CD}" name="Model">
+        <FILE id="N3ECKM" name="Fx.cpp" compile="1" resource="0" file="Source/Fx.cpp"/>
+        <FILE id="PmHnv7" name="Fx.h" compile="0" resource="0" file="Source/Fx.h"/>
+        <FILE id="zZxLgY" name="FxDB.cpp" compile="1" resource="0" file="Source/FxDB.cpp"/>
+        <FILE id="ZC3DE1" name="FxDB.h" compile="0" resource="0" file="Source/FxDB.h"/>
+        <FILE id="cu2AbW" name="FxInfo.cpp" compile="1" resource="0" file="Source/FxInfo.cpp"/>
+        <FILE id="pjHDjY" name="FxInfo.h" compile="0" resource="0" file="Source/FxInfo.h"/>
+      </GROUP>
+      <GROUP id="{1D7761CC-25C8-BF2D-5DB8-4BFC30654A19}" name="UI">
+        <GROUP id="{7FD1403B-D8EA-E91F-7B9F-FD5D11EBF39E}" name="AudioPlayer">
+          <FILE id="lK74hQ" name="AudioExportComponent.cpp" compile="1" resource="0"
+                file="Source/AudioExportComponent.cpp"/>
+          <FILE id="Zwp85v" name="AudioExportComponent.h" compile="0" resource="0"
+                file="Source/AudioExportComponent.h"/>
+        </GROUP>
+        <GROUP id="{228A2707-2FF8-4A16-F384-1111E5DF3FF8}" name="AudioSearch">
+          <FILE id="QqkxNn" name="FxTable.cpp" compile="1" resource="0" file="Source/FxTable.cpp"/>
+          <FILE id="DenWJu" name="FxTable.h" compile="0" resource="0" file="Source/FxTable.h"/>
+          <FILE id="tIp9Iz" name="AudioSearchComponent.cpp" compile="1" resource="0"
+                file="Source/AudioSearchComponent.cpp"/>
+          <FILE id="Wg6Fd3" name="AudioSearchComponent.h" compile="0" resource="0"
+                file="Source/AudioSearchComponent.h"/>
+        </GROUP>
+        <GROUP id="{9A9A6843-1DAC-FC58-5EF7-66F3650EFD64}" name="Menu">
+          <FILE id="OW9sHt" name="PangMenuComponent.cpp" compile="1" resource="0"
+                file="Source/PangMenuComponent.cpp"/>
+          <FILE id="NgIFPi" name="PangMenuComponent.h" compile="0" resource="0"
+                file="Source/PangMenuComponent.h"/>
+          <FILE id="vks887" name="ApplicationSettingComponent.cpp" compile="1"
+                resource="0" file="Source/ApplicationSettingComponent.cpp"/>
+          <FILE id="aufwo2" name="ApplicationSettingComponent.h" compile="0"
+                resource="0" file="Source/ApplicationSettingComponent.h"/>
+        </GROUP>
+        <FILE id="tyksHO" name="MainComponent.cpp" compile="1" resource="0"
+              file="Source/MainComponent.cpp"/>
+        <FILE id="K116Nq" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      </GROUP>
       <FILE id="mO7I9u" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <FILE id="tyksHO" name="MainComponent.cpp" compile="1" resource="0"
-            file="Source/MainComponent.cpp"/>
-      <FILE id="K116Nq" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
-      <FILE id="OW9sHt" name="PangMenuComponent.cpp" compile="1" resource="0"
-            file="Source/PangMenuComponent.cpp"/>
-      <FILE id="NgIFPi" name="PangMenuComponent.h" compile="0" resource="0"
-            file="Source/PangMenuComponent.h"/>
-      <FILE id="QqkxNn" name="WaveMetadataTableListBoxModel.cpp" compile="1"
-            resource="0" file="Source/WaveMetadataTableListBoxModel.cpp"/>
-      <FILE id="q4rpi5" name="DatabaseHelper.cpp" compile="1" resource="0"
-            file="Source/DatabaseHelper.cpp"/>
-      <FILE id="DenWJu" name="WaveMetadataTableListBoxModel.h" compile="0"
-            resource="0" file="Source/WaveMetadataTableListBoxModel.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>

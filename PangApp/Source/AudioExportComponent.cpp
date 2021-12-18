@@ -1,15 +1,6 @@
-/*
-  ==============================================================================
-
-    AudioExportComponent.cpp
-    Created: 8 Dec 2021 11:11:31am
-    Author:  庞兴庆
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "AudioExportComponent.h"
+#include "DatabaseHelper.h"
 
 //==============================================================================
 AudioExportComponent::AudioExportComponent()
@@ -73,8 +64,7 @@ void AudioExportComponent::paint (juce::Graphics& g)
 
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
-    juce::Rectangle<int> thumbnailBounds(10, 100, getWidth() - 20, getHeight() - 120);
-
+    juce::Rectangle<int> thumbnailBounds(0, 40, getWidth(), 200);
     if (thumbnail.getNumChannels() == 0)
     {
         g.setColour(juce::Colours::darkgrey);
@@ -84,16 +74,15 @@ void AudioExportComponent::paint (juce::Graphics& g)
     }
     else
     {
-        g.setColour(juce::Colours::white);
+        g.setColour(juce::Colours::darkgrey);
         g.fillRect(thumbnailBounds);
+        g.setColour(juce::Colours::darkgreen);
+        thumbnail.drawChannels(g, thumbnailBounds, 0.0, thumbnail.getTotalLength(), 1.0f);
 
-        g.setColour(juce::Colours::red);                               // [8]
-
-        thumbnail.drawChannels(g,                                      // [9]
-            thumbnailBounds,
-            0.0,                                    // start time
-            thumbnail.getTotalLength(),             // end time
-            1.0f);                                  // vertical zoom
+        g.setColour(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
+        g.fillRect(0, 40 + 100 - 10, getWidth(), 20);
+        g.setColour(juce::Colour(juce::uint8(211), 211, 211, 0.2f));
+        g.fillRect(300, 40, 100, 200);
     }
 }
 
@@ -133,23 +122,14 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
 }
 
-void AudioExportComponent::selectedFileChanged(int lastRowSelected)
+void AudioExportComponent::selectedFileChanged()
 {
-    auto fx = DatabaseHelper::CurrentFxDB->Fxs[lastRowSelected];
-    auto info = fx.FindInfoByHeaderName("Filename");
-    //if (info == nullptr)
-        ///return;
-    juce::File file(DatabaseHelper::CurrentFxDB->FileBasePath + "\\" + info->Value);
-    if (file.exists())
+    if (DatabaseHelper::CurrentFxFileReader != nullptr)
     {
-        auto* reader = formatManager.createReaderFor(file);                 // [10]
-        if (reader != nullptr)
-        {
-            auto newSource = std::make_unique<juce::AudioFormatReaderSource>(reader, true);   // [11]
-            transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);       // [12]      
-            thumbnail.setSource(new juce::FileInputSource(file));                            // [7]// [13]
-            readerSource.reset(newSource.release());                                          // [14]
-            repaint();
-        }
+        auto newSource = std::make_unique<juce::AudioFormatReaderSource>(DatabaseHelper::CurrentFxFileReader, true);   // [11]
+        transportSource.setSource(newSource.get(), 0, nullptr, DatabaseHelper::CurrentFxFileReader->sampleRate);       // [12]      
+        thumbnail.setSource(new juce::FileInputSource(DatabaseHelper::CurrentFx->AudioFile));                            // [7]// [13]
+        readerSource.reset(newSource.release());                                          // [14]
+        repaint();
     }
 }

@@ -10,6 +10,9 @@
 
 #include <JuceHeader.h>
 #include "ApplicationSettingComponent.h"
+#include "BaiduAIHelper.h"
+#include "SystemSettingsHelper.h"
+#include "TranslateHelper.h"
 
 //==============================================================================
 ApplicationSettingComponent::ApplicationSettingComponent()
@@ -50,11 +53,13 @@ ApplicationSettingComponent::ApplicationSettingComponent()
     appdataBasePathTextEditor->addListener(this);
 
     alwaysAutoTranslateToggleButton.reset(new juce::ToggleButton(""));
-    addAndMakeVisible(alwaysAutoTranslateToggleButton.get());
-    alwaysAutoTranslateToggleButton->addListener(this);
-
     alwaysAutoTranslateLabel.reset(new juce::Label("alwaysAutoTranslateLabel", TRANS("Always auto-translate keywords to chinese. (By Baidu AI)")));
-    addAndMakeVisible(alwaysAutoTranslateLabel.get());
+    if (BaiduAIHelper::GetAccess_Token() != "")
+    {
+        addAndMakeVisible(alwaysAutoTranslateToggleButton.get());
+        alwaysAutoTranslateToggleButton->addListener(this);
+        addAndMakeVisible(alwaysAutoTranslateLabel.get());
+    }
 
     setSize(400, 400);
 
@@ -105,11 +110,11 @@ void ApplicationSettingComponent::resized()
 void ApplicationSettingComponent::SetDefaultComponentValue()
 {
     languageComboBox->clear(juce::NotificationType::dontSendNotification);
-    for (size_t i = SystemSettingsHelper::GetLanguageEnumFirst(); i <= SystemSettingsHelper::GetLanguageEnumLast(); i++)
+    for each (auto language in TranslateHelper::GetAllLanguage())
     {
-        languageComboBox->addItem(SystemSettingsHelper::GetLanguageEnumString((SystemSettingsHelper::LanguageEnum)i), i);
+        languageComboBox->addItem(TRANS(language), TranslateHelper::GetIDByLanguage(language));
     }
-    languageComboBox->setSelectedId(SystemSettingsHelper::GetLanguage(), juce::NotificationType::dontSendNotification);
+    languageComboBox->setSelectedId(TranslateHelper::GetIDByLanguage(SystemSettingsHelper::GetLanguage()), juce::NotificationType::dontSendNotification);
     appdataBasePathTextEditor->setText(SystemSettingsHelper::GetAppDataBasePath(), false);
     alwaysAutoTranslateToggleButton->setToggleState(SystemSettingsHelper::GetAutoTranslate(), juce::NotificationType::dontSendNotification);
 }
@@ -118,9 +123,9 @@ void ApplicationSettingComponent::buttonClicked(juce::Button* button)
 {
     if (button == saveButton.get())
     {
-        SystemSettingsHelper::SetApplicationSettings(SettingsKey_Language, languageComboBox->getSelectedId());
-        SystemSettingsHelper::SetApplicationSettings(SettingsKey_AppDataBasePath, appdataBasePathTextEditor->getText());
-        SystemSettingsHelper::SetApplicationSettings(SettingsKey_AutoTranslate, alwaysAutoTranslateToggleButton->getToggleState());
+        SystemSettingsHelper::SetLanguage(TranslateHelper::GetLanguageByID(languageComboBox->getSelectedId()));
+        SystemSettingsHelper::SetAppDataBasePath(appdataBasePathTextEditor->getText());
+        SystemSettingsHelper::SetAutoTranslate(alwaysAutoTranslateToggleButton->getToggleState());
         saveButton->setEnabled(false);
         juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon
             , TRANS("Message"), TRANS("Restart applicaiton to reload settings."));
@@ -135,12 +140,12 @@ void ApplicationSettingComponent::buttonClicked(juce::Button* button)
     }
 }
 
-void ApplicationSettingComponent::comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged)
+void ApplicationSettingComponent::comboBoxChanged(juce::ComboBox*)
 {
     saveButton->setEnabled(true);
 }
 
-void ApplicationSettingComponent::textEditorTextChanged(juce::TextEditor& textEditor)
+void ApplicationSettingComponent::textEditorTextChanged(juce::TextEditor&)
 {
     saveButton->setEnabled(true);
 }
