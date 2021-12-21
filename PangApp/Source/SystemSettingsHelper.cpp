@@ -64,6 +64,4 @@ void SystemSettingsHelper::Clear()
     SystemSettingsHelper::AppProperties = nullptr;
     DatabaseHelper::CurrentFxDB = nullptr;
     DatabaseHelper::CurrentFx = nullptr;
-    delete DatabaseHelper::CurrentFxFileReader;
-    DatabaseHelper::CurrentFxFileReader = nullptr;
 }

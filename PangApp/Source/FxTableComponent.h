@@ -11,13 +11,12 @@ class FxTable : public juce::Component, juce::TableListBoxModel
 {
 public:
     juce::TableListBox table;
-
     FxTable();
     ~FxTable() override;
 
     void paint(juce::Graphics& g) override;
     void resized() override;
-
+    bool keyPressed(const juce::KeyPress& press) override;
     void Update();
     juce::String GetText(const int columnNumber, const int rowNumber);
     void SetText(const int columnNumber, const int rowNumber, const juce::String& newText);
@@ -29,7 +28,7 @@ private:
     virtual int getNumRows() override;
     virtual void paintRowBackground(juce::Graphics&, int rowNumber, int width, int height, bool rowIsSelected) override;
     virtual void paintCell(juce::Graphics&, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
-    virtual void selectedRowsChanged(int lastRowSelected) override;
+    virtual void selectedRowsChanged(int) override;
     virtual juce::Component* FxTable::refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, juce::Component* existingComponentToUpdate) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FxTable)

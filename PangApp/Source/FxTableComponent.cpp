@@ -1,4 +1,4 @@
-#include "FxTable.h"
+#include "FxTableComponent.h"
 #include "DatabaseHelper.h"
 
 FxTable::FxTable()
@@ -24,10 +24,44 @@ void FxTable::resized()
     table.setBounds(0, 0, getWidth(), getHeight());
 }
 
+bool FxTable::keyPressed(const juce::KeyPress& press)
+{
+    if (press == juce::KeyPress::upKey || press.getTextCharacter() == 'w')
+    {
+        auto preIndex = table.getSelectedRow() - 1;
+        preIndex = preIndex < 0 ? 0 : preIndex;
+        table.selectRow(preIndex, true, true);
+        return true;
+    }
+    if (press == juce::KeyPress::downKey || press.getTextCharacter() == 's')
+    {
+        auto preIndex = table.getSelectedRow() + 1;
+        preIndex = preIndex >= getNumRows() ? preIndex - 1 : preIndex;
+        table.selectRow(preIndex, true, true);
+        return true;
+    }
+    if (press == juce::KeyPress::leftKey || press.getTextCharacter() == 'a')
+    {
+        auto preIndex = table.getSelectedRow() - 5;
+        preIndex = preIndex <= 0 ? 0 : preIndex;
+        table.selectRow(preIndex, true, true);
+        return true;
+    }
+    if (press == juce::KeyPress::rightKey || press.getTextCharacter() == 'd')
+    {
+        auto preIndex = table.getSelectedRow() + 5;
+        preIndex = preIndex >= getNumRows() ? getNumRows() - 1 : preIndex;
+        table.selectRow(preIndex, true, true);
+        return true;
+    }
+    return false;
+}
+
 void FxTable::Update()
 {
     if (DatabaseHelper::CurrentFxDB != nullptr)
     {
+        table.deselectAllRows();
         table.getHeader().removeAllColumns();
         for each (auto header in DatabaseHelper::CurrentFxDB->DBSchema)
         {
@@ -61,7 +95,8 @@ void FxTable::paintCell(juce::Graphics& g, int rowNumber, int columnId, int widt
     {
         g.setColour(rowIsSelected ? juce::Colours::darkblue : getLookAndFeel().findColour(juce::ListBox::textColourId));  // [5]
 
-        auto fx = DatabaseHelper::CurrentFxDB->Fxs[rowNumber];
+        auto fxIndex = rowNumber - 1;
+        auto fx = DatabaseHelper::CurrentFxDB->Fxs[fxIndex];
         FxInfo* info = fx.FindInfoByColumnID(columnId);
         g.drawText(info->Value, 2, 0, width - 4, height, juce::Justification::centredLeft, true);
 
@@ -82,9 +117,10 @@ juce::Component* FxTable::refreshComponentForCell(int rowNumber, int columnId, b
     return textLabel;
 }
 
-void FxTable::selectedRowsChanged(int lastRowSelected)
+void FxTable::selectedRowsChanged(int)
 {
-    DatabaseHelper::LoadFxFile(lastRowSelected);
+    auto selectedRow = table.getSelectedRow();
+    DatabaseHelper::LoadFxFile(selectedRow);
     if (Listener != NULL)
         Listener->tableSelectedRowChanged();
 }
@@ -100,4 +136,3 @@ void FxTable::SetText(const int columnNumber, const int rowNumber, const juce::S
     auto fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber];
     fx.SetValueByColumnID(columnNumber, newText);
 }
-

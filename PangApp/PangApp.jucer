@@ -5,6 +5,15 @@
   <MAINGROUP id="TJiJOX" name="PangApp">
     <GROUP id="{C11C12C5-C006-7AED-2A70-992C6D657A0E}" name="Source">
       <GROUP id="{2BB6C9CA-2267-A8C8-FA4C-904C43862388}" name="Utilities">
+        <GROUP id="{3805D544-B2E1-011E-4F28-6703F48F12C9}" name="ExportUti">
+          <GROUP id="{A7003C3D-2CB8-9693-5C92-11FC23697D89}" name="ProTools">
+            <GROUP id="{278547B9-CF92-1D6E-928F-67489A4330AB}" name="WIN">
+              <FILE id="wgbpoq" name="RegionSpotter.cpp" compile="1" resource="0"
+                    file="Source/WIN/RegionSpotter.cpp"/>
+              <FILE id="i3rmLJ" name="RegionSpotter.h" compile="0" resource="0" file="Source/WIN/RegionSpotter.h"/>
+            </GROUP>
+          </GROUP>
+        </GROUP>
         <FILE id="aevekA" name="TranslateHelper.cpp" compile="1" resource="0"
               file="Source/TranslateHelper.cpp"/>
         <FILE id="G5avyq" name="TranslateHelper.h" compile="0" resource="0"
@@ -34,14 +43,20 @@
       </GROUP>
       <GROUP id="{1D7761CC-25C8-BF2D-5DB8-4BFC30654A19}" name="UI">
         <GROUP id="{7FD1403B-D8EA-E91F-7B9F-FD5D11EBF39E}" name="AudioPlayer">
+          <FILE id="tlEDVL" name="AudioCoverComponent.cpp" compile="1" resource="0"
+                file="Source/AudioCoverComponent.cpp"/>
+          <FILE id="xjPf1a" name="AudioCoverComponent.h" compile="0" resource="0"
+                file="Source/AudioCoverComponent.h"/>
           <FILE id="lK74hQ" name="AudioExportComponent.cpp" compile="1" resource="0"
                 file="Source/AudioExportComponent.cpp"/>
           <FILE id="Zwp85v" name="AudioExportComponent.h" compile="0" resource="0"
                 file="Source/AudioExportComponent.h"/>
         </GROUP>
         <GROUP id="{228A2707-2FF8-4A16-F384-1111E5DF3FF8}" name="AudioSearch">
-          <FILE id="QqkxNn" name="FxTable.cpp" compile="1" resource="0" file="Source/FxTable.cpp"/>
-          <FILE id="DenWJu" name="FxTable.h" compile="0" resource="0" file="Source/FxTable.h"/>
+          <FILE id="QqkxNn" name="FxTableComponent.cpp" compile="1" resource="0"
+                file="Source/FxTableComponent.cpp"/>
+          <FILE id="DenWJu" name="FxTableComponent.h" compile="0" resource="0"
+                file="Source/FxTableComponent.h"/>
           <FILE id="tIp9Iz" name="AudioSearchComponent.cpp" compile="1" resource="0"
                 file="Source/AudioSearchComponent.cpp"/>
           <FILE id="Wg6Fd3" name="AudioSearchComponent.h" compile="0" resource="0"

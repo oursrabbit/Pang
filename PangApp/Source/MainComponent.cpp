@@ -46,4 +46,13 @@ void MainComponent::resized()
     audioSearchComp->setBounds(10, 24 + 8, getWidth() - 20, getHeight() - 24 - 8 - /* selfHeight- */8 - AudioExportComponent::FIXHEIGHT - 8);
 }
 
+bool MainComponent::keyPressed(const juce::KeyPress& press)
+{
+    if (press.getKeyCode() == juce::KeyPress::spaceKey)
+    {
+        audioExportComp->buttonClicked(audioExportComp->playOrPauseButton.get());
+    }
+    return audioSearchComp->keyPressed(press);
+}
+
 

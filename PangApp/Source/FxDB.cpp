@@ -45,6 +45,16 @@ void FxDB::LoadDB()
             FilteredFxs.push_back(newFx);
         }
     }
+
+    // Try to Open File(for local network)
+    if (Fxs.size() > 0)
+    {
+        juce::AudioFormatManager manager;
+        manager.registerBasicFormats();
+        auto* reader = manager.createReaderFor(Fxs[0].AudioFile);
+        delete reader;
+        reader = nullptr;
+    }
 }
 
 void FxDB::ResetFilter()

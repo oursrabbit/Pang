@@ -2,6 +2,15 @@
 
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="PangApp\Source\Utilities\ExportUti\ProTools\WIN">
+      <UniqueIdentifier>{24781487-2015-C06B-6776-6CFC682CEFBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\Utilities\ExportUti\ProTools">
+      <UniqueIdentifier>{0C6360F5-0583-7DC8-CDFA-C28B3DF0271C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangApp\Source\Utilities\ExportUti">
+      <UniqueIdentifier>{72CC5D83-14FC-C39C-FB3F-C8478FCB6355}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PangApp\Source\Utilities\BaiduAI">
       <UniqueIdentifier>{795C21C9-205D-B604-0146-DFFFFD0DE1C8}</UniqueIdentifier>
     </Filter>
@@ -460,6 +469,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\WIN\RegionSpotter.cpp">
+      <Filter>PangApp\Source\Utilities\ExportUti\ProTools\WIN</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\TranslateHelper.cpp">
       <Filter>PangApp\Source\Utilities</Filter>
     </ClCompile>
@@ -481,10 +493,13 @@
     <ClCompile Include="..\..\Source\FxInfo.cpp">
       <Filter>PangApp\Source\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\AudioCoverComponent.cpp">
+      <Filter>PangApp\Source\UI\AudioPlayer</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\AudioExportComponent.cpp">
       <Filter>PangApp\Source\UI\AudioPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\FxTable.cpp">
+    <ClCompile Include="..\..\Source\FxTableComponent.cpp">
       <Filter>PangApp\Source\UI\AudioSearch</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\AudioSearchComponent.cpp">
@@ -2589,6 +2604,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\WIN\RegionSpotter.h">
+      <Filter>PangApp\Source\Utilities\ExportUti\ProTools\WIN</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\TranslateHelper.h">
       <Filter>PangApp\Source\Utilities</Filter>
     </ClInclude>
@@ -2613,10 +2631,13 @@
     <ClInclude Include="..\..\Source\FxInfo.h">
       <Filter>PangApp\Source\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\AudioCoverComponent.h">
+      <Filter>PangApp\Source\UI\AudioPlayer</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\AudioExportComponent.h">
       <Filter>PangApp\Source\UI\AudioPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\FxTable.h">
+    <ClInclude Include="..\..\Source\FxTableComponent.h">
       <Filter>PangApp\Source\UI\AudioSearch</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\AudioSearchComponent.h">

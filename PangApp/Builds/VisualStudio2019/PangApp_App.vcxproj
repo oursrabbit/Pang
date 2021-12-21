@@ -143,6 +143,7 @@
     <Lib/>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\WIN\RegionSpotter.cpp"/>
     <ClCompile Include="..\..\Source\TranslateHelper.cpp"/>
     <ClCompile Include="..\..\Source\SystemSettingsHelper.cpp"/>
     <ClCompile Include="..\..\Source\DatabaseHelper.cpp"/>
@@ -150,8 +151,9 @@
     <ClCompile Include="..\..\Source\Fx.cpp"/>
     <ClCompile Include="..\..\Source\FxDB.cpp"/>
     <ClCompile Include="..\..\Source\FxInfo.cpp"/>
+    <ClCompile Include="..\..\Source\AudioCoverComponent.cpp"/>
     <ClCompile Include="..\..\Source\AudioExportComponent.cpp"/>
-    <ClCompile Include="..\..\Source\FxTable.cpp"/>
+    <ClCompile Include="..\..\Source\FxTableComponent.cpp"/>
     <ClCompile Include="..\..\Source\AudioSearchComponent.cpp"/>
     <ClCompile Include="..\..\Source\PangMenuComponent.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationSettingComponent.cpp"/>
@@ -2101,6 +2103,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\WIN\RegionSpotter.h"/>
     <ClInclude Include="..\..\Source\TranslateHelper.h"/>
     <ClInclude Include="..\..\Source\SystemSettingsHelper.h"/>
     <ClInclude Include="..\..\Source\DatabaseHelper.h"/>
@@ -2109,8 +2112,9 @@
     <ClInclude Include="..\..\Source\Fx.h"/>
     <ClInclude Include="..\..\Source\FxDB.h"/>
     <ClInclude Include="..\..\Source\FxInfo.h"/>
+    <ClInclude Include="..\..\Source\AudioCoverComponent.h"/>
     <ClInclude Include="..\..\Source\AudioExportComponent.h"/>
-    <ClInclude Include="..\..\Source\FxTable.h"/>
+    <ClInclude Include="..\..\Source\FxTableComponent.h"/>
     <ClInclude Include="..\..\Source\AudioSearchComponent.h"/>
     <ClInclude Include="..\..\Source\PangMenuComponent.h"/>
     <ClInclude Include="..\..\Source\ApplicationSettingComponent.h"/>

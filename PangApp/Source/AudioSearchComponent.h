@@ -1,11 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "FxTable.h"
-
-//==============================================================================
-/**/
-
+#include "FxTableComponent.h"
 class AudioSearchComponentListener
 {
 public:
@@ -26,6 +22,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void LoadDatabase();
+    bool keyPressed(const juce::KeyPress& press) override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
     void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override;
     void tableSelectedRowChanged() override;
@@ -42,6 +39,8 @@ private:
     std::unique_ptr<juce::ComboBox> databaseComboBox;
     std::unique_ptr<juce::Label> fileMetadataLabel;
     std::unique_ptr<FxTable> fxListTable;
+
+    long long int threadKey;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioSearchComponent)
 };

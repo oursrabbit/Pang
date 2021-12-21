@@ -6,6 +6,8 @@
 //==============================================================================
 AudioSearchComponent::AudioSearchComponent()
 {
+    threadKey = 0;
+
     keywordsLabel.reset(new juce::Label("keywordsLabel", TRANS("Input Key Words:(Separate by escape)")));
     addAndMakeVisible(keywordsLabel.get());
 
@@ -116,6 +118,11 @@ void AudioSearchComponent::LoadDatabase()
     databaseComboBox->setSelectedId(databaseComboBox->getNumItems() == 0 ? 0 : 1, juce::NotificationType::sendNotification);
 }
 
+bool AudioSearchComponent::keyPressed(const juce::KeyPress& press)
+{
+    return fxListTable->keyPressed(press);
+}
+
 void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 {
     if (buttonThatWasClicked == searchButton.get())
@@ -148,6 +155,7 @@ void AudioSearchComponent::comboBoxChanged(juce::ComboBox* comboBoxThatHasChange
 {
     if (comboBoxThatHasChanged == databaseComboBox.get())
     {
+        fxListTable->table.deselectAllRows();
         DatabaseHelper::LoadFxDatabase(databaseComboBox->getSelectedId());
         fxListTable->Update();
     }
@@ -155,24 +163,35 @@ void AudioSearchComponent::comboBoxChanged(juce::ComboBox* comboBoxThatHasChange
 
 void AudioSearchComponent::tableSelectedRowChanged()
 {
-    if (DatabaseHelper::CurrentFx != nullptr && DatabaseHelper::CurrentFx->AudioFile.existsAsFile() && DatabaseHelper::CurrentFx->AudioFile.getFileExtension() == ".wav" && DatabaseHelper::CurrentFxFileReader != nullptr)
+    long long int currentThreadKey = threadKey++;
+    if (DatabaseHelper::CurrentFx != nullptr)
     {
-        juce::String metaDataString = "There are more meta data except below:";
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavDescription) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavDescription];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginator) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginator];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginatorRef) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginatorRef];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationDate) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginationDate];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationTime) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavOriginationTime];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavTimeReference) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavTimeReference];
-        metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavCodingHistory) + ": " + DatabaseHelper::CurrentFxFileReader->metadataValues[juce::WavAudioFormat::bwavCodingHistory];
-        fileMetadataLabel->setText(metaDataString, juce::NotificationType::dontSendNotification);
-    }
-    else
-    {
-        fileMetadataLabel->setText("Open Failed", juce::NotificationType::dontSendNotification);
+        fileMetadataLabel->setText(TRANS("Opening..."), juce::NotificationType::dontSendNotification);
+        juce::Thread::launch([this, currentThreadKey]() {
+            juce::String metaDataString = TRANS("Open Failed");
+            juce::AudioFormatManager manager;
+            manager.registerBasicFormats();
+            auto reader = manager.createReaderFor(DatabaseHelper::CurrentFx->AudioFile);
+            if (reader != nullptr)
+            {
+                metaDataString = "There are more meta data except below:";
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavDescription) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavDescription];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginator) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavOriginator];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginatorRef) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavOriginatorRef];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationDate) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavOriginationDate];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavOriginationTime) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavOriginationTime];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavTimeReference) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavTimeReference];
+                metaDataString += "\n" + juce::String(juce::WavAudioFormat::bwavCodingHistory) + ": " + reader->metadataValues[juce::WavAudioFormat::bwavCodingHistory];
+            }
+            delete reader;
+            reader = nullptr;
+            const juce::MessageManagerLock mmLock;
+            if (currentThreadKey + 1 == threadKey)
+                fileMetadataLabel->setText(metaDataString, juce::NotificationType::dontSendNotification);
+            });
     }
     if (Listener != nullptr)
-    { 
+    {
         Listener->selectedFileChanged();
     }
 }
