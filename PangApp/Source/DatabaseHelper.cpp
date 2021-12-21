@@ -31,7 +31,7 @@ void DatabaseHelper::LoadFxDatabase(int id)
     if (fxdb != std::end(DatabaseHelper::DatabaseFiles))
     {
         fxdb->LoadDB();
-        DatabaseHelper::CurrentFxDB = fxdb._Ptr;
+        DatabaseHelper::CurrentFxDB = &(*fxdb);
     }
     waitWindow.exitModalState(0);
 }

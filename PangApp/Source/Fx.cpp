@@ -24,7 +24,7 @@ FxInfo* Fx::FindInfoByColumnID(int id)
 {
     auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfo t) {return t.ColumnIndex == id; });
     if (info != std::end(Infos))
-        return info._Ptr;
+        return &(*info);
     else
         return nullptr;
 }
@@ -33,7 +33,7 @@ FxInfo* Fx::FindInfoByHeaderName(juce::String name)
 {
     auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfo t) {return t.HeaderName == name; });
     if (info != std::end(Infos))
-        return info._Ptr;
+        return &(*info);
     else
         return nullptr;
 }

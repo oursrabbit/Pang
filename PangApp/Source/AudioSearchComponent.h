@@ -5,7 +5,8 @@
 class AudioSearchComponentListener
 {
 public:
-    virtual void selectedFileChanged() {};
+    virtual void selectedFileChanged() {}
+    virtual ~AudioSearchComponentListener() {}
 };
 
 class AudioSearchComponent  : public juce::Component,

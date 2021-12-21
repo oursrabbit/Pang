@@ -1,10 +1,10 @@
 
-#ifdef WIN32
+//#ifdef WIN32
 #include "RegionSpotter.h"
-#include <windows.h>
-#include <strstream> 
-#include <string.h>
-#include "..\DatabaseHelper.h"
+//#include <windows.h>
+//#include <strstream>
+//#include <string.h>
+//#include "..\DatabaseHelper.h"
 /*! \brief Spots audio in a RegionSpotter object to a Pro Tools region
  *
  *  \par NOTE:
@@ -31,37 +31,37 @@ void RegionSpotter::Spot(juce::int64 startSample, juce::int64 endSample
     short playlistNumber,
     const char* regionNameString */)
 {
-    std::ostrstream os;
-    // Equivalent AppleEvent keywords
-    os << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl
-        << "<request>" << std::endl
-        << "    <action>spotRegion</action>" << std::endl
-        << "    <file>" << DatabaseHelper::CurrentFx->AudioFile.getFullPathName() << "</file>" << std::endl  // FILE
-        << "    <trackNum>" << -99 << "</trackNum>" << std::endl  // Trak
-        << "    <frameFormat>" << 0 << "</frameFormat>" << std::endl  // FFrm
-        << "    <trackOffset>" << 0 << "</trackOffset>" << std::endl  // TkOf
-        << "    <sampleLoc>" << 0 << "</sampleLoc>" << std::endl  // SMSt
-        << "    <stream>" << 1 << "</stream>" << std::endl  // Strm
-        << "    <region>" << std::endl  // Rgn
-        << "        <start>" << startSample << "</start>" << std::endl  // Star
-        << "        <stop>" << endSample << "</stop>" << std::endl  // Stop
-        << "        <name>" << DatabaseHelper::CurrentFx->AudioFile.getFileNameWithoutExtension() << "</name>" << std::endl  // Name
-        << "    </region>" << std::endl
-        << "</request>" << std::endl
-        << std::ends;
-
-    std::string request = std::string(os.str());
-
-    HWND hwnd = ::FindWindow("ptOpenWindowClass", "ptOpenWindow");
-    if (hwnd)
-    {
-        COPYDATASTRUCT cds;
-        cds.dwData = 'XMLR';
-        cds.lpData = (void*)request.c_str();
-        cds.cbData = (DWORD)request.size() + 1;
-
-        ::SendMessage(hwnd, WM_COPYDATA, NULL, (LPARAM)&cds);
-    }
+//    std::ostrstream os;
+//    // Equivalent AppleEvent keywords
+//    os << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl
+//        << "<request>" << std::endl
+//        << "    <action>spotRegion</action>" << std::endl
+//        << "    <file>" << DatabaseHelper::CurrentFx->AudioFile.getFullPathName() << "</file>" << std::endl  // FILE
+//        << "    <trackNum>" << -99 << "</trackNum>" << std::endl  // Trak
+//        << "    <frameFormat>" << 0 << "</frameFormat>" << std::endl  // FFrm
+//        << "    <trackOffset>" << 0 << "</trackOffset>" << std::endl  // TkOf
+//        << "    <sampleLoc>" << 0 << "</sampleLoc>" << std::endl  // SMSt
+//        << "    <stream>" << 1 << "</stream>" << std::endl  // Strm
+//        << "    <region>" << std::endl  // Rgn
+//        << "        <start>" << startSample << "</start>" << std::endl  // Star
+//        << "        <stop>" << endSample << "</stop>" << std::endl  // Stop
+//        << "        <name>" << DatabaseHelper::CurrentFx->AudioFile.getFileNameWithoutExtension() << "</name>" << std::endl  // Name
+//        << "    </region>" << std::endl
+//        << "</request>" << std::endl
+//        << std::ends;
+//
+//    std::string request = std::string(os.str());
+//
+//    HWND hwnd = ::FindWindow("ptOpenWindowClass", "ptOpenWindow");
+//    if (hwnd)
+//    {
+//        COPYDATASTRUCT cds;
+//        cds.dwData = 'XMLR';
+//        cds.lpData = (void*)request.c_str();
+//        cds.cbData = (DWORD)request.size() + 1;
+//
+//        ::SendMessage(hwnd, WM_COPYDATA, NULL, (LPARAM)&cds);
+//    }
 }
-#else
-#endif
+//#else
+//#endif

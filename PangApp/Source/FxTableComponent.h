@@ -5,6 +5,7 @@ class FxTableListener
 {
 public:
     virtual void tableSelectedRowChanged() = 0;
+    virtual ~FxTableListener() {}
 };
 
 class FxTable : public juce::Component, juce::TableListBoxModel
@@ -29,7 +30,7 @@ private:
     virtual void paintRowBackground(juce::Graphics&, int rowNumber, int width, int height, bool rowIsSelected) override;
     virtual void paintCell(juce::Graphics&, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     virtual void selectedRowsChanged(int) override;
-    virtual juce::Component* FxTable::refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, juce::Component* existingComponentToUpdate) override;
+    virtual juce::Component* refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, juce::Component* existingComponentToUpdate) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(FxTable)
 };
