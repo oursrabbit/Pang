@@ -4,7 +4,7 @@
 Fx::Fx(juce::String audioFileBasePath, juce::XmlElement* infosXMLNode, std::vector<FxInfo> dbSchema)
 {
     Infos.clear();
-    for each (auto key in dbSchema)
+    for(auto key : dbSchema)
     {
         auto childNode = infosXMLNode->getChildByName(key.HeaderName);
         if (childNode != nullptr)
@@ -41,7 +41,7 @@ FxInfo* Fx::FindInfoByHeaderName(juce::String name)
 std::vector<FxInfo> Fx::FindInfoElementsByKeywords(juce::StringArray keywords)
 {
     auto res = std::vector<FxInfo>();
-    for each (auto element in Infos)
+    for(auto element : Infos)
     {
         if (element.ContainKeywords(keywords))
             res.push_back(element);

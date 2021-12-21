@@ -110,7 +110,7 @@ void ApplicationSettingComponent::resized()
 void ApplicationSettingComponent::SetDefaultComponentValue()
 {
     languageComboBox->clear(juce::NotificationType::dontSendNotification);
-    for each (auto language in TranslateHelper::GetAllLanguage())
+    for(auto language : TranslateHelper::GetAllLanguage())
     {
         languageComboBox->addItem(TRANS(language), TranslateHelper::GetIDByLanguage(language));
     }

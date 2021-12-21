@@ -65,7 +65,7 @@ void FxDB::ResetFilter()
 void FxDB::SetFilter(juce::StringArray keywords)
 {
     auto res = std::vector<Fx>();
-    for each (auto info in FilteredFxs)
+    for(auto info : FilteredFxs)
     {
         if (info.FindInfoElementsByKeywords(keywords).size() != 0)
             res.push_back(info);

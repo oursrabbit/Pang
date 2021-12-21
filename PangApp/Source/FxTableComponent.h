@@ -4,7 +4,7 @@
 class FxTableListener
 {
 public:
-    virtual void tableSelectedRowChanged() {};
+    virtual void tableSelectedRowChanged() = 0;
 };
 
 class FxTable : public juce::Component, juce::TableListBoxModel

@@ -10,7 +10,7 @@ FxInfo::FxInfo(int index, juce::String name, juce::String value)
 
 bool FxInfo::ContainKeywords(juce::StringArray keywords)
 {
-    for each (auto kw in keywords)
+    for(auto kw : keywords)
     {
         if (Value.containsIgnoreCase(kw))
             return true;

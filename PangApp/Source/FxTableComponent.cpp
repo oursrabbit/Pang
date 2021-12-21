@@ -63,7 +63,7 @@ void FxTable::Update()
     {
         table.deselectAllRows();
         table.getHeader().removeAllColumns();
-        for each (auto header in DatabaseHelper::CurrentFxDB->DBSchema)
+        for(auto header : DatabaseHelper::CurrentFxDB->DBSchema)
         {
             table.getHeader().addColumn(TRANS(header.HeaderName), header.ColumnIndex, 100);
         }

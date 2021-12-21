@@ -35,6 +35,13 @@ AudioExportComponent::AudioExportComponent()
     nextFileButton->setButtonText(TRANS("NEXT"));
     nextFileButton->addListener(this);
 
+    autoPlayButton.reset(new juce::ToggleButton(""));
+    addAndMakeVisible(autoPlayButton.get());
+
+    autoPlayLabel.reset(new juce::Label("", TRANS("Auto-Play")));
+    addAndMakeVisible(autoPlayLabel.get());
+    autoPlayLabelWidth = juce::LookAndFeel::getDefaultLookAndFeel().getLabelFont(*autoPlayLabel.get()).getStringWidth(TRANS(TRANS("Auto-Play")));
+
     exportButton.reset(new juce::TextButton("exportButton"));
     addAndMakeVisible(exportButton.get());
     exportButton->setButtonText(TRANS("EXPROT"));
@@ -110,7 +117,8 @@ void AudioExportComponent::resized()
     playOrPauseButton->setBounds(100 + 10, 0, 100, 30);
     stopPlayButton->setBounds(100 + 10 + 100 + 10, 0, 100, 30);
     nextFileButton->setBounds(100 + 10 + 100 + 10 + 100 + 10, 0, 100, 30);
-    
+    autoPlayButton->setBounds(100 + 10 + 100 + 10 + 100 + 10 + 100 + 10, 0, 25, 30);
+    autoPlayLabel->setBounds(100 + 10 + 100 + 10 + 100 + 10 + 100 + 10 + 25 + 10, 0, autoPlayLabelWidth, 30);
     exportButton->setBounds(getWidth() - 100, 0, 100, 30);
     clearSelectionButton->setBounds(getWidth() - 100 - 10 - 100, 0, 100, 30);
     waveImageLoadStateLabel->setBounds(0, 40, getWidth(), 200);
@@ -210,7 +218,8 @@ void AudioExportComponent::selectedFileChanged()
                 readyToPlay = true;
                 juce::MessageManagerLock mml;
                 setAudioChannels(0, 2);
-                transportSource.start();
+                if (autoPlayButton->getToggleState())
+                    transportSource.start();
             }
             });
     }

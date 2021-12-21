@@ -45,6 +45,9 @@ public:
     std::unique_ptr<juce::TextButton> playOrPauseButton;
     std::unique_ptr<juce::TextButton> clearSelectionButton;
     std::unique_ptr<juce::TextButton> nextFileButton;
+    std::unique_ptr<juce::ToggleButton> autoPlayButton;
+    std::unique_ptr<juce::Label> autoPlayLabel;
+    int autoPlayLabelWidth;
     std::unique_ptr<juce::TextButton> exportButton;
     std::unique_ptr<AudioCoverComponent> selectionCover;
     int selectionCoverStartX;
