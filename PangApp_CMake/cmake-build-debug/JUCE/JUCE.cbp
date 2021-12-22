@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="JUCE"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\JUCE\;CMake Files\JUCE\extras\;CMake Files\JUCE\extras\Build\;CMake Files\JUCE\extras\Build\CMake\;CMake Files\JUCE\extras\Build\juceaide\;CMake Files\JUCE\modules\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\JUCE\;CMake Files\cmake-build-debug\JUCE\tools\;CMake Files\dev\;CMake Files\dev\vcpkg\;CMake Files\dev\vcpkg\scripts\;CMake Files\dev\vcpkg\scripts\buildsystems\;CMake Files\dev\vcpkg\installed\;CMake Files\dev\vcpkg\installed\x86-windows\;CMake Files\dev\vcpkg\installed\x86-windows\share\;CMake Files\dev\vcpkg\installed\x86-windows\share\curl\;CMake Files\dev\vcpkg\installed\x86-windows\share\zlib\;CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="F:/Pang/PangApp_CMake/cmake-build-debug/JUCE"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f F:\Pang\PangApp_CMake\cmake-build-debug\JUCE\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f F:\Pang\PangApp_CMake\cmake-build-debug\JUCE\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f F:\Pang\PangApp_CMake\cmake-build-debug\JUCE\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f F:\Pang\PangApp_CMake\cmake-build-debug\JUCE\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="F:/Pang/PangApp_CMake/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\JUCE\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMake/JUCECheckAtomic.cmake">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\CMake\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMake/JUCEConfig.cmake.in">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\CMake\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\CMake\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMake/JUCEModuleSupport.cmake">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\CMake\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/CMake/JUCEUtils.cmake">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\CMake\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/extras/Build/juceaide/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\JUCE\extras\Build\juceaide\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/JUCE/modules/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\JUCE\modules\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/cmake-build-debug/JUCE/tools/JUCEToolsExport.cmake">
+			<Option virtualFolder="CMake Files\cmake-build-debug\JUCE\tools\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/scripts/buildsystems/vcpkg.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\scripts\buildsystems\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/CURLConfig.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/CURLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/CURLTargets-debug.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/CURLTargets-release.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/CURLTargets.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/curl/vcpkg-cmake-wrapper.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\curl\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/zlib/vcpkg-cmake-wrapper.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\zlib\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncpp-namespaced-targets.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncpp-targets-debug.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncpp-targets-release.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncpp-targets.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncppConfig.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+		<Unit filename="F:/Pang/PangApp_CMake/dev/vcpkg/installed/x86-windows/share/jsoncpp/jsoncppConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\dev\vcpkg\installed\x86-windows\share\jsoncpp\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

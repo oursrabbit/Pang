@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_core/juce_core.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_data_structures/juce_data_structures.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_events/juce_events.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_graphics/juce_graphics.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp.obj"
+  "CMakeFiles/Pang.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp.obj"
+  "CMakeFiles/Pang.dir/Main.cpp.obj"
+  "CMakeFiles/Pang.dir/Module/Fx.cpp.obj"
+  "CMakeFiles/Pang.dir/Module/FxDB.cpp.obj"
+  "CMakeFiles/Pang.dir/Module/FxInfo.cpp.obj"
+  "CMakeFiles/Pang.dir/Pang_artefacts/JuceLibraryCode/resources.rc.res"
+  "CMakeFiles/Pang.dir/UI/AudioPlayer/AudioCoverComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/AudioPlayer/AudioExportComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/AudioSearch/AudioSearchComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/AudioSearch/FxTableComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/MainComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/Menu/ApplicationSettingComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/UI/Menu/PangMenuComponent.cpp.obj"
+  "CMakeFiles/Pang.dir/Utilities/BaiduAI/BaiduAIHelper.cpp.obj"
+  "CMakeFiles/Pang.dir/Utilities/DatabaseHelper.cpp.obj"
+  "CMakeFiles/Pang.dir/Utilities/SpotToDAW/ProTools/RegionSpotter.cpp.obj"
+  "CMakeFiles/Pang.dir/Utilities/SystemSettingsHelper.cpp.obj"
+  "CMakeFiles/Pang.dir/Utilities/TranslateHelper.cpp.obj"
+  "Pang_artefacts/Debug/Pang.exe"
+  "Pang_artefacts/Debug/Pang.exe.manifest"
+  "Pang_artefacts/Debug/Pang.lib"
+  "Pang_artefacts/Debug/Pang.pdb"
+  "Pang_artefacts/JuceLibraryCode/JuceHeader.h"
+  "Pang_artefacts/JuceLibraryCode/resources.rc"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX RC)
+  include(CMakeFiles/Pang.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
