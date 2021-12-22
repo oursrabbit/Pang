@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-b7a99a420e7596747ec3c02dee7931a6 Pang_artefacts/JuceLibraryCode/JuceHeader.h
-18e450765a12bbdbd9c6c9200b42ccc3 Pang_artefacts/JuceLibraryCode/resources.rc
