@@ -45,8 +45,9 @@ juce_add_gui_app(Pang
     # ICON_SMALL ...
     # DOCUMENT_EXTENSIONS ...           # Specify file extensions that should be associated with this app
     # COMPANY_NAME ...                  # Specify the name of the app's author
-    COMPANY_NAME "Pang Co."
-    PRODUCT_NAME "Pang")     # The name of the final executable, which can differ from the target name
+    COMPANY_NAME "PangXQ Co."
+    PRODUCT_NAME "Pang"
+    PLIST_TO_MERGE "<key>LSPrefersCarbon</key>")     # The name of the final executable, which can differ from the target name
 
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
@@ -54,7 +55,6 @@ juce_add_gui_app(Pang
 # include all your JUCE module headers; if you're happy to include module headers directly, you
 # probably don't need to call this.
 
-# juce_generate_juce_header(GuiAppExample)
 juce_generate_juce_header(Pang)
 
 # `target_sources` adds source files to a target. We pass the target that needs the sources as the
@@ -126,4 +126,4 @@ target_link_libraries(Pang
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags)
 target_link_libraries(Pang PRIVATE CURL::libcurl)
-target_link_libraries(Pang PRIVATE jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp)
+target_link_libraries(Pang PRIVATE jsoncpp_object jsoncpp_static JsonCpp::JsonCpp)

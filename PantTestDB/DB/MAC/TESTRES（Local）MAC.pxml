@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Pang xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<BasePath>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES</BasePath>
+	<SoundEffectInfos>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 Brk Full Pow.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 Hat+Snr1 Bel.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 HiHat Lp Bel.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 KikSnrLp Pow.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 mLP Bass Bel.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>dddddd093 mLP Mixx Bel.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>093 mLP Mixx Pow.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+		<SoundEffect>
+			<UserDefine1>这是通过编辑XML文件，动态添加的一列</UserDefine1>
+			<Filename>撒反对093 mLP M实打实ixx Pow.wav</Filename>
+			<Description>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</Description>
+			<Source>www.boomlibrary.com</Source>
+			<Category>Animals</Category>
+			<SubCategory>Birds</SubCategory>
+			<Notes>All sound effects are copyright BOOM Library - all rights reserved</Notes>
+			<Library>Birds Of Prey</Library>
+			<Keywords>BUZZARD Black Chested Eagle, Chirp</Keywords>
+			<Manufacturer>BOOM Library</Manufacturer>
+			<BWDescription>BLACK-CHESTED BUZZARD-EAGLE CHIRP High pitch, very short chirps. Varying speed of sequence.</BWDescription>
+			<BWOriginator>© 2014 BOOM Library All Rights Reserved</BWOriginator>
+			<BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
+		</SoundEffect>
+	</SoundEffectInfos>
+</Pang>
