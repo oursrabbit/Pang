@@ -1,5 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
+#include "SystemSettingsHelper.h"
 
 enum LanguageEnum
 {
@@ -28,4 +29,31 @@ juce::String GetLanguageEnumString(LanguageEnum value)
     default:
         return "";
     }
+}
+
+LanguageEnum GetLanguageEnum(juce::String value)
+{
+    if (value == "Chinese")
+        return LanguageEnum::Chinese;
+    else
+        return LanguageEnum::English;
+}
+
+juce::File GetLanguageFontFile(LanguageEnum value)
+{
+    switch (value)
+    {
+    case English:
+        return juce::File();
+    case Chinese:
+        return juce::File(SystemSettingsHelper::GetAppDataBasePath()).getChildFile("TRANS").getChildFile("zh.ttf");
+        break;
+    default:
+        return juce::File();
+    }
+}
+
+juce::File GetLanguageFontFile(juce::String value)
+{
+    return GetLanguageFontFile(GetLanguageEnum(value));
 }

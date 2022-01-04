@@ -36,3 +36,10 @@ int TranslateHelper::GetIDByLanguage(juce::String language)
         return LanguageID_Chinese;
     return LanguageID_English;
 }
+
+juce::File TranslateHelper::GetLanguageFontFile(juce::String language)
+{
+    if (language == Language_Chinese)
+        return juce::File(SystemSettingsHelper::GetAppDataBasePath()).getChildFile("TRANS").getChildFile("zh.ttf");
+    return juce::File();
+}

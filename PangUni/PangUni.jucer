@@ -67,7 +67,6 @@
             file="Source/Utilities/DatabaseHelper.cpp"/>
       <FILE id="khHWgx" name="DatabaseHelper.h" compile="0" resource="0"
             file="Source/Utilities/DatabaseHelper.h"/>
-      <FILE id="fjqHsF" name="LanguageEnum.h" compile="0" resource="0" file="Source/Utilities/LanguageEnum.h"/>
       <FILE id="vqcUkt" name="SystemSettingsHelper.cpp" compile="1" resource="0"
             file="Source/Utilities/SystemSettingsHelper.cpp"/>
       <FILE id="ri42Jb" name="SystemSettingsHelper.h" compile="0" resource="0"

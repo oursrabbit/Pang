@@ -12,6 +12,7 @@ class TranslateHelper
 public:
     static juce::StringArray GetAllLanguage();
     static juce::File GetTransFileByLanguage(juce::String language);
+    static juce::File GetLanguageFontFile(juce::String language);
     static juce::String GetLanguageByID(int id);
     static int GetIDByLanguage(juce::String language);
 };

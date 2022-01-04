@@ -29,15 +29,14 @@ public:
     {
         // This method is where you should put your application's initialisation code..
         //[Pang Initialize]
-#ifdef WIN32
-        juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YeHei");
-#else
-        juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Hei");
-#endif // WIN32
+        //juce::LookAndFeel::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YeHei");
         auto language = SystemSettingsHelper::GetLanguage();
         auto languageFile = TranslateHelper::GetTransFileByLanguage(language);
-        if (languageFile.existsAsFile())
+        auto languageFontFile = TranslateHelper::GetLanguageFontFile(language);
+        if (languageFile.existsAsFile() && languageFontFile.existsAsFile())
+        {
             juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(languageFile, false));
+        }
         DatabaseHelper::LoadAllFxDatabase();
         //[/Pang Initialize]
 
