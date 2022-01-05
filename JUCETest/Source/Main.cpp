@@ -24,7 +24,24 @@ public:
     void initialise (const juce::String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
+        juce::AudioFormatManager manager;
+        manager.registerBasicFormats();
+        auto format = manager.findFormatForFileExtension(".wav");
+        auto inFile = juce::File("F:\\In.wav");
+        auto inStream = new juce::FileInputStream(inFile);
+        auto inFormatReader = format->createReaderFor(inStream, true);
+        auto inAudioFormartReaderSource = new juce::AudioFormatReaderSource(inFormatReader, true);
+        auto inResampling = new juce::ResamplingAudioSource(inAudioFormartReaderSource, true);
+        inResampling.
 
+        auto outFile = juce::File("F:\\Out.wav");
+        auto outStream = new juce::FileOutputStream(outFile);
+        auto writer = format->createWriterFor(outStream
+            , 48000
+            , 2
+            , 16
+            , juce::StringPairArray()
+            , 1);
         mainWindow.reset (new MainWindow (getApplicationName()));
     }
 
