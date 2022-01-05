@@ -25,6 +25,7 @@ private:
     std::unique_ptr<juce::Label> languageLabel;
     int languageLabelWidth;
     std::unique_ptr<juce::ComboBox> languageComboBox;
+
     std::unique_ptr<juce::Label> appdataBasePathLabel;
     int appdataBasePathLabelWidth;
     std::unique_ptr<juce::TextEditor> appdataBasePathTextEditor;

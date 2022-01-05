@@ -19,9 +19,13 @@ public:
     static juce::String GetAppDataBasePath();
     static bool GetAutoTranslate();
     static juce::String GetLanguage();
+    static juce::uint64 GetSpotSampleRate();
+    static juce::uint32 GetSpotDepth();
 
     // Set Settings
     static void SetAppDataBasePath(juce::String basePath);
     static void SetAutoTranslate(bool autoTrans);
     static void SetLanguage(juce::String language);
+    static void SetSpotSampleRate(juce::uint64 rate);
+    static void SetSpotDepth(juce::uint32 depth);
 };

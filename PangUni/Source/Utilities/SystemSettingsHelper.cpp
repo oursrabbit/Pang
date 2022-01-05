@@ -18,6 +18,14 @@ juce::String SystemSettingsHelper::GetLanguage()
 {
     return GetApplicationSettings()->getUserSettings()->getValue(SettingsKey_Language, "");
 }
+juce::uint64 SystemSettingsHelper::GetSpotSampleRate()
+{
+    return 48000;
+}
+juce::uint32 SystemSettingsHelper::GetSpotDepth()
+{
+    return 16;
+}
 //[/Get Settings]
 
 //[Set Settings]
@@ -40,6 +48,12 @@ void SystemSettingsHelper::SetLanguage(juce::String language)
     auto settings = GetApplicationSettings()->getUserSettings();
     settings->setValue(SettingsKey_Language, language);
     settings->saveIfNeeded();
+}
+void SystemSettingsHelper::SetSpotSampleRate(juce::uint64 rate)
+{
+}
+void SystemSettingsHelper::SetSpotDepth(juce::uint32 depth)
+{
 }
 //[/Set Settings]
 

@@ -62,7 +62,7 @@ ApplicationSettingComponent::ApplicationSettingComponent()
         addAndMakeVisible(alwaysAutoTranslateLabel.get());
     }
 
-    setSize(400, 400);
+    setSize(600, 400);
 
     SetDefaultComponentValue();
 }
@@ -116,6 +116,7 @@ void ApplicationSettingComponent::SetDefaultComponentValue()
         languageComboBox->addItem(TRANS(language), TranslateHelper::GetIDByLanguage(language));
     }
     languageComboBox->setSelectedId(TranslateHelper::GetIDByLanguage(SystemSettingsHelper::GetLanguage()), juce::NotificationType::dontSendNotification);
+    
     appdataBasePathTextEditor->setText(SystemSettingsHelper::GetAppDataBasePath(), false);
     alwaysAutoTranslateToggleButton->setToggleState(SystemSettingsHelper::GetAutoTranslate(), juce::NotificationType::dontSendNotification);
 }
