@@ -24,24 +24,20 @@ public:
     void initialise (const juce::String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
-        juce::AudioFormatManager manager;
-        manager.registerBasicFormats();
-        auto format = manager.findFormatForFileExtension(".wav");
-        auto inFile = juce::File("F:\\In.wav");
-        auto inStream = new juce::FileInputStream(inFile);
-        auto inFormatReader = format->createReaderFor(inStream, true);
-        auto inAudioFormartReaderSource = new juce::AudioFormatReaderSource(inFormatReader, true);
-        auto inResampling = new juce::ResamplingAudioSource(inAudioFormartReaderSource, true);
-        inResampling.
-
-        auto outFile = juce::File("F:\\Out.wav");
-        auto outStream = new juce::FileOutputStream(outFile);
-        auto writer = format->createWriterFor(outStream
-            , 48000
-            , 2
-            , 16
-            , juce::StringPairArray()
-            , 1);
+        auto basePath = new juce::FileSearchPath("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\");
+        auto allPaths = basePath->findChildFiles(juce::File::TypesOfFileToFind::findFilesAndDirectories, true, "*.wav");
+        juce::String outS = "";
+        for (auto path : allPaths)
+        {
+            auto manager = new juce::AudioFormatManager();
+            manager->registerBasicFormats();
+            auto reader = manager->createReaderFor(path);
+            for (auto key : reader->metadataValues.getAllKeys())
+            {
+                outS = outS + "Key: " + key + "\t\t\tValue: " + reader->metadataValues.getValue(key, "NULL") + "\n";
+            }
+            outS += "\n";
+        }
         mainWindow.reset (new MainWindow (getApplicationName()));
     }
 
