@@ -1,73 +1,63 @@
 #include "FxDB.h"
-#include "../Utilities/SystemSettingsHelper.h"
 
-// id for combobox itemif, Start from 1, CANNOT BE 0
+FxDB::FxDB()
+{
+    auto newFxDB = new FxDB();
+    newFxDB->DBSchema.clear();
+    newFxDB->Fxs.clear();
+    newFxDB->ComboboxItemID = 0;
+    newFxDB->DatabaseFile = juce::File();
+
+    newFxDB->DBSchema.push_back(new FxInfo(1, TRANS("FileName"), ""));
+    newFxDB->DBSchema.push_back(new FxInfo(2, TRANS("Description"), ""));
+}
+
 FxDB::FxDB(juce::File file, int id)
 {
-    // Reset or Default DB or NULL DB
+    // Clear
+    DBSchema.clear();
+    Fxs.clear();
+
+    // Combobox
     ComboboxItemID = id;
+
+    // FxDB
     DatabaseFile = file;
-    DBSchema.clear();
-    Fxs.clear();
-    FilteredFxs.clear();
-}
 
-void FxDB::LoadDB()
-{
-    // Load Schema
-    DBSchema.clear();
-    auto databaseSchemaFile = juce::File(SystemSettingsHelper::GetAppDataBasePath()).getChildFile("DB").getChildFile("Template").getChildFile("PXMLSchema.pxml");
-    if (databaseSchemaFile.exists())
+    auto fxXMLData = juce::XmlDocument::parse(file);
+    auto SoundEffectInfos = fxXMLData->getChildByName("Pang");
+    if (SoundEffectInfos == nullptr
+        || SoundEffectInfos->getNumChildElements() < 1
+        || SoundEffectInfos->getFirstChildElement()->getChildByName("FileName") == nullptr
+        || SoundEffectInfos->getFirstChildElement()->getChildByName("Description") == nullptr)
     {
-        auto databaseSchema = juce::XmlDocument::parse(databaseSchemaFile);
-
+        return;
+    }
+    else
+    {
+        // 0 node for schema
         int columnIndex = 1;
-
-        for (auto tableHeader : databaseSchema->getChildByName(XML_FXROOT_NODENAME)->getChildIterator())
+        for (auto tableHeader : SoundEffectInfos->getFirstChildElement()->getChildIterator())
         {
-            FxInfo newHeader(columnIndex++, tableHeader->getTagName());
-            DBSchema.push_back(newHeader);
+            DBSchema.push_back(new FxInfo(columnIndex++, tableHeader->getTagName()));
         }
-    }
 
-    // Load DB and ALL Fxs
-    Fxs.clear();
-    FilteredFxs.clear();
-    if (DatabaseFile.exists())
-    {
-        auto fxXMLData = juce::XmlDocument::parse(DatabaseFile);
-        auto audioFileBasePath = SystemSettingsHelper::FilePathClear(fxXMLData->getChildByName(XML_FXAUDIOBASEPATH_NODENAME)->getAllSubText());
-        auto SoundEffectInfos = fxXMLData->getChildByName(XML_FXINFO_NODENAME);
-        for (auto FXInfoXML : SoundEffectInfos->getChildIterator())
+        for (int i = 1; i < SoundEffectInfos->getNumChildElements(); i++)
         {
-            Fx newFx(audioFileBasePath, FXInfoXML, DBSchema);
+            auto fxInfoXML = SoundEffectInfos->getChildElement(i);
+            auto newFx = new Fx(fxInfoXML, DBSchema);
             Fxs.push_back(newFx);
-            FilteredFxs.push_back(newFx);
         }
     }
-
-    // Try to Open File(for local network)
-    if (Fxs.size() > 0)
-    {
-        juce::AudioFormatManager manager;
-        manager.registerBasicFormats();
-        auto* reader = manager.createReaderFor(Fxs[0].AudioFile);
-        delete reader;
-        reader = nullptr;
-    }
 }
 
-void FxDB::ResetFilter()
-{
-    FilteredFxs = Fxs;
-}
 
-void FxDB::SetFilter(juce::StringArray keywords)
+void FxDB::FindFxByKeywords(juce::StringArray keywords)
 {
-    auto res = std::vector<Fx>();
-    for(auto info : FilteredFxs)
+    auto res = std::vector<Fx* >();
+    for(auto info : Fxs)
     {
-        if (info.FindInfoElementsByKeywords(keywords).size() != 0)
+        if (info->FindInfosByKeywords(keywords).size() != 0)
             res.push_back(info);
     }
     FilteredFxs = res;

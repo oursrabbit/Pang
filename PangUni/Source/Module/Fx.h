@@ -5,13 +5,20 @@
 class Fx
 {
 public:
-    std::vector<FxInfo> Infos;
-    juce::File AudioFile;
+    std::vector<FxInfo* > Infos;
 
-    Fx(juce::String audioFileBasePath, juce::XmlElement* infosXMLNode, std::vector<FxInfo> dbSchema);
+    Fx();
+    Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema);
 
-    FxInfo* FindInfoByColumnID(int id);
-    FxInfo* FindInfoByHeaderName(juce::String name);
-    std::vector<FxInfo> FindInfoElementsByKeywords(juce::StringArray keywords);
-    void SetValueByColumnID(int id, juce::String value);
+    juce::File GetAudioFile();
+    juce::String GetAudioDescription();
+
+    // Table
+    FxInfo* GetInfoValueByColumnID(int id);
+    void SetInfoValueByColumnID(int id, juce::String value);
+    FxInfo* GetInfoValueByName(juce::String name);
+    void SetInfoValueByName(juce::String name, juce::String value);
+    
+    // Search
+    std::vector<FxInfo* > FindInfosByKeywords(juce::StringArray keywords);
 };

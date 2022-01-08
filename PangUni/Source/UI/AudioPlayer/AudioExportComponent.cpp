@@ -159,7 +159,7 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
         {
             juce::AlertWindow waitWindow(TRANS("Export..."), "", juce::MessageBoxIconType::WarningIcon);
             waitWindow.enterModalState();
-            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->AudioFile);
+            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
             if (reader != nullptr)
             {
                 // Export All Audio
@@ -205,10 +205,10 @@ void AudioExportComponent::selectedFileChanged()
     {
         // Thumbnail
         waveImageLoadStateLabel->setText(TRANS("Loading Thumbnail Image..."), juce::NotificationType::dontSendNotification);
-        ifSucceedLoaded = thumb.setSource(new juce::FileInputSource(DatabaseHelper::CurrentFx->AudioFile));
+        ifSucceedLoaded = thumb.setSource(new juce::FileInputSource(DatabaseHelper::CurrentFx->GetAudioFile()));
         // Player
         juce::Thread::launch([this, currentThreadKey]() {
-            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->AudioFile);
+            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
             if (reader != nullptr)
             {
                 auto newSource = std::make_unique<juce::AudioFormatReaderSource>(reader, true);   // [11]

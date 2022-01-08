@@ -65,7 +65,7 @@ void FxTable::Update()
         table.getHeader().removeAllColumns();
         for(auto header : DatabaseHelper::CurrentFxDB->DBSchema)
         {
-            table.getHeader().addColumn(TRANS(header.HeaderName), header.ColumnIndex, 100);
+            table.getHeader().addColumn(TRANS(header->HeaderName), header->ColumnIndex, 100);
         }
         table.autoSizeAllColumns();
         table.updateContent();
@@ -97,7 +97,7 @@ void FxTable::paintCell(juce::Graphics& g, int rowNumber, int columnId, int widt
 
         auto fxIndex = rowNumber - 1;
         auto fx = DatabaseHelper::CurrentFxDB->Fxs[fxIndex];
-        FxInfo* info = fx.FindInfoByColumnID(columnId);
+        FxInfo* info = fx->GetInfoValueByColumnID(columnId);
         g.drawText(info->Value, 2, 0, width - 4, height, juce::Justification::centredLeft, true);
 
         g.setColour(getLookAndFeel().findColour(juce::ListBox::backgroundColourId));
@@ -127,12 +127,12 @@ void FxTable::selectedRowsChanged(int)
 
 juce::String FxTable::GetText(const int columnNumber, const int rowNumber)
 {
-    FxInfo* fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber].FindInfoByColumnID(columnNumber);
+    FxInfo* fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber]->GetInfoValueByColumnID(columnNumber);
     return fx == nullptr ? "" : fx->Value;
 }
 
 void FxTable::SetText(const int columnNumber, const int rowNumber, const juce::String& newText)
 {
     auto fx = DatabaseHelper::CurrentFxDB->FilteredFxs[rowNumber];
-    fx.SetValueByColumnID(columnNumber, newText);
+    fx->SetInfoValueByColumnID(columnNumber, newText);
 }

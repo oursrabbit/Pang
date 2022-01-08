@@ -113,7 +113,7 @@ void AudioSearchComponent::LoadDatabase()
     databaseComboBox->clear();
     for (unsigned long i = 0; i < DatabaseHelper::DatabaseFiles.size(); i++)
     {
-        databaseComboBox->addItem(DatabaseHelper::DatabaseFiles[i].DatabaseFile.getFileNameWithoutExtension(), DatabaseHelper::DatabaseFiles[i].ComboboxItemID);
+        databaseComboBox->addItem(DatabaseHelper::DatabaseFiles[i]->DatabaseFile.getFileNameWithoutExtension(), DatabaseHelper::DatabaseFiles[i]->ComboboxItemID);
     }
     databaseComboBox->setSelectedId(databaseComboBox->getNumItems() == 0 ? 0 : 1, juce::NotificationType::sendNotification);
 }
@@ -134,7 +134,7 @@ void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
             auto text = keywordsTextEditor->getText();
             juce::StringArray keyWords;
             keyWords.addTokens(text, true);
-            DatabaseHelper::CurrentFxDB->SetFilter(keyWords);
+            DatabaseHelper::CurrentFxDB->FindFxByKeywords(keyWords);
             fxListTable->Update();
         }
     }
@@ -142,7 +142,7 @@ void AudioSearchComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     {
         if (DatabaseHelper::CurrentFxDB != nullptr)
         {
-            DatabaseHelper::CurrentFxDB->ResetFilter();
+            DatabaseHelper::CurrentFxDB->ResetFilteredFxs();
             fxListTable->Update();
         }
     }
@@ -171,7 +171,7 @@ void AudioSearchComponent::tableSelectedRowChanged()
             metaDataString = TRANS("Open Failed");
             juce::AudioFormatManager manager;
             manager.registerBasicFormats();
-            auto reader = manager.createReaderFor(DatabaseHelper::CurrentFx->AudioFile);
+            auto reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
             if (reader != nullptr)
             {
                 metaDataString = "There are more meta data except below:";

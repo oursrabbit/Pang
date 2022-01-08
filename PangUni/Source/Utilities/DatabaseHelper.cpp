@@ -1,44 +1,30 @@
 #include "DatabaseHelper.h"
-#include "SystemSettingsHelper.h"
 
-std::vector <FxDB> DatabaseHelper::DatabaseFiles = std::vector <FxDB>();
+std::vector <FxDB*> DatabaseHelper::DatabaseFiles = std::vector <FxDB* >();
 FxDB* DatabaseHelper::CurrentFxDB = nullptr;
 Fx* DatabaseHelper::CurrentFx = nullptr;
 
-void DatabaseHelper::LoadAllFxDatabase()
+void DatabaseHelper::LoadAllFxDatabase(juce::File appDataPath)
 {
     // Load DatabaseList
-    juce::File databasePath = juce::File(SystemSettingsHelper::GetAppDataBasePath()).getChildFile("DB");
-#ifdef WIN32
-    databasePath = databasePath.getChildFile("WIN");
-#else
-    databasePath = databasePath.getChildFile("MAC");
-#endif
+    juce::File databasePath = appDataPath.getChildFile("DB");
     auto dbF = databasePath.findChildFiles(juce::File::findFiles, false, "*.pxml");
     DatabaseHelper::DatabaseFiles.clear();
     for (int i = 0; i < dbF.size(); ++i)
     {
-        DatabaseHelper::DatabaseFiles.push_back(FxDB(dbF[i], i + 1));
+        DatabaseHelper::DatabaseFiles.push_back(new FxDB(dbF[i], i + 1));
     }
 }
 
 // Combobox Item ID
+// ID start from 1
 void DatabaseHelper::LoadFxDatabase(int id)
 {
-    juce::AlertWindow waitWindow(TRANS("Loading..."), 
-        TRANS("Loading Database.") + "\n\n" + 
-        TRANS("Please DO NOT close window.") + "\n\n" + 
-        TRANS("This window will be hold for a while,") + "\n" + 
-        TRANS("if audio files are not at local disk."), juce::MessageBoxIconType::WarningIcon);
-    waitWindow.enterModalState();
     DatabaseHelper::CurrentFxDB = nullptr;
-    auto fxdb = std::find_if(std::begin(DatabaseHelper::DatabaseFiles), std::end(DatabaseHelper::DatabaseFiles), [id](FxDB t) { return t.ComboboxItemID == id; });
-    if (fxdb != std::end(DatabaseHelper::DatabaseFiles))
+    if (DatabaseHelper::DatabaseFiles.size() >= id && id >= 1)
     {
-        fxdb->LoadDB();
-        DatabaseHelper::CurrentFxDB = &(*fxdb);
+        DatabaseHelper::CurrentFxDB = DatabaseHelper::DatabaseFiles[id - 1];
     }
-    waitWindow.exitModalState(0);
 }
 
 // Table RowNumber Start From 1st.
@@ -49,6 +35,6 @@ void DatabaseHelper::LoadFxFile(int index)
     DatabaseHelper::CurrentFx = nullptr;
     if (DatabaseHelper::CurrentFxDB != nullptr && index >= 0)
     {
-        DatabaseHelper::CurrentFx = &DatabaseHelper::CurrentFxDB->Fxs[(unsigned long)index];
+        DatabaseHelper::CurrentFx = DatabaseHelper::CurrentFxDB->Fxs[(unsigned long)index];
     }
 }

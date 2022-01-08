@@ -36,7 +36,7 @@ void RegionSpotter::Spot(juce::int64 startSample, juce::int64 endSample
     os << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl
         << "<request>" << std::endl
         << "    <action>spotRegion</action>" << std::endl
-        << "    <file>" << DatabaseHelper::CurrentFx->AudioFile.getFullPathName() << "</file>" << std::endl  // FILE
+        << "    <file>" << DatabaseHelper::CurrentFx->GetAudioFile().getFullPathName() << "</file>" << std::endl  // FILE
         << "    <trackNum>" << -99 << "</trackNum>" << std::endl  // Trak
         << "    <frameFormat>" << 0 << "</frameFormat>" << std::endl  // FFrm
         << "    <trackOffset>" << 0 << "</trackOffset>" << std::endl  // TkOf
@@ -45,7 +45,7 @@ void RegionSpotter::Spot(juce::int64 startSample, juce::int64 endSample
         << "    <region>" << std::endl  // Rgn
         << "        <start>" << startSample << "</start>" << std::endl  // Star
         << "        <stop>" << endSample << "</stop>" << std::endl  // Stop
-        << "        <name>" << DatabaseHelper::CurrentFx->AudioFile.getFileNameWithoutExtension() << "</name>" << std::endl  // Name
+        << "        <name>" << DatabaseHelper::CurrentFx->GetAudioFile().getFileNameWithoutExtension() << "</name>" << std::endl  // Name
         << "    </region>" << std::endl
         << "</request>" << std::endl
         << std::ends;

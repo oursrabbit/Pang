@@ -1,5 +1,4 @@
 #include "TranslateHelper.h"
-#include "SystemSettingsHelper.h"
 
 juce::StringArray TranslateHelper::GetAllLanguage()
 {
@@ -9,12 +8,12 @@ juce::StringArray TranslateHelper::GetAllLanguage()
 	return languages;
 }
 
-juce::File TranslateHelper::GetTransFileByLanguage(juce::String language)
+juce::File TranslateHelper::GetTransFileByLanguage(juce::File appDataPath, juce::String language)
 {
     juce::File file;
 
     if (language == Language_Chinese)
-        file = juce::File(SystemSettingsHelper::GetAppDataBasePath()).getChildFile("TRANS").getChildFile("zh.txt");
+        file = appDataPath.getChildFile("TRANS").getChildFile("zh.txt");
 
     return file;
 }

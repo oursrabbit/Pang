@@ -1,58 +1,76 @@
 #include "Fx.h"
 #include "FxDB.h"
 
-Fx::Fx(juce::String audioFileBasePath, juce::XmlElement* infosXMLNode, std::vector<FxInfo> dbSchema)
+Fx::Fx()
+{
+    Infos.clear();
+
+    Infos.push_back(new FxInfo(1, "FileName", ""));
+    Infos.push_back(new FxInfo(2, "Description", ""));
+}
+
+Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)
 {
     Infos.clear();
     for(auto key : dbSchema)
     {
-        auto childNode = infosXMLNode->getChildByName(key.HeaderName);
+        auto childNode = infosXMLNode->getChildByName(key->HeaderName);
         if (childNode != nullptr)
-            Infos.push_back(FxInfo(key.ColumnIndex, key.HeaderName, childNode->getAllSubText()));
+            Infos.push_back(new FxInfo(key->ColumnIndex, key->HeaderName, childNode->getAllSubText()));
         else
-            Infos.push_back(FxInfo(key.ColumnIndex, key.HeaderName));
-    }
-
-    auto fileInfo = std::find_if(Infos.begin(), Infos.end(), [](FxInfo t) {return t.HeaderName == XML_FILENAME_NODENAME; });
-    if (fileInfo != Infos.end())
-    {
-        AudioFile = juce::File(audioFileBasePath).getChildFile(fileInfo->Value);
+            Infos.push_back(new FxInfo(key->ColumnIndex, key->HeaderName));
     }
 }
 
-FxInfo* Fx::FindInfoByColumnID(int id)
+juce::File Fx::GetAudioFile()
 {
-    auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfo t) {return t.ColumnIndex == id; });
+    return juce::File(GetInfoValueByName("FileName")->Value);
+}
+
+juce::String Fx::GetAudioDescription()
+{
+    return juce::String(GetInfoValueByName("Description")->Value);
+}
+
+FxInfo* Fx::GetInfoValueByColumnID(int id)
+{
+    auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfo* t) {return t->ColumnIndex == id; });
     if (info != std::end(Infos))
-        return &(*info);
+        return *info;
     else
         return nullptr;
 }
 
-FxInfo* Fx::FindInfoByHeaderName(juce::String name)
+void Fx::SetInfoValueByColumnID(int id, juce::String value)
 {
-    auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfo t) {return t.HeaderName == name; });
+    auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfo* t) {return t->ColumnIndex == id; });
     if (info != std::end(Infos))
-        return &(*info);
+        (*info)->Value = value;
+}
+
+FxInfo* Fx::GetInfoValueByName(juce::String name)
+{
+    auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfo* t) {return t->HeaderName == name; });
+    if (info != std::end(Infos))
+        return *info;
     else
         return nullptr;
 }
 
-std::vector<FxInfo> Fx::FindInfoElementsByKeywords(juce::StringArray keywords)
+void Fx::SetInfoValueByName(juce::String name, juce::String value)
 {
-    auto res = std::vector<FxInfo>();
+    auto info = std::find_if(Infos.begin(), Infos.end(), [name](FxInfo* t) {return t->HeaderName == name; });
+    if (info != std::end(Infos))
+        (*info)->Value = value;
+}
+
+std::vector<FxInfo* > Fx::FindInfosByKeywords(juce::StringArray keywords)
+{
+    auto res = std::vector<FxInfo* >();
     for(auto element : Infos)
     {
-        if (element.ContainKeywords(keywords))
+        if (element->ContainKeywords(keywords))
             res.push_back(element);
     }
     return res;
-}
-
-
-void Fx::SetValueByColumnID(int id, juce::String value)
-{
-    auto info = std::find_if(Infos.begin(), Infos.end(), [id](FxInfo t) {return t.ColumnIndex == id; });
-    if (info != std::end(Infos))
-        info->Value = value;
 }

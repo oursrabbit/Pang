@@ -4,6 +4,7 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="nI1Vk4" name="PangUni">
     <GROUP id="{1D6AD4DE-2088-ED25-AC19-F87C27DBEF06}" name="Module">
+      <FILE id="gmuuYH" name="Base.xml" compile="0" resource="0" file="Source/Module/Base.xml"/>
       <FILE id="abyjyG" name="Fx.cpp" compile="1" resource="0" file="Source/Module/Fx.cpp"/>
       <FILE id="RAdinD" name="Fx.h" compile="0" resource="0" file="Source/Module/Fx.h"/>
       <FILE id="e2fFds" name="FxDB.cpp" compile="1" resource="0" file="Source/Module/FxDB.cpp"/>

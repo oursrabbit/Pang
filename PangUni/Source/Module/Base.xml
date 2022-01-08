@@ -1,0 +1,16 @@
+<Pang>
+	<!-- this node for table header -->
+	<SoundEffect>
+		<FileName></FileName>
+		<Description></Description>
+		<!-- custom columns -->
+		<CustomColumn></CustomColumn>
+	</SoundEffect>
+	<!-- Fxs -->
+	<SoundEffect>
+		<FileName></FileName>
+		<Description></Description>
+		<!-- custom columns -->
+		<CustomColumn></CustomColumn>
+	</SoundEffect>
+</Pang>

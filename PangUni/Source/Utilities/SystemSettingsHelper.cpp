@@ -1,5 +1,4 @@
 #include "SystemSettingsHelper.h"
-#include "DatabaseHelper.h"
 
 std::unique_ptr<juce::ApplicationProperties> SystemSettingsHelper::AppProperties = nullptr;
 
@@ -7,6 +6,11 @@ std::unique_ptr<juce::ApplicationProperties> SystemSettingsHelper::AppProperties
 juce::String SystemSettingsHelper::GetAppDataBasePath()
 {
     return GetApplicationSettings()->getUserSettings()->getValue(SettingsKey_AppDataBasePath, juce::File::getSpecialLocation(juce::File::SpecialLocationType::userApplicationDataDirectory).getFullPathName());
+}
+
+juce::File SystemSettingsHelper::GetAppDataBaseFolder()
+{
+    return juce::File(SystemSettingsHelper::GetAppDataBasePath());
 }
 
 bool SystemSettingsHelper::GetAutoTranslate()
@@ -71,26 +75,4 @@ juce::ApplicationProperties* SystemSettingsHelper::GetApplicationSettings()
         AppProperties->setStorageParameters(options);
     }
     return AppProperties.get();
-}
-
-void SystemSettingsHelper::Clear()
-{
-    SystemSettingsHelper::AppProperties = nullptr;
-    DatabaseHelper::CurrentFxDB = nullptr;
-    DatabaseHelper::CurrentFx = nullptr;
-}
-
-juce::String SystemSettingsHelper::FilePathClear(juce::String path) {
-#ifdef WIN32
-    path = path.replace("////", "\\\\\\\\", true);
-    path = path.replace("///", "\\\\\\", true);
-    path = path.replace("//", "\\\\", true);
-    path = path.replace("/", "\\", true);
-#else
-    path = path.replace("\\\\\\\\", "////", true);
-    path = path.replace("\\\\\\", "///", true);
-    path = path.replace("\\\\", "//", true);
-    path = path.replace("\\", "/", true);
-#endif
-    return path;
 }

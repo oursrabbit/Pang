@@ -12,11 +12,10 @@ class SystemSettingsHelper
 public:
     static std::unique_ptr<juce::ApplicationProperties> AppProperties;
     static juce::ApplicationProperties* GetApplicationSettings();
-    static void Clear();
-    static juce::String FilePathClear(juce::String path);
 
     // Get Settings
     static juce::String GetAppDataBasePath();
+    static juce::File GetAppDataBaseFolder();
     static bool GetAutoTranslate();
     static juce::String GetLanguage();
     static juce::uint64 GetSpotSampleRate();
