@@ -3,24 +3,29 @@
 //==============================================================================
 DatabaseEditorComponent::DatabaseEditorComponent()
 {
-    addAndMakeVisible(table);
+    addAndMakeVisible(fxTable);
+    fxTable.fxInfoTable = &fxInfoTable;
+    fxTable.newFxDB = &newFxDB;
+    addAndMakeVisible(fxInfoTable);
+    fxInfoTable.fxTable = &fxTable;
+    fxInfoTable.newFxDB = &newFxDB;
 
-    addFxButton.setButtonText(TRANS("Add Fx"));
+    addFxButton.setButtonText("+");
     addFxButtonWidth = juce::LookAndFeel::getDefaultLookAndFeel().getTextButtonWidthToFitText(addFxButton, 30);
     addFxButton.addListener(this);
     addAndMakeVisible(addFxButton);
 
-    deleteFxButton.setButtonText(TRANS("Delete Selected Fx"));
+    deleteFxButton.setButtonText("-");
     deleteFxButtonWidth = juce::LookAndFeel::getDefaultLookAndFeel().getTextButtonWidthToFitText(deleteFxButton, 30);
     deleteFxButton.addListener(this);
     addAndMakeVisible(deleteFxButton);
 
-    addCustomInfoButton.setButtonText(TRANS("Add Custom Info"));
+    addCustomInfoButton.setButtonText("+");
     addCustomInfoButtonWidth = juce::LookAndFeel::getDefaultLookAndFeel().getTextButtonWidthToFitText(addCustomInfoButton, 30);
     addCustomInfoButton.addListener(this);
     addAndMakeVisible(addCustomInfoButton);
 
-    deleteCustomInfoButton.setButtonText(TRANS("Delete Custom Info"));
+    deleteCustomInfoButton.setButtonText("-");
     deleteCustomInfoButtonWidth = juce::LookAndFeel::getDefaultLookAndFeel().getTextButtonWidthToFitText(deleteCustomInfoButton, 30);
     deleteCustomInfoButton.addListener(this);
     addAndMakeVisible(deleteCustomInfoButton);
@@ -54,12 +59,15 @@ void DatabaseEditorComponent::paint (juce::Graphics&)
 
 void DatabaseEditorComponent::resized()
 {
-    table.setBounds(0, 40, getWidth(), getHeight() - 80);
+    fxInfoTable.setBounds(0, 40, 200, getHeight() - 80);
+    fxTable.setBounds(210, 40, getWidth() - 210, getHeight() - 80);
 
-    addFxButton.setBounds(0, 0, addFxButtonWidth, 30);
-    deleteFxButton.setBounds(addFxButtonWidth + 10, 0, deleteFxButtonWidth, 30);
-    addCustomInfoButton.setBounds(addFxButtonWidth + 10 + deleteFxButtonWidth + 10, 0, addCustomInfoButtonWidth, 30);
-    deleteCustomInfoButton.setBounds(addFxButtonWidth + 10 + deleteFxButtonWidth + 10 + addCustomInfoButtonWidth + 10, 0, deleteCustomInfoButtonWidth, 30);
+    addCustomInfoButton.setBounds(0, 0, addCustomInfoButtonWidth, 30);
+    deleteCustomInfoButton.setBounds(addFxButtonWidth + 10, 0, deleteCustomInfoButtonWidth, 30);
+
+    addFxButton.setBounds(210, 0, addFxButtonWidth, 30);
+    deleteFxButton.setBounds(210 + addFxButtonWidth + 10, 0, deleteFxButtonWidth, 30);
+    
 
     openDBButton.setBounds(getWidth() - openDBButtonWidth, getHeight() - 30, openDBButtonWidth, 30);
     openDBFolderButton.setBounds(getWidth() - openDBButtonWidth - 10 - openDBFolderButtonWidth, getHeight() - 30, openDBFolderButtonWidth, 30);
@@ -70,18 +78,30 @@ void DatabaseEditorComponent::buttonClicked(juce::Button* btn)
 {
     if (btn == &addFxButton)
     {
-        table.addFx();
+        fxTable.addFx();
     }
     else if (btn == &deleteFxButton)
     {
-        table.deleteFx();
+        fxTable.deleteFx();
     }
     else if (btn == &addCustomInfoButton)
     {
-        table.addFxInfo();
+        fxInfoTable.addFxInfo();
     }
     else if (btn == &deleteCustomInfoButton)
     {
-        table.deleteFxInfo();
+        fxInfoTable.deleteFxInfo();
+    }
+    else if (btn == &saveDBButton)
+    {
+        //table.exportFxDB();
+    }
+    else if (btn == &openDBFolderButton)
+    {
+        //table.openFxDBFolder();
+    }
+    else if (btn == &openDBButton)
+    {
+        //table.openFxDB();
     }
 }

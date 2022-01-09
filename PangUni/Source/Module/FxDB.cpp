@@ -2,14 +2,13 @@
 
 FxDB::FxDB()
 {
-    auto newFxDB = new FxDB();
-    newFxDB->DBSchema.clear();
-    newFxDB->Fxs.clear();
-    newFxDB->ComboboxItemID = 0;
-    newFxDB->DatabaseFile = juce::File();
+    DBSchema.clear();
+    Fxs.clear();
+    ComboboxItemID = 0;
+    DatabaseFile = juce::File();
 
-    newFxDB->DBSchema.push_back(new FxInfo(1, TRANS("FileName"), ""));
-    newFxDB->DBSchema.push_back(new FxInfo(2, TRANS("Description"), ""));
+    DBSchema.push_back(new FxInfo(1, TRANS("FileName"), ""));
+    DBSchema.push_back(new FxInfo(2, TRANS("Description"), ""));
 }
 
 FxDB::FxDB(juce::File file, int id)

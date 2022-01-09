@@ -5,8 +5,8 @@ Fx::Fx()
 {
     Infos.clear();
 
-    Infos.push_back(new FxInfo(1, "FileName", ""));
-    Infos.push_back(new FxInfo(2, "Description", ""));
+    Infos.push_back(new FxInfo(1, "FileName", TRANS("Absolute Path At Here")));
+    Infos.push_back(new FxInfo(2, "Description", TRANS("Some Description Text, Ignore Case")));
 }
 
 Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)

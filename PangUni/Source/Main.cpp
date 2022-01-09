@@ -13,6 +13,8 @@
 
 #include "Utilities/SpotToDAW/ProTools/RegionSpotter.h"
 
+#include "../Source/UI/DatabaseEditor/DatabaseEditorComponent.h"
+
 //==============================================================================
 class PangAppApplication  : public juce::JUCEApplication
 {
@@ -29,17 +31,6 @@ public:
     {
         // This method is where you should put your application's initialisation code..
         //[Pang Initialize]
-        juce::AlertWindow waitWindow(TRANS("Loading..."),
-            TRANS("Loading Database.") + "\n\n" +
-            TRANS("Please DO NOT close window.") + "\n\n"
-            , juce::MessageBoxIconType::WarningIcon);
-        waitWindow.enterModalState();
-#ifdef WIN32
-        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("STKaiti");
-#else
-        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Kai");
-#endif // 
-
         auto language = SystemSettingsHelper::GetLanguage();
         auto languageFile = TranslateHelper::GetTransFileByLanguage(SystemSettingsHelper::GetAppDataBaseFolder(), language);
         if (languageFile.existsAsFile())
@@ -47,6 +38,13 @@ public:
             // Set TRANS
             juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(languageFile, false));
         }
+
+        juce::AlertWindow waitWindow(TRANS("Loading..."),
+            TRANS("Loading Database.") + "\n\n" +
+            TRANS("Please DO NOT close window.") + "\n\n"
+            , juce::MessageBoxIconType::WarningIcon);
+        waitWindow.enterModalState();
+
         DatabaseHelper::LoadAllFxDatabase(SystemSettingsHelper::GetAppDataBaseFolder());
 
         waitWindow.exitModalState(0);
@@ -92,7 +90,8 @@ public:
                               DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (new MainComponent(), true);
+
+            setContentOwned (new DatabaseEditorComponent(), true);
 
            #if JUCE_IOS || JUCE_ANDROID
             setFullScreen (true);

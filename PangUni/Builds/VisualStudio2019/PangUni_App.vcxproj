@@ -147,6 +147,9 @@
     <ClCompile Include="..\..\Source\UI\AudioPlayer\AudioExportComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\AudioSearch\AudioSearchComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\AudioSearch\FxTableComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxInfoTableMod.cpp"/>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxTableMod.cpp"/>
     <ClCompile Include="..\..\Source\UI\Menu\ApplicationSettingComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\Menu\PangMenuComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\MainComponent.cpp"/>
@@ -2109,6 +2112,9 @@
     <ClInclude Include="..\..\Source\UI\AudioPlayer\AudioExportComponent.h"/>
     <ClInclude Include="..\..\Source\UI\AudioSearch\AudioSearchComponent.h"/>
     <ClInclude Include="..\..\Source\UI\AudioSearch\FxTableComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxInfoTableMod.h"/>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxTableMod.h"/>
     <ClInclude Include="..\..\Source\UI\Menu\ApplicationSettingComponent.h"/>
     <ClInclude Include="..\..\Source\UI\Menu\PangMenuComponent.h"/>
     <ClInclude Include="..\..\Source\UI\MainComponent.h"/>

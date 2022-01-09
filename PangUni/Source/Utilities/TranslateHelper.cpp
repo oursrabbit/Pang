@@ -13,7 +13,14 @@ juce::File TranslateHelper::GetTransFileByLanguage(juce::File appDataPath, juce:
     juce::File file;
 
     if (language == Language_Chinese)
+    {
         file = appDataPath.getChildFile("TRANS").getChildFile("zh.txt");
+#ifdef WIN32
+        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("STKaiti");
+#else
+        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("Kai");
+#endif // 
+    }
 
     return file;
 }

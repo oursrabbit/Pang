@@ -37,6 +37,20 @@
               file="Source/UI/AudioSearch/FxTableComponent.h"/>
       </GROUP>
       <GROUP id="{2F8028AD-64B6-779C-2303-A8778D2A9536}" name="Menu">
+        <GROUP id="{59D5C5E3-5CAE-6EB2-2DFE-D6FE7AAA4EDD}" name="DatabaseEditor">
+          <FILE id="KpjDkC" name="DatabaseEditorComponent.cpp" compile="1" resource="0"
+                file="Source/UI/DatabaseEditor/DatabaseEditorComponent.cpp"/>
+          <FILE id="reNqSl" name="DatabaseEditorComponent.h" compile="0" resource="0"
+                file="Source/UI/DatabaseEditor/DatabaseEditorComponent.h"/>
+          <FILE id="Gvlloo" name="DatabaseEditorFxInfoTableMod.cpp" compile="1"
+                resource="0" file="Source/UI/DatabaseEditor/DatabaseEditorFxInfoTableMod.cpp"/>
+          <FILE id="ZiHBLh" name="DatabaseEditorFxInfoTableMod.h" compile="0"
+                resource="0" file="Source/UI/DatabaseEditor/DatabaseEditorFxInfoTableMod.h"/>
+          <FILE id="P2Byel" name="DatabaseEditorFxTableMod.cpp" compile="1" resource="0"
+                file="Source/UI/DatabaseEditor/DatabaseEditorFxTableMod.cpp"/>
+          <FILE id="blexOY" name="DatabaseEditorFxTableMod.h" compile="0" resource="0"
+                file="Source/UI/DatabaseEditor/DatabaseEditorFxTableMod.h"/>
+        </GROUP>
         <FILE id="wl2n3f" name="ApplicationSettingComponent.cpp" compile="1"
               resource="0" file="Source/UI/Menu/ApplicationSettingComponent.cpp"/>
         <FILE id="L44jZ6" name="ApplicationSettingComponent.h" compile="0"

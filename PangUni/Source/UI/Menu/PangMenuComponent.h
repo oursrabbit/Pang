@@ -1,7 +1,6 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "ApplicationSettingComponent.h"
 
 //==============================================================================
 /*
@@ -20,6 +19,7 @@ private:
     std::unique_ptr<juce::MenuBarComponent> menuBarComp;
 
     void OpenSystemSettingsWindow();
+    void OpenDatabaseEditorWindow();
 
     virtual juce::StringArray getMenuBarNames() override;
     virtual juce::PopupMenu getMenuForIndex(int topLevelMenuIndex, const juce::String& menuName) override;

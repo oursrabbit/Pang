@@ -25,6 +25,8 @@ MainComponent::~MainComponent()
     audioSearchComp = nullptr;
     audioExportComp = nullptr;
     pangMenuComp = nullptr;
+
+    SystemSettingsHelper::AppProperties = nullptr;
 }
 
 void MainComponent::paint (juce::Graphics& g)

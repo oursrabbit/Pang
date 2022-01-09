@@ -14,6 +14,9 @@
     <Filter Include="PangUni\UI\AudioSearch">
       <UniqueIdentifier>{17DCB0F4-2356-B639-B294-BCA45B49C5AE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PangUni\UI\Menu\DatabaseEditor">
+      <UniqueIdentifier>{10609EF7-1DE5-A925-5239-7ADCCB04C7C4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PangUni\UI\Menu">
       <UniqueIdentifier>{996717F4-B8C4-D135-1245-42EDE4F58EA1}</UniqueIdentifier>
     </Filter>
@@ -489,6 +492,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\AudioSearch\FxTableComponent.cpp">
       <Filter>PangUni\UI\AudioSearch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorComponent.cpp">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxInfoTableMod.cpp">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxTableMod.cpp">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\Menu\ApplicationSettingComponent.cpp">
       <Filter>PangUni\UI\Menu</Filter>
@@ -2624,6 +2636,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\AudioSearch\FxTableComponent.h">
       <Filter>PangUni\UI\AudioSearch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorComponent.h">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxInfoTableMod.h">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\DatabaseEditor\DatabaseEditorFxTableMod.h">
+      <Filter>PangUni\UI\Menu\DatabaseEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\Menu\ApplicationSettingComponent.h">
       <Filter>PangUni\UI\Menu</Filter>

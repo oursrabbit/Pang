@@ -1,7 +1,11 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "DatabaseEditorTableMod.h"
+#include "../Source/Module/FxDB.h"
+#include "../Source/Module/Fx.h"
+#include "../Source/Module/Fx.h"
+#include "DatabaseEditorFxTableMod.h"
+#include "DatabaseEditorFxInfoTableMod.h"
 
 //==============================================================================
 /*
@@ -11,6 +15,10 @@
 class DatabaseEditorComponent  : public juce::Component, public juce::Button::Listener
 {
 public:
+    FxDB newFxDB;
+    DatabaseEditorFxTableMod fxTable;
+    DatabaseEditorFxInfoTableMod fxInfoTable;
+
     //==============================================================================
     DatabaseEditorComponent();
     ~DatabaseEditorComponent() override;
@@ -19,15 +27,11 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-
-    // Í¨¹ý Listener ¼Ì³Ð
     virtual void buttonClicked(juce::Button* btn) override;
 
 private:
     //==============================================================================
     // Your private member variables go here...
-    DatabaseEditorTableMod table;
-
     juce::TextButton addFxButton; 
     int addFxButtonWidth;
 

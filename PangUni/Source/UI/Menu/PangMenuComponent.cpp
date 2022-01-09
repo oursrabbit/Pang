@@ -1,5 +1,7 @@
 #include <JuceHeader.h>
 #include "PangMenuComponent.h"
+#include "ApplicationSettingComponent.h"
+#include "../DatabaseEditor/DatabaseEditorComponent.h"
 
 //==============================================================================
 PangMenuComponent::PangMenuComponent()
@@ -38,7 +40,7 @@ void PangMenuComponent::resized()
 
 juce::StringArray PangMenuComponent::getMenuBarNames()
 {
-    return { TRANS("System") };
+    return { TRANS("System"), TRANS("Database") };
 }
 
 juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menuName)
@@ -47,6 +49,10 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
     if (menuName == TRANS("System"))
     {
         menu.addItem(101, TRANS("System Settings..."));
+    }
+    else if (menuName == TRANS("Database"))
+    {
+        menu.addItem(201, TRANS("Edit Database"));
     }
     return menu;
 }
@@ -57,6 +63,10 @@ void PangMenuComponent::menuItemSelected(int menuItemID, int)
     {
     case 101: // System/System Settings...
         OpenSystemSettingsWindow();
+        break;
+    case 201: // Database/Edit Database
+        OpenDatabaseEditorWindow();
+        break;
     default:
         break;
     }
@@ -67,5 +77,13 @@ void PangMenuComponent::OpenSystemSettingsWindow()
     juce::DialogWindow::LaunchOptions options;
     options.dialogTitle = TRANS("System Settings");
     options.content = juce::OptionalScopedPointer<juce::Component>(new ApplicationSettingComponent(), true);
+    options.launchAsync();
+}
+
+void PangMenuComponent::OpenDatabaseEditorWindow()
+{
+    juce::DialogWindow::LaunchOptions options;
+    options.dialogTitle = TRANS("Database Editor");
+    options.content = juce::OptionalScopedPointer<juce::Component>(new DatabaseEditorComponent(), true);
     options.launchAsync();
 }
