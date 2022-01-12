@@ -17,15 +17,20 @@
 //==============================================================================
 /*
 */
-class FxInfoTableModel  : public juce::Component, public juce::TableListBoxModel, public juce::Label::Listener
+class FxInfoTableModel  : public juce::Component, public juce::TableListBoxModel
 {
 public:
     FxDB* newFxDB;
+    juce::Label::Listener* labeListener;
     std::unique_ptr<juce::TableListBox> table;
 
     FxInfoTableModel();
-    FxInfoTableModel(FxDB* newFxDB);
+    FxInfoTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener);
     ~FxInfoTableModel() override;
+    void AddNewFxInfoDB();
+    void DeleteNewFxInfoDB();
+    bool CheckNewFxInfoDB(juce::String newName);
+    void UpdateNewFxDB();
 
     void paint (juce::Graphics&) override;
     void resized() override;
@@ -34,8 +39,6 @@ public:
     virtual void paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     virtual void paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     virtual Component* refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, Component* existingComponentToUpdate) override;
-
-    virtual void labelTextChanged(juce::Label* labelThatHasChanged) override;
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FxInfoTableModel)
 };

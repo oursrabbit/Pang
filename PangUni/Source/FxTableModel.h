@@ -20,11 +20,13 @@ class FxTableModel  : public juce::Component, public juce::TableListBoxModel
 {
 public:
     FxDB* newFxDB;
+    juce::Label::Listener* labeListener;
     std::unique_ptr<juce::TableListBox> table;
 
     FxTableModel();
-    FxTableModel(FxDB* newFxDB);
+    FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener);
     ~FxTableModel() override;
+    void UpdateNewFxDB();
 
     void paint (juce::Graphics&) override;
     void resized() override;

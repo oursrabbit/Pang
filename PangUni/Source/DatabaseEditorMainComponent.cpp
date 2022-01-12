@@ -29,11 +29,11 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
     autoCreateThumbnailCheckBox->setToggleState(true, juce::NotificationType::dontSendNotification);
     autoCreateThumbnailCheckBox->addListener(this);
 
-    fxInfosTable.reset(new FxInfoTableModel(newFxDB));
+    fxInfosTable.reset(new FxInfoTableModel(newFxDB, this));
     addAndMakeVisible(fxInfosTable.get());
     fxInfosTable->setName("fxInfosTable");
 
-    fxsTable.reset(new FxTableModel(newFxDB));
+    fxsTable.reset(new FxTableModel(newFxDB, this));
     addAndMakeVisible(fxsTable.get());
     fxsTable->setName("fxsTable");
 
@@ -149,13 +149,15 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     }
     else if (buttonThatWasClicked == addInfoButton.get())
     {
-        //[UserButtonCode_addInfoButton] -- add your button handler code here..
-        //[/UserButtonCode_addInfoButton]
+        fxInfosTable->AddNewFxInfoDB();
+        fxInfosTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == deleteInfoButton.get())
     {
-        //[UserButtonCode_deleteInfoButton] -- add your button handler code here..
-        //[/UserButtonCode_deleteInfoButton]
+        fxInfosTable->DeleteNewFxInfoDB();
+        fxInfosTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == addFxButton.get())
     {
@@ -195,4 +197,15 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
 
     //[UserbuttonClicked_Post]
     //[/UserbuttonClicked_Post]
+}
+
+void DatabaseEditorMainComponent::labelTextChanged(juce::Label* labelThatHasChanged)
+{
+    auto label = (DoubleClickedEditableLabel*)labelThatHasChanged;
+    if (label != nullptr && label->OwnerType == OwnerTypeEnum::FxInfoTable && fxInfosTable->CheckNewFxInfoDB(label->getText()))
+    {
+        newFxDB->DBSchema[label->RowNumber]->HeaderName = label->getText();
+    }
+    fxInfosTable->UpdateNewFxDB();
+    fxsTable->UpdateNewFxDB();
 }

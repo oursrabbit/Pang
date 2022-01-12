@@ -15,11 +15,13 @@ DoubleClickedEditableLabel::DoubleClickedEditableLabel()
     setEditable(false, true, true);
 }
 
-DoubleClickedEditableLabel::DoubleClickedEditableLabel(int rowNumber, int columnID)
+DoubleClickedEditableLabel::DoubleClickedEditableLabel(bool editable, int rowNumber, int columnID, OwnerTypeEnum ownerType, std::function<void(int)> onClicked)
 {
+    OwnerType = ownerType;
     RowNumber = rowNumber;
     ColumnID = columnID;
-    setEditable(false, true, true);
+    OnClicked = onClicked;
+    setEditable(false, editable, true);
 }
 
 DoubleClickedEditableLabel::~DoubleClickedEditableLabel()

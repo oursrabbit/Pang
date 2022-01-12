@@ -16,7 +16,7 @@
 //==============================================================================
 /*
 */
-class DatabaseEditorMainComponent  : public juce::Component, public juce::Button::Listener
+class DatabaseEditorMainComponent  : public juce::Component, public juce::Button::Listener, public juce::Label::Listener
 {
 public:
     DatabaseEditorMainComponent();
@@ -26,6 +26,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
+    virtual void labelTextChanged(juce::Label* labelThatHasChanged) override;
 
     FxDB* newFxDB;
 

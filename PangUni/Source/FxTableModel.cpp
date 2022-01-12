@@ -18,17 +18,30 @@ FxTableModel::FxTableModel()
     // initialise any special settings that your component needs.
 }
 
-FxTableModel::FxTableModel(FxDB* newFxDB)
+FxTableModel::FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener)
 {
     this->newFxDB = newFxDB;
+    this->labeListener = labeListener;
 
     table.reset(new juce::TableListBox("", this));
     addAndMakeVisible(table.get());
+
+    UpdateNewFxDB();
 }
 
 FxTableModel::~FxTableModel()
 {
     table = nullptr;
+}
+
+void FxTableModel::UpdateNewFxDB()
+{
+    table->getHeader().removeAllColumns();
+    for (auto itr = newFxDB->DBSchema.begin(); itr != newFxDB->DBSchema.end(); itr++)
+    {
+        table->getHeader().addColumn((*itr)->HeaderName, (*itr)->ColumnIndex, 100);
+    }
+    table->updateContent();
 }
 
 void FxTableModel::paint (juce::Graphics& g)
@@ -53,9 +66,7 @@ void FxTableModel::paint (juce::Graphics& g)
 
 void FxTableModel::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
+    table->setBounds(0, 0, getWidth(), getHeight());
 }
 
 int FxTableModel::getNumRows()

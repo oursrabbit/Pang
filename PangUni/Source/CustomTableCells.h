@@ -11,12 +11,26 @@
 #pragma once
 #include <JuceHeader.h>
 
+enum OwnerTypeEnum
+{
+    FxInfoTable, FxTable
+};
+
 class DoubleClickedEditableLabel : public juce::Label
 {
 public:
+    OwnerTypeEnum OwnerType;
     int RowNumber;
     int ColumnID;
+    std::function<void(int)> OnClicked;
+
+    void mouseDown(const juce::MouseEvent& event) override
+    {
+        OnClicked(RowNumber);
+        Label::mouseDown(event);
+    }
+
     DoubleClickedEditableLabel();
-    DoubleClickedEditableLabel(int rowNumber, int columnID);
+    DoubleClickedEditableLabel(bool editable, int rowNumber, int columnID, OwnerTypeEnum ownerType, std::function<void(int)> onClicked);
     ~DoubleClickedEditableLabel();
 };
