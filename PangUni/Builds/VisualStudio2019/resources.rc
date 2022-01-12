@@ -15,6 +15,8 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
+      VALUE "CompanyName",  "Pang Co\0"
+      VALUE "LegalCopyright",  "Pang Co Copyright\0"
       VALUE "FileDescription",  "PangUni\0"
       VALUE "FileVersion",  "1.0.0\0"
       VALUE "ProductName",  "PangUni\0"
@@ -29,3 +31,6 @@ BEGIN
 END
 
 #endif
+
+IDI_ICON1 ICON DISCARDABLE "icon.ico"
+IDI_ICON2 ICON DISCARDABLE "icon.ico"
