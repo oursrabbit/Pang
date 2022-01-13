@@ -57,16 +57,6 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
     deleteFxButton->setButtonText(TRANS("-"));
     deleteFxButton->addListener(this);
 
-    importInfoSchemaButton.reset(new juce::TextButton("importInfoSchemaButton"));
-    addAndMakeVisible(importInfoSchemaButton.get());
-    importInfoSchemaButton->setButtonText(TRANS("Import Schema From File"));
-    importInfoSchemaButton->addListener(this);
-
-    exportInfoSchemaButton.reset(new juce::TextButton("exportInfoSchemaButton"));
-    addAndMakeVisible(exportInfoSchemaButton.get());
-    exportInfoSchemaButton->setButtonText(TRANS("Export Schema to Disk"));
-    exportInfoSchemaButton->addListener(this);
-
     importFxFromDBButton.reset(new juce::TextButton("importFxFromDBButton"));
     addAndMakeVisible(importFxFromDBButton.get());
     importFxFromDBButton->setButtonText(TRANS("Import Data From File"));
@@ -102,8 +92,6 @@ DatabaseEditorMainComponent::~DatabaseEditorMainComponent()
     deleteInfoButton = nullptr;
     addFxButton = nullptr;
     deleteFxButton = nullptr;
-    importInfoSchemaButton = nullptr;
-    exportInfoSchemaButton = nullptr;
     importFxFromDBButton = nullptr;
     exportFXDBButton = nullptr;
     importFxFromFolderButton = nullptr;
@@ -119,14 +107,11 @@ void DatabaseEditorMainComponent::resized()
 {
     addInfoButton->setBounds(10, 10, 30, 30);
     deleteInfoButton->setBounds(50, 10, 30, 30);
-    addFxButton->setBounds(420, 10, 30, 30);
-    deleteFxButton->setBounds(460, 10, 30, 30);
+    addFxButton->setBounds(220, 10, 30, 30);
+    deleteFxButton->setBounds(260, 10, 30, 30);
 
-    fxInfosTable->setBounds(10, 50, 200, getHeight() - 40 * 5 - 20);
+    fxInfosTable->setBounds(10, 50, 200, getHeight() - 40 * 2 - 20);
     fxsTable->setBounds(220, 50, getWidth() - 230, getHeight() - 40 * 5 - 20);
-
-    importInfoSchemaButton->setBounds(10, getHeight() - 40 * 4, 200, 30);
-    exportInfoSchemaButton->setBounds(10, getHeight() - 40 * 3, 200, 30);
 
     importFxFromFolderButton->setBounds(220, getHeight() - 40 * 4, 200, 30);
     importFxFromDBButton->setBounds(220, getHeight() - 40 * 3, 200, 30);
@@ -149,7 +134,7 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     }
     else if (buttonThatWasClicked == addInfoButton.get())
     {
-        fxInfosTable->AddNewFxInfoDB();
+        fxInfosTable->AddNewFxInfo();
         fxInfosTable->UpdateNewFxDB();
         fxsTable->UpdateNewFxDB();
     }
@@ -161,38 +146,36 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     }
     else if (buttonThatWasClicked == addFxButton.get())
     {
-        //[UserButtonCode_addFxButton] -- add your button handler code here..
-        //[/UserButtonCode_addFxButton]
+        fxsTable->AddNewFx();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == deleteFxButton.get())
     {
-        //[UserButtonCode_deleteFxButton] -- add your button handler code here..
-        //[/UserButtonCode_deleteFxButton]
-    }
-    else if (buttonThatWasClicked == importInfoSchemaButton.get())
-    {
-        //[UserButtonCode_importInfoSchemaButton] -- add your button handler code here..
-        //[/UserButtonCode_importInfoSchemaButton]
-    }
-    else if (buttonThatWasClicked == exportInfoSchemaButton.get())
-    {
-        //[UserButtonCode_exportInfoSchemaButton] -- add your button handler code here..
-        //[/UserButtonCode_exportInfoSchemaButton]
+        fxsTable->DeleteNewFx();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == importFxFromDBButton.get())
     {
         //[UserButtonCode_importFxFromDBButton] -- add your button handler code here..
         //[/UserButtonCode_importFxFromDBButton]
     }
-    else if (buttonThatWasClicked == exportFXDBButton.get())
-    {
-        //[UserButtonCode_exportFXDBButton] -- add your button handler code here..
-        //[/UserButtonCode_exportFXDBButton]
-    }
     else if (buttonThatWasClicked == importFxFromFolderButton.get())
     {
         //[UserButtonCode_importFxFromFolderButton] -- add your button handler code here..
         //[/UserButtonCode_importFxFromFolderButton]
+    }
+    else if (buttonThatWasClicked == exportFXDBButton.get())
+    {
+        chooser = std::make_unique<juce::FileChooser>(TRANS("Save"), juce::File{}, "*.pxml");
+        auto chooserFlags = juce::FileBrowserComponent::saveMode;
+        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+            {
+                auto file = fc.getResult();
+                if (file != juce::File{})
+                {
+                    newFxDB->Serialization(file);
+                }
+            });
     }
 
     //[UserbuttonClicked_Post]
@@ -204,7 +187,21 @@ void DatabaseEditorMainComponent::labelTextChanged(juce::Label* labelThatHasChan
     auto label = (DoubleClickedEditableLabel*)labelThatHasChanged;
     if (label != nullptr && label->OwnerType == OwnerTypeEnum::FxInfoTable && fxInfosTable->CheckNewFxInfoDB(label->getText()))
     {
+        // New Fx Info
         newFxDB->DBSchema[label->RowNumber]->HeaderName = label->getText();
+    }
+    else if (label != nullptr && label->OwnerType == OwnerTypeEnum::FxTable)
+    {
+        // New Fx
+        auto fx = newFxDB->Fxs[label->RowNumber];
+        auto info = fx->GetInfoValueByColumnID(label->ColumnID);
+        if (info == nullptr)
+        {
+            auto newInfo = std::find_if(newFxDB->DBSchema.begin(), newFxDB->DBSchema.end(), [&](FxInfo* t) { return t->ColumnIndex == label->ColumnID; });
+            info = new FxInfo((*newInfo)->ColumnIndex, (*newInfo)->HeaderName, "");
+            fx->Infos.push_back(info);
+        }
+        info->Value = label->getText();
     }
     fxInfosTable->UpdateNewFxDB();
     fxsTable->UpdateNewFxDB();

@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "FxDB.h"
+#include "CustomTableCells.h"
 
 //==============================================================================
 /*
@@ -26,6 +27,8 @@ public:
     FxTableModel();
     FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener);
     ~FxTableModel() override;
+    void AddNewFx();
+    void DeleteNewFx();
     void UpdateNewFxDB();
 
     void paint (juce::Graphics&) override;
@@ -34,7 +37,7 @@ public:
     virtual int getNumRows() override;
     virtual void paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     virtual void paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
-
+    virtual Component* refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, Component* existingComponentToUpdate) override;
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FxTableModel)
 };

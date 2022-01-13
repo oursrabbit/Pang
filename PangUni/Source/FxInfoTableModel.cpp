@@ -20,12 +20,13 @@ FxInfoTableModel::FxInfoTableModel(FxDB* newFxDB, juce::Label::Listener* labeLis
 {
     this->newFxDB = newFxDB;
     this->labeListener = labeListener;
+    newFxInfoId = 3;
 
     table.reset(new juce::TableListBox("", this));
     addAndMakeVisible(table.get());
 
     table->getHeader().removeAllColumns();
-    table->getHeader().addColumn(TRANS("Fx Info"), 1, 200);
+    table->getHeader().addColumn(TRANS("Fx Info"), 1, 200, 30, -1, table->getHeader().notSortable, -1);
 }
 
 FxInfoTableModel::~FxInfoTableModel()
@@ -33,12 +34,9 @@ FxInfoTableModel::~FxInfoTableModel()
     table = nullptr;
 }
 
-void FxInfoTableModel::AddNewFxInfoDB()
+void FxInfoTableModel::AddNewFxInfo()
 {
-    newFxDB->DBSchema.push_back(new FxInfo(
-        newFxDB->DBSchema.size() + 1,
-        "New FxInfo " + juce::String(newFxDB->DBSchema.size() + 1),
-        ""));
+    newFxDB->DBSchema.push_back(new FxInfo(newFxInfoId, "NewFxInfo" + juce::String(newFxInfoId++), ""));
 }
 
 void FxInfoTableModel::DeleteNewFxInfoDB()
@@ -57,7 +55,8 @@ bool FxInfoTableModel::CheckNewFxInfoDB(juce::String newName)
         if (newName == (*itr)->HeaderName)
             return false;
     }
-    return true;
+    juce::XmlElement temp("TEMP");
+    return temp.isValidXmlName(newName);
 }
 
 void FxInfoTableModel::UpdateNewFxDB()
@@ -107,7 +106,7 @@ juce::Component* FxInfoTableModel::refreshComponentForCell(int rowNumber, int co
                 table->selectRowsBasedOnModifierKeys(rowNumber, juce::ModifierKeys::noModifiers, false);
                 });
         }
-        textLabel->setText(TRANS(newFxDB->DBSchema[rowNumber]->HeaderName), juce::NotificationType::dontSendNotification);
+        textLabel->setText(newFxDB->DBSchema[rowNumber]->HeaderName, juce::NotificationType::dontSendNotification);
         textLabel->addListener(this->labeListener);
 
         return textLabel;

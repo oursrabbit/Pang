@@ -21,13 +21,14 @@ class FxInfoTableModel  : public juce::Component, public juce::TableListBoxModel
 {
 public:
     FxDB* newFxDB;
+    int newFxInfoId;
     juce::Label::Listener* labeListener;
     std::unique_ptr<juce::TableListBox> table;
 
     FxInfoTableModel();
     FxInfoTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener);
     ~FxInfoTableModel() override;
-    void AddNewFxInfoDB();
+    void AddNewFxInfo();
     void DeleteNewFxInfoDB();
     bool CheckNewFxInfoDB(juce::String newName);
     void UpdateNewFxDB();

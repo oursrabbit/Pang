@@ -50,6 +50,30 @@ FxDB::FxDB(juce::File file, int id)
     }
 }
 
+void FxDB::Serialization(juce::File file)
+{
+    juce::XmlElement Pang("Pang");
+    // First node for schema
+    auto Schema = Pang.createNewChildElement("SoundEffect");
+    for (auto itr = DBSchema.begin(); itr != DBSchema.end(); itr++)
+    {
+        Schema->createNewChildElement((*itr)->HeaderName);
+    }
+    // Real Fxs start from the second node
+    for (auto fx = Fxs.begin(); fx != Fxs.end(); fx++)
+    {
+        auto SoundEffect = Pang.createNewChildElement("SoundEffect");
+        for (auto info = DBSchema.begin(); info != DBSchema.end(); info++)
+        {
+            auto SoundEffectInfoNode = SoundEffect->createNewChildElement((*info)->HeaderName);
+            auto value = (*fx)->GetInfoValueByColumnID((*info)->ColumnIndex);
+            auto text = value == nullptr ? "" : value->Value;
+            SoundEffectInfoNode->addTextElement(text);
+        }
+    }
+    Pang.writeTo(file);
+}
+
 
 void FxDB::FindFxByKeywords(juce::StringArray keywords)
 {

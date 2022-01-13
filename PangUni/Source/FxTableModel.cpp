@@ -34,6 +34,22 @@ FxTableModel::~FxTableModel()
     table = nullptr;
 }
 
+void FxTableModel::AddNewFx()
+{
+    Fx* newFx = new Fx();
+    newFx->SetInfoValueByColumnID(1, "New Fx");
+    newFxDB->Fxs.push_back(newFx);
+}
+
+void FxTableModel::DeleteNewFx()
+{
+    if (table->getSelectedRow() != -1 && table->getSelectedRow() < newFxDB->Fxs.size())
+    {
+        auto itr = newFxDB->Fxs.begin() + table->getSelectedRow();
+        newFxDB->Fxs.erase(itr);
+    }
+}
+
 void FxTableModel::UpdateNewFxDB()
 {
     table->getHeader().removeAllColumns();
@@ -46,22 +62,7 @@ void FxTableModel::UpdateNewFxDB()
 
 void FxTableModel::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("FxTableModel", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
 }
 
 void FxTableModel::resized()
@@ -71,13 +72,40 @@ void FxTableModel::resized()
 
 int FxTableModel::getNumRows()
 {
-    return 0;
+    return newFxDB->Fxs.size();
 }
 
 void FxTableModel::paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
 {
+    auto alternateColour = getLookAndFeel().findColour(juce::ListBox::backgroundColourId)
+        .interpolatedWith(getLookAndFeel().findColour(juce::ListBox::textColourId), 0.03f);
+    if (rowIsSelected)
+        g.fillAll(juce::Colours::lightblue);
+    else if (rowNumber % 2)
+        g.fillAll(alternateColour);
 }
 
 void FxTableModel::paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
 {
+}
+
+juce::Component* FxTableModel::refreshComponentForCell(int rowNumber, int columnId, bool, Component* existingComponentToUpdate)
+{
+    if (rowNumber < newFxDB->Fxs.size())
+    {
+        auto* textLabel = static_cast<DoubleClickedEditableLabel*> (existingComponentToUpdate);
+        if (textLabel == nullptr)
+        {
+            textLabel = new DoubleClickedEditableLabel(true, rowNumber, columnId, OwnerTypeEnum::FxTable, [this](int rowNumber) {
+                table->selectRowsBasedOnModifierKeys(rowNumber, juce::ModifierKeys::noModifiers, false);
+                });
+        }
+        auto info = newFxDB->Fxs[rowNumber]->GetInfoValueByColumnID(columnId);
+        auto text = info == nullptr ? "" : info->Value;
+        textLabel->setText(text, juce::NotificationType::dontSendNotification);
+        textLabel->addListener(this->labeListener);
+
+        return textLabel;
+    }
+    return existingComponentToUpdate;
 }

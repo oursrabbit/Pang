@@ -14,6 +14,7 @@ public:
     // file: pxml
     // id: combobox itemid, Start from 1, CANNOT BE 0
     FxDB(juce::File file, int id);
+    void Serialization(juce::File file);
 
     // FxDB =============================================================================================
 

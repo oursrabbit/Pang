@@ -16,18 +16,17 @@
 //==============================================================================
 /*
 */
-class DatabaseEditorMainComponent  : public juce::Component, public juce::Button::Listener, public juce::Label::Listener
+class DatabaseEditorMainComponent : public juce::Component, public juce::Button::Listener, public juce::Label::Listener
 {
 public:
     DatabaseEditorMainComponent();
     DatabaseEditorMainComponent(FxDB* newFxDB);
     ~DatabaseEditorMainComponent() override;
 
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
-    virtual void labelTextChanged(juce::Label* labelThatHasChanged) override;
-
+    void labelTextChanged(juce::Label* labelThatHasChanged) override;
     FxDB* newFxDB;
 
     std::unique_ptr<juce::ToggleButton> autoCreateThumbnailCheckBox;
@@ -37,12 +36,12 @@ public:
     std::unique_ptr<juce::TextButton> deleteInfoButton;
     std::unique_ptr<juce::TextButton> addFxButton;
     std::unique_ptr<juce::TextButton> deleteFxButton;
-    std::unique_ptr<juce::TextButton> importInfoSchemaButton;
-    std::unique_ptr<juce::TextButton> exportInfoSchemaButton;
     std::unique_ptr<juce::TextButton> importFxFromDBButton;
     std::unique_ptr<juce::TextButton> exportFXDBButton;
     std::unique_ptr<juce::TextButton> importFxFromFolderButton;
     std::unique_ptr<juce::Label> helpLabel;
 private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DatabaseEditorMainComponent)
+    std::unique_ptr<juce::FileChooser> chooser;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DatabaseEditorMainComponent)
 };
