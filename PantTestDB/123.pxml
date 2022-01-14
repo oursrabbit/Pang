@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Pang>
+  <SoundEffect>
+    <FileName/>
+    <Description/>
+    <一个属性/>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>Absolute Path for New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>Absolute Path for New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>Absolute Path for New Fx</FileName>
+    <Description>Some Description Text, Ignore Case</Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 Brk Full Pow.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 Hat+Snr1 Bel.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 HiHat Lp Bel.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 mLP Bass Bel.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 mLP Mixx Bel.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>C:\Users\YC\Desktop\Pang\PantTestDB\TESTRES\093 mLP Mixx Pow.wav</FileName>
+    <Description></Description>
+    <一个属性></一个属性>
+  </SoundEffect>
+</Pang>

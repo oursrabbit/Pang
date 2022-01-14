@@ -22,15 +22,16 @@ public:
     OwnerTypeEnum OwnerType;
     int RowNumber;
     int ColumnID;
-    std::function<void(int)> OnClicked;
+    std::function<void(int,int)> OnClicked;
 
     void mouseDown(const juce::MouseEvent& event) override
     {
-        OnClicked(RowNumber);
+        getParentComponent()->mouseDown(event);
+        OnClicked(RowNumber, ColumnID);
         Label::mouseDown(event);
     }
 
     DoubleClickedEditableLabel();
-    DoubleClickedEditableLabel(bool editable, int rowNumber, int columnID, OwnerTypeEnum ownerType, std::function<void(int)> onClicked);
+    DoubleClickedEditableLabel(bool editable, int rowNumber, int columnID, OwnerTypeEnum ownerType, std::function<void(int, int)> onClicked);
     ~DoubleClickedEditableLabel();
 };

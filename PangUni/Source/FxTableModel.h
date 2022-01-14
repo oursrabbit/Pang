@@ -29,7 +29,7 @@ public:
     ~FxTableModel() override;
     void AddNewFx();
     void DeleteNewFx();
-    void UpdateNewFxDB();
+    void UpdateNewFxDB(FxDB* newFxDB);
 
     void paint (juce::Graphics&) override;
     void resized() override;
@@ -37,7 +37,8 @@ public:
     virtual int getNumRows() override;
     virtual void paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     virtual void paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
-    virtual Component* refreshComponentForCell(int rowNumber, int columnId, bool /*isRowSelected*/, Component* existingComponentToUpdate) override;
+    virtual Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
+    virtual void cellClicked(int rowNumber, int columnId, juce::MouseEvent& event);
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FxTableModel)
 };

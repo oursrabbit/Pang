@@ -5,11 +5,20 @@
     <Filter Include="PangUni\Source\Model">
       <UniqueIdentifier>{5D66DEDE-DFA0-65C5-F660-46584FF63B17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PangUni\Source\Test">
-      <UniqueIdentifier>{F93C54C4-26DF-4D7D-38DE-D8D8FA1ABE76}</UniqueIdentifier>
+    <Filter Include="PangUni\Source\Windows\SystemSetting">
+      <UniqueIdentifier>{71E443E5-FD04-9386-93FB-0032B32D4AA7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PangUni\Source\Main">
-      <UniqueIdentifier>{5E7D0FA6-92B3-FF9B-DC89-C71EEA58C998}</UniqueIdentifier>
+    <Filter Include="PangUni\Source\Windows\Main">
+      <UniqueIdentifier>{41518724-45A9-4761-FA9B-B5FF15C52DF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Windows\Search">
+      <UniqueIdentifier>{A1740897-EC67-6121-5423-3D0037E2691D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Windows\DatabaseEditor">
+      <UniqueIdentifier>{7E6F1392-8F5F-9072-DD47-E9116E28EC15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Windows">
+      <UniqueIdentifier>{6D17B273-279D-BD32-0426-1F85C262C232}</UniqueIdentifier>
     </Filter>
     <Filter Include="PangUni\Source\Utilities\UI">
       <UniqueIdentifier>{2C9644B0-2DC6-F245-2758-9AE8C35586D4}</UniqueIdentifier>
@@ -17,11 +26,11 @@
     <Filter Include="PangUni\Source\Utilities">
       <UniqueIdentifier>{6978AB77-9380-DFB1-A298-1FC742AD8B99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PangUni\Source\Search">
-      <UniqueIdentifier>{12A69D92-6825-0724-6A0E-18CEDDD8CE42}</UniqueIdentifier>
+    <Filter Include="PangUni\Source\Resource">
+      <UniqueIdentifier>{D8AD2B23-D27B-191C-FCD1-55DC28A92D6A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PangUni\Source\DatabaseEditor">
-      <UniqueIdentifier>{43628B97-2970-E3A1-EB58-1A6756DF2B0B}</UniqueIdentifier>
+    <Filter Include="PangUni\Source\Test">
+      <UniqueIdentifier>{F93C54C4-26DF-4D7D-38DE-D8D8FA1ABE76}</UniqueIdentifier>
     </Filter>
     <Filter Include="PangUni\Source">
       <UniqueIdentifier>{116F2412-5DCB-3986-6382-A3A3C4B3F646}</UniqueIdentifier>
@@ -244,17 +253,35 @@
     <ClCompile Include="..\..\Source\FxInfo.cpp">
       <Filter>PangUni\Source\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\GUIDesign.cpp">
-      <Filter>PangUni\Source\Test</Filter>
+    <ClCompile Include="..\..\Source\BasicSettingsComponent.cpp">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpotSettingsComponent.cpp">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SystemSettingsComponent.cpp">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Main.cpp">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\MainComponent.cpp">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PangMenuComponent.cpp">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SearchWindowMainComponent.cpp">
+      <Filter>PangUni\Source\Windows\Search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\DatabaseEditorMainComponent.cpp">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FxInfoTableModel.cpp">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\FxTableModel.cpp">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\CustomTableCells.cpp">
       <Filter>PangUni\Source\Utilities\UI</Filter>
@@ -262,17 +289,8 @@
     <ClCompile Include="..\..\Source\SystemHelper.cpp">
       <Filter>PangUni\Source\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SearchWindowMainComponent.cpp">
-      <Filter>PangUni\Source\Search</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\DatabaseEditorMainComponent.cpp">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FxInfoTableModel.cpp">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\FxTableModel.cpp">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
+    <ClCompile Include="..\..\Source\GUIDesign.cpp">
+      <Filter>PangUni\Source\Test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_AbstractFifo.cpp">
       <Filter>JUCE Modules\juce_core\containers</Filter>
@@ -1497,17 +1515,44 @@
     <ClInclude Include="..\..\Source\FxInfo.h">
       <Filter>PangUni\Source\Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GUIDesign.h">
-      <Filter>PangUni\Source\Test</Filter>
+    <ClInclude Include="..\..\Source\BasicSettingsComponent.h">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpotSettingsComponent.h">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SystemSettingsComponent.h">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SystemSettingsWindow.h">
+      <Filter>PangUni\Source\Windows\SystemSetting</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MainWindow.h">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MainComponent.h">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PangMenuComponent.h">
-      <Filter>PangUni\Source\Main</Filter>
+      <Filter>PangUni\Source\Windows\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SearchWindowMainComponent.h">
+      <Filter>PangUni\Source\Windows\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SearchWindow.h">
+      <Filter>PangUni\Source\Windows\Search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\DatabaseEditorMainComponent.h">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\DatabaseEditorWindow.h">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FxInfoTableModel.h">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\FxTableModel.h">
+      <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\CustomTableCells.h">
       <Filter>PangUni\Source\Utilities\UI</Filter>
@@ -1515,23 +1560,8 @@
     <ClInclude Include="..\..\Source\SystemHelper.h">
       <Filter>PangUni\Source\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SearchWindowMainComponent.h">
-      <Filter>PangUni\Source\Search</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\SearchWindow.h">
-      <Filter>PangUni\Source\Search</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\DatabaseEditorMainComponent.h">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\DatabaseEditorWindow.h">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FxInfoTableModel.h">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\FxTableModel.h">
-      <Filter>PangUni\Source\DatabaseEditor</Filter>
+    <ClInclude Include="..\..\Source\GUIDesign.h">
+      <Filter>PangUni\Source\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_AbstractFifo.h">
       <Filter>JUCE Modules\juce_core\containers</Filter>
@@ -2771,11 +2801,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Base.xml">
-      <Filter>PangUni\Source\Model</Filter>
+    <None Include="..\..\Source\Handbook.docx">
+      <Filter>PangUni\Source\Resource</Filter>
     </None>
     <None Include="..\..\Source\juce_icon.png">
-      <Filter>PangUni\Source</Filter>
+      <Filter>PangUni\Source\Resource</Filter>
+    </None>
+    <None Include="..\..\Source\Base.xml">
+      <Filter>PangUni\Source\Resource</Filter>
     </None>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\native\java\README.txt">
       <Filter>JUCE Modules\juce_core\native\java</Filter>

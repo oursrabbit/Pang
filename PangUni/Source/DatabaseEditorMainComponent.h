@@ -36,6 +36,8 @@ public:
     std::unique_ptr<juce::TextButton> deleteInfoButton;
     std::unique_ptr<juce::TextButton> addFxButton;
     std::unique_ptr<juce::TextButton> deleteFxButton;
+    std::unique_ptr<juce::TextButton> importFxFromExcelButton;
+    std::unique_ptr<juce::TextButton> exportFxToExcelButton;
     std::unique_ptr<juce::TextButton> importFxFromDBButton;
     std::unique_ptr<juce::TextButton> exportFXDBButton;
     std::unique_ptr<juce::TextButton> importFxFromFolderButton;

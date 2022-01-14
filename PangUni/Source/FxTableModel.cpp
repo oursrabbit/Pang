@@ -26,7 +26,7 @@ FxTableModel::FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener)
     table.reset(new juce::TableListBox("", this));
     addAndMakeVisible(table.get());
 
-    UpdateNewFxDB();
+    UpdateNewFxDB(newFxDB);
 }
 
 FxTableModel::~FxTableModel()
@@ -37,7 +37,7 @@ FxTableModel::~FxTableModel()
 void FxTableModel::AddNewFx()
 {
     Fx* newFx = new Fx();
-    newFx->SetInfoValueByColumnID(1, "New Fx");
+    newFx->SetInfoValueByColumnID(1, "Absolute Path for New Fx");
     newFxDB->Fxs.push_back(newFx);
 }
 
@@ -50,8 +50,9 @@ void FxTableModel::DeleteNewFx()
     }
 }
 
-void FxTableModel::UpdateNewFxDB()
+void FxTableModel::UpdateNewFxDB(FxDB* newFxDB)
 {
+    this->newFxDB = newFxDB;
     table->getHeader().removeAllColumns();
     for (auto itr = newFxDB->DBSchema.begin(); itr != newFxDB->DBSchema.end(); itr++)
     {
@@ -87,25 +88,33 @@ void FxTableModel::paintRowBackground(juce::Graphics& g, int rowNumber, int widt
 
 void FxTableModel::paintCell(juce::Graphics& g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
 {
+
 }
 
-juce::Component* FxTableModel::refreshComponentForCell(int rowNumber, int columnId, bool, Component* existingComponentToUpdate)
+juce::Component* FxTableModel::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
 {
     if (rowNumber < newFxDB->Fxs.size())
     {
+        auto info = newFxDB->Fxs[rowNumber]->GetInfoValueByColumnID(columnId);
+        auto text = info == nullptr ? "" : info->Value;
+
         auto* textLabel = static_cast<DoubleClickedEditableLabel*> (existingComponentToUpdate);
         if (textLabel == nullptr)
         {
-            textLabel = new DoubleClickedEditableLabel(true, rowNumber, columnId, OwnerTypeEnum::FxTable, [this](int rowNumber) {
+            textLabel = new DoubleClickedEditableLabel(true, rowNumber, columnId, OwnerTypeEnum::FxTable, [this](int rowNumber, int columnID) {
                 table->selectRowsBasedOnModifierKeys(rowNumber, juce::ModifierKeys::noModifiers, false);
+                //cellClicked(rowNumber, columnID);
                 });
+            textLabel->addListener(this->labeListener);
         }
-        auto info = newFxDB->Fxs[rowNumber]->GetInfoValueByColumnID(columnId);
-        auto text = info == nullptr ? "" : info->Value;
         textLabel->setText(text, juce::NotificationType::dontSendNotification);
-        textLabel->addListener(this->labeListener);
-
+        
         return textLabel;
     }
     return existingComponentToUpdate;
+}
+
+void FxTableModel::cellClicked(int rowNumber, int columnId, juce::MouseEvent& event)
+{
+
 }

@@ -8,6 +8,8 @@ public:
     std::vector<FxInfo* > Infos;
 
     Fx();
+    Fx(juce::String exceltxt, std::vector<FxInfo* > dbSchema);
+    Fx(juce::String absolutePath, juce::String description);
     Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema);
 
     juce::File GetAudioFile();

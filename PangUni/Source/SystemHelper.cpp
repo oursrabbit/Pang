@@ -30,6 +30,7 @@ void SystemHelper::OpenDatabaseEditorWindow()
 
 void SystemHelper::OpenSystemSettingsWindow()
 {
+    systemSettingsWindow.reset(new SystemSettingsWindow("Pang Uni System Settings"));
 }
 
 SystemHelper::~SystemHelper()
@@ -43,4 +44,6 @@ SystemHelper::~SystemHelper()
     {
         itr->reset(nullptr);
     }
+
+    systemSettingsWindow = nullptr;
 }

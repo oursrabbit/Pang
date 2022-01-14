@@ -11,7 +11,7 @@ FxDB::FxDB()
     DBSchema.push_back(new FxInfo(2, TRANS("Description"), ""));
 }
 
-FxDB::FxDB(juce::File file, int id)
+FxDB::FxDB(juce::File file, int id, bool none)
 {
     // Clear
     DBSchema.clear();
@@ -23,12 +23,49 @@ FxDB::FxDB(juce::File file, int id)
     // FxDB
     DatabaseFile = file;
 
-    auto fxXMLData = juce::XmlDocument::parse(file);
-    auto SoundEffectInfos = fxXMLData->getChildByName("Pang");
-    if (SoundEffectInfos == nullptr
-        || SoundEffectInfos->getNumChildElements() < 1
-        || SoundEffectInfos->getFirstChildElement()->getChildByName("FileName") == nullptr
-        || SoundEffectInfos->getFirstChildElement()->getChildByName("Description") == nullptr)
+    juce::StringArray lines;
+    file.readLines(lines);
+    if (lines.size() < 1
+        || !lines[0].contains("FileName")
+        || !lines[0].contains("Description"))
+    {
+        return;
+    }
+    else
+    {
+        // 1st. line for schema
+        int columnIndex = 1;
+        juce::StringArray headers;
+        headers.addTokens(lines[0], "\t", "\"");
+        for (auto tableHeader : headers)
+        {
+            DBSchema.push_back(new FxInfo(columnIndex++, tableHeader));
+        }
+
+        for (int i = 1; i < lines.size(); i++)
+        {
+            auto newFx = new Fx(lines[i], DBSchema);
+            Fxs.push_back(newFx);
+        }
+    }
+}
+
+FxDB::FxDB(juce::File file, int id)
+{
+    // Clear
+    DBSchema.clear();
+    Fxs.clear();
+
+    // Combobox
+    ComboboxItemID = id;
+
+    // FxDB
+    DatabaseFile = file;
+    auto Pang = juce::XmlDocument::parse(file);
+    if (Pang == nullptr
+        || Pang->getNumChildElements() < 1
+        || Pang->getFirstChildElement()->getChildByName("FileName") == nullptr
+        || Pang->getFirstChildElement()->getChildByName("Description") == nullptr)
     {
         return;
     }
@@ -36,15 +73,15 @@ FxDB::FxDB(juce::File file, int id)
     {
         // 0 node for schema
         int columnIndex = 1;
-        for (auto tableHeader : SoundEffectInfos->getFirstChildElement()->getChildIterator())
+        for (auto tableHeader : Pang->getFirstChildElement()->getChildIterator())
         {
             DBSchema.push_back(new FxInfo(columnIndex++, tableHeader->getTagName()));
         }
 
-        for (int i = 1; i < SoundEffectInfos->getNumChildElements(); i++)
+        for (int i = 1; i < Pang->getNumChildElements(); i++)
         {
-            auto fxInfoXML = SoundEffectInfos->getChildElement(i);
-            auto newFx = new Fx(fxInfoXML, DBSchema);
+            auto SoundEffect = Pang->getChildElement(i);
+            auto newFx = new Fx(SoundEffect, DBSchema);
             Fxs.push_back(newFx);
         }
     }

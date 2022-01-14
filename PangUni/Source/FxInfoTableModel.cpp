@@ -59,8 +59,10 @@ bool FxInfoTableModel::CheckNewFxInfoDB(juce::String newName)
     return temp.isValidXmlName(newName);
 }
 
-void FxInfoTableModel::UpdateNewFxDB()
+void FxInfoTableModel::UpdateNewFxDB(FxDB* newFxDB)
 {
+    this->newFxDB = newFxDB;
+    newFxInfoId += this->newFxDB->DBSchema.size();
     table->updateContent();
 }
 
@@ -102,7 +104,7 @@ juce::Component* FxInfoTableModel::refreshComponentForCell(int rowNumber, int co
         if (textLabel == nullptr)
         {
             bool canEdit = (rowNumber == 0 || rowNumber == 1 ? false : true);
-            textLabel = new DoubleClickedEditableLabel(canEdit, rowNumber, columnId, OwnerTypeEnum::FxInfoTable, [this](int rowNumber) {
+            textLabel = new DoubleClickedEditableLabel(canEdit, rowNumber, columnId, OwnerTypeEnum::FxInfoTable, [this](int rowNumber, int columnID) {
                 table->selectRowsBasedOnModifierKeys(rowNumber, juce::ModifierKeys::noModifiers, false);
                 });
         }

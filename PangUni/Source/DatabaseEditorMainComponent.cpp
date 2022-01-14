@@ -57,6 +57,11 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
     deleteFxButton->setButtonText(TRANS("-"));
     deleteFxButton->addListener(this);
 
+    importFxFromExcelButton.reset(new juce::TextButton("importFxFromExcelButton"));
+    addAndMakeVisible(importFxFromExcelButton.get());
+    importFxFromExcelButton->setButtonText(TRANS("Import Data From Excel TXT"));
+    importFxFromExcelButton->addListener(this);
+
     importFxFromDBButton.reset(new juce::TextButton("importFxFromDBButton"));
     addAndMakeVisible(importFxFromDBButton.get());
     importFxFromDBButton->setButtonText(TRANS("Import Data From File"));
@@ -72,13 +77,13 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
     importFxFromFolderButton->setButtonText(TRANS("Import Data From Audio Folder"));
     importFxFromFolderButton->addListener(this);
 
-    helpLabel.reset(new juce::Label("helpLabel", TRANS("* Copy Paste and Cut is enable")));
-    addAndMakeVisible(helpLabel.get());
-    helpLabel->setFont(juce::Font(15.00f, juce::Font::plain).withTypefaceStyle("Regular"));
-    helpLabel->setJustificationType(juce::Justification::centredLeft);
-    helpLabel->setEditable(false, false, false);
-    helpLabel->setColour(juce::TextEditor::textColourId, juce::Colours::black);
-    helpLabel->setColour(juce::TextEditor::backgroundColourId, juce::Colour(0x00000000));
+    //helpLabel.reset(new juce::Label("helpLabel", TRANS("* Copy Paste and Cut is enable")));
+    //addAndMakeVisible(helpLabel.get());
+    //helpLabel->setFont(juce::Font(15.00f, juce::Font::plain).withTypefaceStyle("Regular"));
+    //helpLabel->setJustificationType(juce::Justification::centredLeft);
+    //helpLabel->setEditable(false, false, false);
+    //helpLabel->setColour(juce::TextEditor::textColourId, juce::Colours::black);
+    //helpLabel->setColour(juce::TextEditor::backgroundColourId, juce::Colour(0x00000000));
 
     setSize(1000, 600);
 }
@@ -92,6 +97,8 @@ DatabaseEditorMainComponent::~DatabaseEditorMainComponent()
     deleteInfoButton = nullptr;
     addFxButton = nullptr;
     deleteFxButton = nullptr;
+    importFxFromExcelButton = nullptr;
+    exportFxToExcelButton = nullptr;
     importFxFromDBButton = nullptr;
     exportFXDBButton = nullptr;
     importFxFromFolderButton = nullptr;
@@ -110,16 +117,17 @@ void DatabaseEditorMainComponent::resized()
     addFxButton->setBounds(220, 10, 30, 30);
     deleteFxButton->setBounds(260, 10, 30, 30);
 
-    fxInfosTable->setBounds(10, 50, 200, getHeight() - 40 * 2 - 20);
+    fxInfosTable->setBounds(10, 50, 200, getHeight() - 40 - 20);
     fxsTable->setBounds(220, 50, getWidth() - 230, getHeight() - 40 * 5 - 20);
 
-    importFxFromFolderButton->setBounds(220, getHeight() - 40 * 4, 200, 30);
-    importFxFromDBButton->setBounds(220, getHeight() - 40 * 3, 200, 30);
-    exportFXDBButton->setBounds(220, getHeight() - 40 * 2, 200, 30);
+    importFxFromExcelButton->setBounds(220, getHeight() - 40 * 4, 200, 30);
+    importFxFromFolderButton->setBounds(220, getHeight() - 40 * 3, 200, 30);
+    importFxFromDBButton->setBounds(220, getHeight() - 40 * 2, 200, 30);
+    exportFXDBButton->setBounds(220, getHeight() - 40 * 1, 200, 30);
 
-    autoCreateThumbnailCheckBox->setBounds(450, getHeight() - 40 * 2, 250, 30);
+    autoCreateThumbnailCheckBox->setBounds(450, getHeight() - 40 * 1, 250, 30);
 
-    helpLabel->setBounds(10, getHeight() - 30, getWidth(), 30);
+    // helpLabel->setBounds(10, getHeight() - 30, getWidth(), 30);
 }
 
 void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClicked)
@@ -135,34 +143,72 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     else if (buttonThatWasClicked == addInfoButton.get())
     {
         fxInfosTable->AddNewFxInfo();
-        fxInfosTable->UpdateNewFxDB();
-        fxsTable->UpdateNewFxDB();
+        fxInfosTable->UpdateNewFxDB(newFxDB);
+        fxsTable->UpdateNewFxDB(newFxDB);
     }
     else if (buttonThatWasClicked == deleteInfoButton.get())
     {
         fxInfosTable->DeleteNewFxInfoDB();
-        fxInfosTable->UpdateNewFxDB();
-        fxsTable->UpdateNewFxDB();
+        fxInfosTable->UpdateNewFxDB(newFxDB);
+        fxsTable->UpdateNewFxDB(newFxDB);
     }
     else if (buttonThatWasClicked == addFxButton.get())
     {
         fxsTable->AddNewFx();
-        fxsTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB(newFxDB);
     }
     else if (buttonThatWasClicked == deleteFxButton.get())
     {
         fxsTable->DeleteNewFx();
-        fxsTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB(newFxDB);
+    }
+    else if (buttonThatWasClicked == importFxFromExcelButton.get())
+    {
+        chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.txt");
+        auto chooserFlags = juce::FileBrowserComponent::openMode;
+        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+            {
+                auto file = fc.getResult();
+                if (file != juce::File{})
+                {
+                    newFxDB = new FxDB(file, 1, true);
+                    fxInfosTable->UpdateNewFxDB(newFxDB);
+                    fxsTable->UpdateNewFxDB(newFxDB);
+                }
+            });
     }
     else if (buttonThatWasClicked == importFxFromDBButton.get())
     {
-        //[UserButtonCode_importFxFromDBButton] -- add your button handler code here..
-        //[/UserButtonCode_importFxFromDBButton]
+        chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.pxml");
+        auto chooserFlags = juce::FileBrowserComponent::openMode;
+        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+            {
+                auto file = fc.getResult();
+                if (file != juce::File{})
+                {
+                    newFxDB = new FxDB(file, 1);
+                    fxInfosTable->UpdateNewFxDB(newFxDB);
+                    fxsTable->UpdateNewFxDB(newFxDB);
+                }
+            });
     }
     else if (buttonThatWasClicked == importFxFromFolderButton.get())
     {
-        //[UserButtonCode_importFxFromFolderButton] -- add your button handler code here..
-        //[/UserButtonCode_importFxFromFolderButton]
+        chooser = std::make_unique<juce::FileChooser>(TRANS("Open"));
+        auto chooserFlags = juce::FileBrowserComponent::canSelectDirectories | juce::FileBrowserComponent::useTreeView;
+        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+            {
+                auto file = fc.getResult();
+                if (file != juce::File{} && file.isDirectory())
+                {
+                    auto audioFiles = file.findChildFiles(file.findFiles, true, "*.wav");
+                    for (auto af : audioFiles)
+                    {
+                        newFxDB->Fxs.push_back(new Fx(af.getFullPathName(), ""));
+                    }
+                    fxsTable->UpdateNewFxDB(newFxDB);
+                }
+            });
     }
     else if (buttonThatWasClicked == exportFXDBButton.get())
     {
@@ -203,6 +249,6 @@ void DatabaseEditorMainComponent::labelTextChanged(juce::Label* labelThatHasChan
         }
         info->Value = label->getText();
     }
-    fxInfosTable->UpdateNewFxDB();
-    fxsTable->UpdateNewFxDB();
+    fxInfosTable->UpdateNewFxDB(newFxDB);
+    fxsTable->UpdateNewFxDB(newFxDB);
 }

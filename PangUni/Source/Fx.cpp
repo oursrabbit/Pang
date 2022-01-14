@@ -5,8 +5,28 @@ Fx::Fx()
 {
     Infos.clear();
 
-    Infos.push_back(new FxInfo(1, "FileName", TRANS("Absolute Path At Here")));
-    Infos.push_back(new FxInfo(2, "Description", TRANS("Some Description Text, Ignore Case")));
+    Infos.push_back(new FxInfo(1, "FileName", "Absolute Path At Here"));
+    Infos.push_back(new FxInfo(2, "Description", "Some Description Text, Ignore Case"));
+}
+
+Fx::Fx(juce::String exceltxt, std::vector<FxInfo* > dbSchema)
+{
+    Infos.clear();
+    juce::StringArray fxInfos;
+    fxInfos.addTokens(exceltxt, "\t", "\"");
+    for (auto key : dbSchema)
+    {
+        auto childNode = key->ColumnIndex > fxInfos.size() ? "" : fxInfos[key->ColumnIndex - 1];
+        Infos.push_back(new FxInfo(key->ColumnIndex, key->HeaderName, childNode));
+    }
+}
+
+Fx::Fx(juce::String absolutePath, juce::String description)
+{
+    Infos.clear();
+
+    Infos.push_back(new FxInfo(1, "FileName", absolutePath));
+    Infos.push_back(new FxInfo(2, "Description", description));
 }
 
 Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)

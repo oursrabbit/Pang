@@ -142,16 +142,19 @@
     <ClCompile Include="..\..\Source\Fx.cpp"/>
     <ClCompile Include="..\..\Source\FxDB.cpp"/>
     <ClCompile Include="..\..\Source\FxInfo.cpp"/>
-    <ClCompile Include="..\..\Source\GUIDesign.cpp"/>
+    <ClCompile Include="..\..\Source\BasicSettingsComponent.cpp"/>
+    <ClCompile Include="..\..\Source\SpotSettingsComponent.cpp"/>
+    <ClCompile Include="..\..\Source\SystemSettingsComponent.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\Source\MainComponent.cpp"/>
     <ClCompile Include="..\..\Source\PangMenuComponent.cpp"/>
-    <ClCompile Include="..\..\Source\CustomTableCells.cpp"/>
-    <ClCompile Include="..\..\Source\SystemHelper.cpp"/>
     <ClCompile Include="..\..\Source\SearchWindowMainComponent.cpp"/>
     <ClCompile Include="..\..\Source\DatabaseEditorMainComponent.cpp"/>
     <ClCompile Include="..\..\Source\FxInfoTableModel.cpp"/>
     <ClCompile Include="..\..\Source\FxTableModel.cpp"/>
+    <ClCompile Include="..\..\Source\CustomTableCells.cpp"/>
+    <ClCompile Include="..\..\Source\SystemHelper.cpp"/>
+    <ClCompile Include="..\..\Source\GUIDesign.cpp"/>
     <ClCompile Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_AbstractFifo.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -1286,18 +1289,22 @@
     <ClInclude Include="..\..\Source\Fx.h"/>
     <ClInclude Include="..\..\Source\FxDB.h"/>
     <ClInclude Include="..\..\Source\FxInfo.h"/>
-    <ClInclude Include="..\..\Source\GUIDesign.h"/>
+    <ClInclude Include="..\..\Source\BasicSettingsComponent.h"/>
+    <ClInclude Include="..\..\Source\SpotSettingsComponent.h"/>
+    <ClInclude Include="..\..\Source\SystemSettingsComponent.h"/>
+    <ClInclude Include="..\..\Source\SystemSettingsWindow.h"/>
     <ClInclude Include="..\..\Source\MainWindow.h"/>
     <ClInclude Include="..\..\Source\MainComponent.h"/>
     <ClInclude Include="..\..\Source\PangMenuComponent.h"/>
-    <ClInclude Include="..\..\Source\CustomTableCells.h"/>
-    <ClInclude Include="..\..\Source\SystemHelper.h"/>
     <ClInclude Include="..\..\Source\SearchWindowMainComponent.h"/>
     <ClInclude Include="..\..\Source\SearchWindow.h"/>
     <ClInclude Include="..\..\Source\DatabaseEditorMainComponent.h"/>
     <ClInclude Include="..\..\Source\DatabaseEditorWindow.h"/>
     <ClInclude Include="..\..\Source\FxInfoTableModel.h"/>
     <ClInclude Include="..\..\Source\FxTableModel.h"/>
+    <ClInclude Include="..\..\Source\CustomTableCells.h"/>
+    <ClInclude Include="..\..\Source\SystemHelper.h"/>
+    <ClInclude Include="..\..\Source\GUIDesign.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_AbstractFifo.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_Array.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\containers\juce_ArrayAllocationBase.h"/>
@@ -1712,8 +1719,9 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Base.xml"/>
+    <None Include="..\..\Source\Handbook.docx"/>
     <None Include="..\..\Source\juce_icon.png"/>
+    <None Include="..\..\Source\Base.xml"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_core\native\java\README.txt"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_graphics\image_formats\jpglib\changes to libjpeg for JUCE.txt"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_graphics\image_formats\pnglib\libpng_readme.txt"/>

@@ -7,7 +7,6 @@
   <MAINGROUP id="E8ZPdj" name="PangUni">
     <GROUP id="{B7D90DEA-3B89-2CEE-B733-C539EE4DE2AD}" name="Source">
       <GROUP id="{DF1FCAC2-63F4-8CC2-36BF-EDA1E7408F87}" name="Model">
-        <FILE id="u0u0gU" name="Base.xml" compile="0" resource="0" file="Source/Base.xml"/>
         <FILE id="Ipx2oc" name="Fx.cpp" compile="1" resource="0" file="Source/Fx.cpp"/>
         <FILE id="YIa3Dv" name="Fx.h" compile="0" resource="0" file="Source/Fx.h"/>
         <FILE id="TY8EQx" name="FxDB.cpp" compile="1" resource="0" file="Source/FxDB.cpp"/>
@@ -15,20 +14,56 @@
         <FILE id="oy7Rmd" name="FxInfo.cpp" compile="1" resource="0" file="Source/FxInfo.cpp"/>
         <FILE id="dKOMjG" name="FxInfo.h" compile="0" resource="0" file="Source/FxInfo.h"/>
       </GROUP>
-      <GROUP id="{EE3396D4-63E7-3125-CAA2-89B965F049FC}" name="Test">
-        <FILE id="tGMw4c" name="GUIDesign.cpp" compile="1" resource="0" file="Source/GUIDesign.cpp"/>
-        <FILE id="X6HhpH" name="GUIDesign.h" compile="0" resource="0" file="Source/GUIDesign.h"/>
-      </GROUP>
-      <GROUP id="{9526AC87-20C9-C262-2E29-881B58C8062C}" name="Main">
-        <FILE id="Atpbss" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-        <FILE id="RQ7ev1" name="MainWindow.h" compile="0" resource="0" file="Source/MainWindow.h"/>
-        <FILE id="KAqRh1" name="MainComponent.cpp" compile="1" resource="0"
-              file="Source/MainComponent.cpp"/>
-        <FILE id="xeDobI" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
-        <FILE id="mbykdq" name="PangMenuComponent.cpp" compile="1" resource="0"
-              file="Source/PangMenuComponent.cpp"/>
-        <FILE id="HpUbcG" name="PangMenuComponent.h" compile="0" resource="0"
-              file="Source/PangMenuComponent.h"/>
+      <GROUP id="{4B2C2ACC-8E9A-62EE-7D6B-82D3A4E25F7F}" name="Windows">
+        <GROUP id="{6F5415A4-26D3-FDDB-827D-C31D40AA15C5}" name="SystemSetting">
+          <FILE id="JkppHC" name="BasicSettingsComponent.cpp" compile="1" resource="0"
+                file="Source/BasicSettingsComponent.cpp"/>
+          <FILE id="CiNzO6" name="BasicSettingsComponent.h" compile="0" resource="0"
+                file="Source/BasicSettingsComponent.h"/>
+          <FILE id="OpO2ai" name="SpotSettingsComponent.cpp" compile="1" resource="0"
+                file="Source/SpotSettingsComponent.cpp"/>
+          <FILE id="smKoMC" name="SpotSettingsComponent.h" compile="0" resource="0"
+                file="Source/SpotSettingsComponent.h"/>
+          <FILE id="t9Q1Yz" name="SystemSettingsComponent.cpp" compile="1" resource="0"
+                file="Source/SystemSettingsComponent.cpp"/>
+          <FILE id="XZZBBp" name="SystemSettingsComponent.h" compile="0" resource="0"
+                file="Source/SystemSettingsComponent.h"/>
+          <FILE id="bkV6Z9" name="SystemSettingsWindow.h" compile="0" resource="0"
+                file="Source/SystemSettingsWindow.h"/>
+        </GROUP>
+        <GROUP id="{9526AC87-20C9-C262-2E29-881B58C8062C}" name="Main">
+          <FILE id="Atpbss" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+          <FILE id="RQ7ev1" name="MainWindow.h" compile="0" resource="0" file="Source/MainWindow.h"/>
+          <FILE id="KAqRh1" name="MainComponent.cpp" compile="1" resource="0"
+                file="Source/MainComponent.cpp"/>
+          <FILE id="xeDobI" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+          <FILE id="mbykdq" name="PangMenuComponent.cpp" compile="1" resource="0"
+                file="Source/PangMenuComponent.cpp"/>
+          <FILE id="HpUbcG" name="PangMenuComponent.h" compile="0" resource="0"
+                file="Source/PangMenuComponent.h"/>
+        </GROUP>
+        <GROUP id="{5DF8B6BA-73F0-C8AD-0D03-903F370302D9}" name="Search">
+          <FILE id="dIsQq4" name="SearchWindowMainComponent.cpp" compile="1"
+                resource="0" file="Source/SearchWindowMainComponent.cpp"/>
+          <FILE id="vI2vN8" name="SearchWindowMainComponent.h" compile="0" resource="0"
+                file="Source/SearchWindowMainComponent.h"/>
+          <FILE id="k1ReV9" name="SearchWindow.h" compile="0" resource="0" file="Source/SearchWindow.h"/>
+        </GROUP>
+        <GROUP id="{6688204C-4F63-A78F-AD2C-2B2775DFFA02}" name="DatabaseEditor">
+          <FILE id="FMf9U1" name="DatabaseEditorMainComponent.cpp" compile="1"
+                resource="0" file="Source/DatabaseEditorMainComponent.cpp"/>
+          <FILE id="F6XuIV" name="DatabaseEditorMainComponent.h" compile="0"
+                resource="0" file="Source/DatabaseEditorMainComponent.h"/>
+          <FILE id="NVg0oU" name="DatabaseEditorWindow.h" compile="0" resource="0"
+                file="Source/DatabaseEditorWindow.h"/>
+          <FILE id="sccGhS" name="FxInfoTableModel.cpp" compile="1" resource="0"
+                file="Source/FxInfoTableModel.cpp"/>
+          <FILE id="Qu596v" name="FxInfoTableModel.h" compile="0" resource="0"
+                file="Source/FxInfoTableModel.h"/>
+          <FILE id="xoLnKI" name="FxTableModel.cpp" compile="1" resource="0"
+                file="Source/FxTableModel.cpp"/>
+          <FILE id="gt4hQo" name="FxTableModel.h" compile="0" resource="0" file="Source/FxTableModel.h"/>
+        </GROUP>
       </GROUP>
       <GROUP id="{16F86DE0-AC00-7E11-E79F-4078E1F3E029}" name="Utilities">
         <GROUP id="{9F8E53C9-4C30-DDC7-6243-66E12587FB9C}" name="UI">
@@ -41,28 +76,14 @@
               file="Source/SystemHelper.cpp"/>
         <FILE id="CYlSsa" name="SystemHelper.h" compile="0" resource="0" file="Source/SystemHelper.h"/>
       </GROUP>
-      <FILE id="CcpD3M" name="juce_icon.png" compile="0" resource="0" file="Source/juce_icon.png"/>
-      <GROUP id="{5DF8B6BA-73F0-C8AD-0D03-903F370302D9}" name="Search">
-        <FILE id="dIsQq4" name="SearchWindowMainComponent.cpp" compile="1"
-              resource="0" file="Source/SearchWindowMainComponent.cpp"/>
-        <FILE id="vI2vN8" name="SearchWindowMainComponent.h" compile="0" resource="0"
-              file="Source/SearchWindowMainComponent.h"/>
-        <FILE id="k1ReV9" name="SearchWindow.h" compile="0" resource="0" file="Source/SearchWindow.h"/>
+      <GROUP id="{4A9EA792-6F57-2AB7-5B26-C20651FF0CF4}" name="Resource">
+        <FILE id="VOq9us" name="Handbook.docx" compile="0" resource="0" file="Source/Handbook.docx"/>
+        <FILE id="CcpD3M" name="juce_icon.png" compile="0" resource="0" file="Source/juce_icon.png"/>
+        <FILE id="u0u0gU" name="Base.xml" compile="0" resource="0" file="Source/Base.xml"/>
       </GROUP>
-      <GROUP id="{6688204C-4F63-A78F-AD2C-2B2775DFFA02}" name="DatabaseEditor">
-        <FILE id="FMf9U1" name="DatabaseEditorMainComponent.cpp" compile="1"
-              resource="0" file="Source/DatabaseEditorMainComponent.cpp"/>
-        <FILE id="F6XuIV" name="DatabaseEditorMainComponent.h" compile="0"
-              resource="0" file="Source/DatabaseEditorMainComponent.h"/>
-        <FILE id="NVg0oU" name="DatabaseEditorWindow.h" compile="0" resource="0"
-              file="Source/DatabaseEditorWindow.h"/>
-        <FILE id="sccGhS" name="FxInfoTableModel.cpp" compile="1" resource="0"
-              file="Source/FxInfoTableModel.cpp"/>
-        <FILE id="Qu596v" name="FxInfoTableModel.h" compile="0" resource="0"
-              file="Source/FxInfoTableModel.h"/>
-        <FILE id="xoLnKI" name="FxTableModel.cpp" compile="1" resource="0"
-              file="Source/FxTableModel.cpp"/>
-        <FILE id="gt4hQo" name="FxTableModel.h" compile="0" resource="0" file="Source/FxTableModel.h"/>
+      <GROUP id="{EE3396D4-63E7-3125-CAA2-89B965F049FC}" name="Test">
+        <FILE id="tGMw4c" name="GUIDesign.cpp" compile="1" resource="0" file="Source/GUIDesign.cpp"/>
+        <FILE id="X6HhpH" name="GUIDesign.h" compile="0" resource="0" file="Source/GUIDesign.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>

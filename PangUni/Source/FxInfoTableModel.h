@@ -31,7 +31,7 @@ public:
     void AddNewFxInfo();
     void DeleteNewFxInfoDB();
     bool CheckNewFxInfoDB(juce::String newName);
-    void UpdateNewFxDB();
+    void UpdateNewFxDB(FxDB* newFxDB);
 
     void paint (juce::Graphics&) override;
     void resized() override;

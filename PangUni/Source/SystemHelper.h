@@ -11,6 +11,7 @@
 #pragma once
 #include "DatabaseEditorWindow.h"
 #include "SearchWindow.h"
+#include "SystemSettingsWindow.h"
 
 class SystemHelper
 {
@@ -26,7 +27,7 @@ public:
     ~SystemHelper();
 private:
    
-
+    std::unique_ptr<SystemSettingsWindow> systemSettingsWindow;
     std::vector<std::unique_ptr<SearchWindow>> searchWindows;
     std::vector<std::unique_ptr<DatabaseEditorWindow>> databaseEditorWindows;
 
