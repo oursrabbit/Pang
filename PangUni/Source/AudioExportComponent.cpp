@@ -1,12 +1,13 @@
 #include <JuceHeader.h>
 #include "AudioExportComponent.h"
-#include "../../Utilities/DatabaseHelper.h"
-#include "../../Utilities/SpotToDAW/ProTools/RegionSpotter.h"
+#include "SystemHelper.h"
+#include "RegionSpotter.h"
 
 //==============================================================================
-AudioExportComponent::AudioExportComponent()
+AudioExportComponent::AudioExportComponent(SearchDataStruct* newData)
     :thumbCache(256), thumb(128, manager, thumbCache)
 {
+    this->newData = newData;
     threadKey = 0;
     timeCursorLineX = 0;
 
@@ -47,11 +48,11 @@ AudioExportComponent::AudioExportComponent()
     exportButton->setButtonText(TRANS("EXPROT"));
     exportButton->addListener(this);
 
-    waveImageLoadStateLabel.reset(new juce::Label("waveImageLoadStateLabel", TRANS("waveImageLoadStateLabel")));
+    waveImageLoadStateLabel.reset(new juce::Label("waveImageLoadStateLabel", TRANS("")));
     addAndMakeVisible(waveImageLoadStateLabel.get());
     waveImageLoadStateLabel->addMouseListener(this, true);
 
-    selectionCover.reset(new AudioCoverComponent());
+    selectionCover.reset(new ThumbnailCoverComponent());
     addAndMakeVisible(selectionCover.get());
     selectionCover->setBounds(-100, 40, 0, 200);
 
@@ -69,6 +70,10 @@ AudioExportComponent::AudioExportComponent()
     startTimer(40);
 }
 
+AudioExportComponent::AudioExportComponent()
+    :thumbCache(256), thumb(128, manager, thumbCache)
+{}
+
 AudioExportComponent::~AudioExportComponent()
 {
     shutdownAudio();
@@ -85,13 +90,6 @@ AudioExportComponent::~AudioExportComponent()
 
 void AudioExportComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
     juce::Rectangle<int> thumbnailBounds(0, 40, getWidth(), 200);
@@ -124,6 +122,11 @@ void AudioExportComponent::resized()
     waveImageLoadStateLabel->setBounds(0, 40, getWidth(), 200);
 }
 
+bool AudioExportComponent::keyPressed(const juce::KeyPress& press)
+{
+    return false;
+}
+
 void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 {
     if (buttonThatWasClicked == preFileButton.get())
@@ -132,13 +135,19 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == stopPlayButton.get())
     {
+        shutdownAudio();
         transportSource.stop();
         transportSource.setPosition(0);
     }
     else if (buttonThatWasClicked == playOrPauseButton.get())
     {
         if (readerSource != nullptr && !transportSource.isPlaying())
-            transportSource.start();
+        {
+            // Check Audio Device
+            // Open Audio Device
+            // Play Audio
+            // transportSource.start();
+        }
         else
             transportSource.stop();
     }
@@ -155,37 +164,37 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == exportButton.get())
     {
-        if (DatabaseHelper::CurrentFx != nullptr)
-        {
-            juce::AlertWindow waitWindow(TRANS("Export..."), "", juce::MessageBoxIconType::WarningIcon);
-            waitWindow.enterModalState();
-            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
-            if (reader != nullptr)
-            {
-                // Export All Audio
-                if (selectionCover->getBounds().getX() < 0)
-                {
-                    RegionSpotter::Spot(0, reader->lengthInSamples);
-                }
-                // Export Selection
-                else
-                {
-                    float totalLength = (float)getWidth();
-                    auto startPoint = selectionCover->getBounds().getX();
-                    auto endPoint = selectionCover->getBounds().getX() + selectionCover->getBounds().getWidth();
-                    auto totalSamples = reader->lengthInSamples;
-                    auto startSample = (int)(totalSamples * startPoint / totalLength);
-                    auto endSample = (int)(totalSamples * endPoint / totalLength);
-                    RegionSpotter::Spot(startSample, endSample);
-                }
-                delete reader;
-            }
-            waitWindow.exitModalState(0);
-        }
+        //if (DatabaseHelper::CurrentFx != nullptr)
+        //{
+        //    juce::AlertWindow waitWindow(TRANS("Export..."), "", juce::MessageBoxIconType::WarningIcon);
+        //    waitWindow.enterModalState();
+        //    auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
+        //    if (reader != nullptr)
+        //    {
+        //        // Export All Audio
+        //        if (selectionCover->getBounds().getX() < 0)
+        //        {
+        //            RegionSpotter::Spot(0, reader->lengthInSamples);
+        //        }
+        //        // Export Selection
+        //        else
+        //        {
+        //            float totalLength = (float)getWidth();
+        //            auto startPoint = selectionCover->getBounds().getX();
+        //            auto endPoint = selectionCover->getBounds().getX() + selectionCover->getBounds().getWidth();
+        //            auto totalSamples = reader->lengthInSamples;
+        //            auto startSample = (int)(totalSamples * startPoint / totalLength);
+        //            auto endSample = (int)(totalSamples * endPoint / totalLength);
+        //            RegionSpotter::Spot(startSample, endSample);
+        //        }
+        //        delete reader;
+        //    }
+        //    waitWindow.exitModalState(0);
+        //}
     }
 }
 
-void AudioExportComponent::selectedFileChanged()
+void AudioExportComponent::UpdataNewFx()
 {
     shutdownAudio();
     timeCursorLineX = 0;
@@ -201,14 +210,14 @@ void AudioExportComponent::selectedFileChanged()
     playOrPauseButton->setButtonText(TRANS("PLAY"));
     transportSource.setSource(nullptr, 0, nullptr);
     readyToPlay = false;
-    if (DatabaseHelper::CurrentFx != nullptr)
+    if (this->newData->CurrentFx != nullptr && this->newData->CurrentFx->GetAudioFile().existsAsFile())
     {
         // Thumbnail
         waveImageLoadStateLabel->setText(TRANS("Loading Thumbnail Image..."), juce::NotificationType::dontSendNotification);
-        ifSucceedLoaded = thumb.setSource(new juce::FileInputSource(DatabaseHelper::CurrentFx->GetAudioFile()));
+        ifSucceedLoaded = thumb.setSource(new juce::FileInputSource(this->newData->CurrentFx->GetAudioFile()));
         // Player
         juce::Thread::launch([this, currentThreadKey]() {
-            auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
+            auto* reader = manager.createReaderFor(this->newData->CurrentFx->GetAudioFile());
             if (reader != nullptr)
             {
                 auto newSource = std::make_unique<juce::AudioFormatReaderSource>(reader, true);   // [11]
@@ -217,9 +226,13 @@ void AudioExportComponent::selectedFileChanged()
                 readerSource.reset(newSource.release());
                 readyToPlay = true;
                 juce::MessageManagerLock mml;
-                setAudioChannels(0, 2);
                 if (autoPlayButton->getToggleState())
-                    transportSource.start();
+                {
+                    // Check Audio Device
+                    // Open Audio Device
+                    // Play Audio
+                    // transportSource.start();
+                }
             }
             });
     }
@@ -284,7 +297,7 @@ void AudioExportComponent::changeListenerCallback(juce::ChangeBroadcaster* sourc
     {
         if (thumb.isFullyLoaded())
         {
-            auto loadState = DatabaseHelper::CurrentFx == nullptr ? "" : ifSucceedLoaded ? "" : TRANS("Loading Thumbnail Image Failed");
+            auto loadState = this->newData->CurrentFx == nullptr ? "" : ifSucceedLoaded ? "" : TRANS("Loading Thumbnail Image Failed");
             waveImageLoadStateLabel->setText(loadState, juce::NotificationType::dontSendNotification);
         }
     }

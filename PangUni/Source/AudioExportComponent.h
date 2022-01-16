@@ -1,21 +1,23 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "../AudioSearch/AudioSearchComponent.h"
-#include "AudioCoverComponent.h"
+#include "SearchDataStruct.h"
+#include "ThumbnailCoverComponent.h"
 
 //==============================================================================
 /*
 */
 class AudioExportComponent  : public juce::AudioAppComponent,
                               public juce::Button::Listener,
-                              public AudioSearchComponentListener,
                               public juce::Timer,
                               public juce::ChangeListener
 {
 public:
     AudioExportComponent();
+    AudioExportComponent(SearchDataStruct* newData);
     ~AudioExportComponent() override;
+
+    void UpdataNewFx();
 
     // Inherited via AudioAppComponent
     virtual void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
@@ -24,8 +26,8 @@ public:
 
     void paint (juce::Graphics&) override;
     void resized() override;
+    bool keyPressed(const juce::KeyPress& press) override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
-    void selectedFileChanged() override;
     
     void mouseDown(const juce::MouseEvent& event) override;
     void mouseDrag(const juce::MouseEvent& event) override;
@@ -39,6 +41,7 @@ public:
     // 30 + 10 + 200
     const static int FIXHEIGHT = 240;
 
+    SearchDataStruct* newData;
     std::unique_ptr<juce::Label> waveImageLoadStateLabel;
     std::unique_ptr<juce::TextButton> preFileButton;
     std::unique_ptr<juce::TextButton> stopPlayButton;
@@ -49,7 +52,7 @@ public:
     std::unique_ptr<juce::Label> autoPlayLabel;
     int autoPlayLabelWidth;
     std::unique_ptr<juce::TextButton> exportButton;
-    std::unique_ptr<AudioCoverComponent> selectionCover;
+    std::unique_ptr<ThumbnailCoverComponent> selectionCover;
     int selectionCoverStartX;
     int selectionCoverEndX;
 

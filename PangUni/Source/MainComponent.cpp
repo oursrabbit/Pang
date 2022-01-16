@@ -16,9 +16,10 @@ MainComponent::MainComponent()
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
+    newData = new SearchDataStruct();
     menu.reset(new PangMenuComponent());
     addAndMakeVisible(menu.get());
-    mainComp.reset(new SearchWindowMainComponent());
+    mainComp.reset(new SearchWindowMainComponent(newData));
     addAndMakeVisible(mainComp.get());
 
     setSize(1000, 600);
@@ -26,6 +27,9 @@ MainComponent::MainComponent()
 
 MainComponent::~MainComponent()
 {
+    delete newData;
+    menu = nullptr;
+    mainComp = nullptr;
 }
 
 void MainComponent::paint (juce::Graphics& g)

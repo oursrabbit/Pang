@@ -11,9 +11,12 @@ public:
     std::vector<Fx* > Fxs;
 
     FxDB();
-    // file: pxml
+    // file: excel txt
     // id: combobox itemid, Start from 1, CANNOT BE 0
     FxDB(juce::File file, int id, bool none);
+
+    // file: pxml
+    // id: combobox itemid, Start from 1, CANNOT BE 0
     FxDB(juce::File file, int id);
     void Serialization(juce::File file);
 

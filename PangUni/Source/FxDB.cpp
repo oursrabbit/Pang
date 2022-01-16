@@ -4,6 +4,7 @@ FxDB::FxDB()
 {
     DBSchema.clear();
     Fxs.clear();
+    FilteredFxs.clear();
     ComboboxItemID = 0;
     DatabaseFile = juce::File();
 
@@ -16,6 +17,7 @@ FxDB::FxDB(juce::File file, int id, bool none)
     // Clear
     DBSchema.clear();
     Fxs.clear();
+    FilteredFxs.clear();
 
     // Combobox
     ComboboxItemID = id;
@@ -47,6 +49,7 @@ FxDB::FxDB(juce::File file, int id, bool none)
             auto newFx = new Fx(lines[i], DBSchema);
             Fxs.push_back(newFx);
         }
+        FilteredFxs = Fxs;
     }
 }
 
@@ -55,6 +58,7 @@ FxDB::FxDB(juce::File file, int id)
     // Clear
     DBSchema.clear();
     Fxs.clear();
+    FilteredFxs.clear();
 
     // Combobox
     ComboboxItemID = id;
@@ -84,6 +88,7 @@ FxDB::FxDB(juce::File file, int id)
             auto newFx = new Fx(SoundEffect, DBSchema);
             Fxs.push_back(newFx);
         }
+        FilteredFxs = Fxs;
     }
 }
 

@@ -3,18 +3,55 @@
 std::unique_ptr<SystemHelper> SystemHelper::Helper = nullptr;
 
 SystemHelper::SystemHelper()
+{}
+
+void SystemHelper::_initSystemHelper()
 {
+    systemSettingsHelper.reset(new SystemSettingsHelper());
+    languageHelper.reset(new LanguageHelper());
+    baiduAIHelper.reset(new BaiduAIHelper());
+
+    auto currentLangS = SystemHelper::Helper->systemSettingsHelper->GetLanguage();
+    auto currentAppBasePath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBasePath();
+    auto transFile = SystemHelper::Helper->languageHelper->GetTransFileByLanguage(currentAppBasePath, currentLangS);
+    if (transFile.existsAsFile())
+    {
+        juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
+    }
+    juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
+
     searchWindows.clear();
     databaseEditorWindows.clear();
+}
+
+void SystemHelper::_releaseSystemHelper()
+{
+    for (auto itr = searchWindows.begin(); itr != searchWindows.end(); itr++)
+    {
+        itr->reset(nullptr);
+    }
+
+    for (auto itr = databaseEditorWindows.begin(); itr != databaseEditorWindows.end(); itr++)
+    {
+        itr->reset(nullptr);
+    }
+
+    systemSettingsWindow = nullptr;
+
+    systemSettingsHelper = nullptr;
+    languageHelper = nullptr;
+    baiduAIHelper = nullptr;
 }
 
 void SystemHelper::InitSystemHelper()
 {
     SystemHelper::Helper.reset(new SystemHelper());
+    SystemHelper::Helper->_initSystemHelper();
 }
 
 void SystemHelper::ReleaseSystemHelper()
 {
+    SystemHelper::Helper->_releaseSystemHelper();
     SystemHelper::Helper = nullptr;
 }
 
@@ -31,19 +68,4 @@ void SystemHelper::OpenDatabaseEditorWindow()
 void SystemHelper::OpenSystemSettingsWindow()
 {
     systemSettingsWindow.reset(new SystemSettingsWindow("Pang Uni System Settings"));
-}
-
-SystemHelper::~SystemHelper()
-{
-    for (auto itr = searchWindows.begin(); itr != searchWindows.end() ; itr++)
-    {
-        itr->reset(nullptr);
-    }
-
-    for (auto itr = databaseEditorWindows.begin(); itr != databaseEditorWindows.end(); itr++)
-    {
-        itr->reset(nullptr);
-    }
-
-    systemSettingsWindow = nullptr;
 }

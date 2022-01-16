@@ -11,12 +11,12 @@
 #pragma once
 #include <JuceHeader.h>
 #include "DatabaseEditorMainComponent.h"
-#include "FxDB.h"
+#include "DatabaseEditorDataStruct.h"
 
 class DatabaseEditorWindow : public juce::DocumentWindow
 {
 public:
-    FxDB* newFxDB;
+    DatabaseEditorDataStruct* newData;
 
     DatabaseEditorWindow(juce::String name)
         : DocumentWindow(name,
@@ -24,9 +24,9 @@ public:
             .findColour(juce::ResizableWindow::backgroundColourId),
             DocumentWindow::allButtons)
     {
-        newFxDB = new FxDB();
+        newData = new DatabaseEditorDataStruct();
         setUsingNativeTitleBar(true);
-        setContentOwned(new DatabaseEditorMainComponent(newFxDB), true);
+        setContentOwned(new DatabaseEditorMainComponent(newData), true);
 
 #if JUCE_IOS || JUCE_ANDROID
         setFullScreen(true);
@@ -40,7 +40,7 @@ public:
 
     void closeButtonPressed() override
     {
-        delete newFxDB;
+        delete newData;
         setVisible(false);
     }
 private:

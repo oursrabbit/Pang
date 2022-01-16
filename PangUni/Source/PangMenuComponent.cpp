@@ -51,7 +51,7 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
     }
     else if (menuName == TRANS("Database"))
     {
-        menu.addItem(201, TRANS("New Databse Editor Window"));
+        menu.addItem(201, TRANS("New Database Editor Window"));
     }
     else if (menuName == TRANS("Windows"))
     {

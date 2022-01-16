@@ -2476,19 +2476,4 @@
     <BWOriginator>? 2014 BOOM Library All Rights Reserved</BWOriginator>
     <BWOriginatorRef>www.boomlibrary.com</BWOriginatorRef>
   </SoundEffect>
-  <SoundEffect>
-    <FileName></FileName>
-    <Description></Description>
-    <Source></Source>
-    <Category></Category>
-    <SubCategory></SubCategory>
-    <Notes></Notes>
-    <Library></Library>
-    <Keywords></Keywords>
-    <Manufacturer></Manufacturer>
-    <Designer></Designer>
-    <BWDescription></BWDescription>
-    <BWOriginator></BWOriginator>
-    <BWOriginatorRef></BWOriginatorRef>
-  </SoundEffect>
 </Pang>

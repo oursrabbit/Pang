@@ -18,15 +18,15 @@ FxTableModel::FxTableModel()
     // initialise any special settings that your component needs.
 }
 
-FxTableModel::FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener)
+FxTableModel::FxTableModel(DatabaseEditorDataStruct* newData, juce::Label::Listener* labeListener)
 {
-    this->newFxDB = newFxDB;
+    this->newData = newData;
     this->labeListener = labeListener;
 
     table.reset(new juce::TableListBox("", this));
     addAndMakeVisible(table.get());
 
-    UpdateNewFxDB(newFxDB);
+    UpdateNewFxDB();
 }
 
 FxTableModel::~FxTableModel()
@@ -38,23 +38,22 @@ void FxTableModel::AddNewFx()
 {
     Fx* newFx = new Fx();
     newFx->SetInfoValueByColumnID(1, "Absolute Path for New Fx");
-    newFxDB->Fxs.push_back(newFx);
+    newData->newFxDB->Fxs.push_back(newFx);
 }
 
 void FxTableModel::DeleteNewFx()
 {
-    if (table->getSelectedRow() != -1 && table->getSelectedRow() < newFxDB->Fxs.size())
+    if (table->getSelectedRow() != -1 && table->getSelectedRow() < newData->newFxDB->Fxs.size())
     {
-        auto itr = newFxDB->Fxs.begin() + table->getSelectedRow();
-        newFxDB->Fxs.erase(itr);
+        auto itr = newData->newFxDB->Fxs.begin() + table->getSelectedRow();
+        newData->newFxDB->Fxs.erase(itr);
     }
 }
 
-void FxTableModel::UpdateNewFxDB(FxDB* newFxDB)
+void FxTableModel::UpdateNewFxDB()
 {
-    this->newFxDB = newFxDB;
     table->getHeader().removeAllColumns();
-    for (auto itr = newFxDB->DBSchema.begin(); itr != newFxDB->DBSchema.end(); itr++)
+    for (auto itr = newData->newFxDB->DBSchema.begin(); itr != newData->newFxDB->DBSchema.end(); itr++)
     {
         table->getHeader().addColumn((*itr)->HeaderName, (*itr)->ColumnIndex, 100);
     }
@@ -73,7 +72,7 @@ void FxTableModel::resized()
 
 int FxTableModel::getNumRows()
 {
-    return newFxDB->Fxs.size();
+    return newData->newFxDB->Fxs.size();
 }
 
 void FxTableModel::paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
@@ -93,9 +92,9 @@ void FxTableModel::paintCell(juce::Graphics& g, int rowNumber, int columnId, int
 
 juce::Component* FxTableModel::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
 {
-    if (rowNumber < newFxDB->Fxs.size())
+    if (rowNumber < newData->newFxDB->Fxs.size())
     {
-        auto info = newFxDB->Fxs[rowNumber]->GetInfoValueByColumnID(columnId);
+        auto info = newData->newFxDB->Fxs[rowNumber]->GetInfoValueByColumnID(columnId);
         auto text = info == nullptr ? "" : info->Value;
 
         auto* textLabel = static_cast<DoubleClickedEditableLabel*> (existingComponentToUpdate);
@@ -107,6 +106,8 @@ juce::Component* FxTableModel::refreshComponentForCell(int rowNumber, int column
                 });
             textLabel->addListener(this->labeListener);
         }
+        textLabel->RowNumber = rowNumber;
+        textLabel->ColumnID = columnId;
         textLabel->setText(text, juce::NotificationType::dontSendNotification);
         
         return textLabel;

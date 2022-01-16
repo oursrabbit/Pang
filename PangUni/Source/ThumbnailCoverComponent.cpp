@@ -1,19 +1,19 @@
 #include <JuceHeader.h>
-#include "AudioCoverComponent.h"
+#include "ThumbnailCoverComponent.h"
 
 //==============================================================================
-AudioCoverComponent::AudioCoverComponent()
+ThumbnailCoverComponent::ThumbnailCoverComponent()
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
 }
 
-AudioCoverComponent::~AudioCoverComponent()
+ThumbnailCoverComponent::~ThumbnailCoverComponent()
 {
 }
 
-void AudioCoverComponent::paint (juce::Graphics& g)
+void ThumbnailCoverComponent::paint (juce::Graphics& g)
 {
     /* This demo code just fills the component's background and
        draws some placeholder text to get you started.
@@ -25,7 +25,7 @@ void AudioCoverComponent::paint (juce::Graphics& g)
     g.fillAll(juce::Colour(juce::uint8(255), 0, 0, 0.2f));   // clear the background
 }
 
-void AudioCoverComponent::resized()
+void ThumbnailCoverComponent::resized()
 {
     // This method is where you should set the bounds of any child
     // components that your component contains..

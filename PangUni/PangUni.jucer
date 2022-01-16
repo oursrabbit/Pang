@@ -16,6 +16,10 @@
       </GROUP>
       <GROUP id="{4B2C2ACC-8E9A-62EE-7D6B-82D3A4E25F7F}" name="Windows">
         <GROUP id="{6F5415A4-26D3-FDDB-827D-C31D40AA15C5}" name="SystemSetting">
+          <FILE id="UYZMoB" name="AudioDeviceSettingsComponent.cpp" compile="1"
+                resource="0" file="Source/AudioDeviceSettingsComponent.cpp"/>
+          <FILE id="gDQ73A" name="AudioDeviceSettingsComponent.h" compile="0"
+                resource="0" file="Source/AudioDeviceSettingsComponent.h"/>
           <FILE id="JkppHC" name="BasicSettingsComponent.cpp" compile="1" resource="0"
                 file="Source/BasicSettingsComponent.cpp"/>
           <FILE id="CiNzO6" name="BasicSettingsComponent.h" compile="0" resource="0"
@@ -43,13 +47,41 @@
                 file="Source/PangMenuComponent.h"/>
         </GROUP>
         <GROUP id="{5DF8B6BA-73F0-C8AD-0D03-903F370302D9}" name="Search">
+          <FILE id="BcGGv2" name="FxMetaTableComponent.cpp" compile="1" resource="0"
+                file="Source/FxMetaTableComponent.cpp"/>
+          <FILE id="ASIt6x" name="FxMetaTableComponent.h" compile="0" resource="0"
+                file="Source/FxMetaTableComponent.h"/>
+          <FILE id="kd3BTI" name="SearchDataStruct.cpp" compile="1" resource="0"
+                file="Source/SearchDataStruct.cpp"/>
+          <FILE id="PCLQjJ" name="SearchDataStruct.h" compile="0" resource="0"
+                file="Source/SearchDataStruct.h"/>
           <FILE id="dIsQq4" name="SearchWindowMainComponent.cpp" compile="1"
                 resource="0" file="Source/SearchWindowMainComponent.cpp"/>
           <FILE id="vI2vN8" name="SearchWindowMainComponent.h" compile="0" resource="0"
                 file="Source/SearchWindowMainComponent.h"/>
           <FILE id="k1ReV9" name="SearchWindow.h" compile="0" resource="0" file="Source/SearchWindow.h"/>
+          <FILE id="E5BieG" name="AudioSearchComponent.cpp" compile="1" resource="0"
+                file="Source/AudioSearchComponent.cpp"/>
+          <FILE id="KZiiTx" name="AudioSearchComponent.h" compile="0" resource="0"
+                file="Source/AudioSearchComponent.h"/>
+          <FILE id="Cwpyrk" name="FxTableComponent.cpp" compile="1" resource="0"
+                file="Source/FxTableComponent.cpp"/>
+          <FILE id="kArZmm" name="FxTableComponent.h" compile="0" resource="0"
+                file="Source/FxTableComponent.h"/>
+          <FILE id="zAjNqz" name="ThumbnailCoverComponent.cpp" compile="1" resource="0"
+                file="Source/ThumbnailCoverComponent.cpp"/>
+          <FILE id="Yd5J8K" name="ThumbnailCoverComponent.h" compile="0" resource="0"
+                file="Source/ThumbnailCoverComponent.h"/>
+          <FILE id="d8wrHq" name="AudioExportComponent.cpp" compile="1" resource="0"
+                file="Source/AudioExportComponent.cpp"/>
+          <FILE id="Pw9jt8" name="AudioExportComponent.h" compile="0" resource="0"
+                file="Source/AudioExportComponent.h"/>
         </GROUP>
         <GROUP id="{6688204C-4F63-A78F-AD2C-2B2775DFFA02}" name="DatabaseEditor">
+          <FILE id="C6ACjZ" name="DatabaseEditorDataStruct.cpp" compile="1" resource="0"
+                file="Source/DatabaseEditorDataStruct.cpp"/>
+          <FILE id="DNg5rX" name="DatabaseEditorDataStruct.h" compile="0" resource="0"
+                file="Source/DatabaseEditorDataStruct.h"/>
           <FILE id="FMf9U1" name="DatabaseEditorMainComponent.cpp" compile="1"
                 resource="0" file="Source/DatabaseEditorMainComponent.cpp"/>
           <FILE id="F6XuIV" name="DatabaseEditorMainComponent.h" compile="0"
@@ -66,6 +98,17 @@
         </GROUP>
       </GROUP>
       <GROUP id="{16F86DE0-AC00-7E11-E79F-4078E1F3E029}" name="Utilities">
+        <GROUP id="{053B81C3-210F-5B4E-B9E9-EC741AA2502A}" name="SpotToPT">
+          <FILE id="VdCqQQ" name="RegionSpotter.cpp" compile="1" resource="0"
+                file="Source/RegionSpotter.cpp"/>
+          <FILE id="T96t9L" name="RegionSpotter.h" compile="0" resource="0" file="Source/RegionSpotter.h"/>
+        </GROUP>
+        <GROUP id="{2FF48405-A1A6-6889-3868-C4769D4504D6}" name="BaiduAI">
+          <FILE id="yidNd1" name="BaiduAI.h" compile="0" resource="0" file="Source/BaiduAI.h"/>
+          <FILE id="CGQMj6" name="BaiduAIHelper.cpp" compile="1" resource="0"
+                file="Source/BaiduAIHelper.cpp"/>
+          <FILE id="WQPHbG" name="BaiduAIHelper.h" compile="0" resource="0" file="Source/BaiduAIHelper.h"/>
+        </GROUP>
         <GROUP id="{9F8E53C9-4C30-DDC7-6243-66E12587FB9C}" name="UI">
           <FILE id="EIdyGr" name="CustomTableCells.cpp" compile="1" resource="0"
                 file="Source/CustomTableCells.cpp"/>
@@ -75,6 +118,14 @@
         <FILE id="LLCQRT" name="SystemHelper.cpp" compile="1" resource="0"
               file="Source/SystemHelper.cpp"/>
         <FILE id="CYlSsa" name="SystemHelper.h" compile="0" resource="0" file="Source/SystemHelper.h"/>
+        <FILE id="rUcb0h" name="SystemSettingsHelper.cpp" compile="1" resource="0"
+              file="Source/SystemSettingsHelper.cpp"/>
+        <FILE id="t8FQAD" name="SystemSettingsHelper.h" compile="0" resource="0"
+              file="Source/SystemSettingsHelper.h"/>
+        <FILE id="wqUO8e" name="LanguageHelper.cpp" compile="1" resource="0"
+              file="Source/LanguageHelper.cpp"/>
+        <FILE id="wBqDS6" name="LanguageHelper.h" compile="0" resource="0"
+              file="Source/LanguageHelper.h"/>
       </GROUP>
       <GROUP id="{4A9EA792-6F57-2AB7-5B26-C20651FF0CF4}" name="Resource">
         <FILE id="VOq9us" name="Handbook.docx" compile="0" resource="0" file="Source/Handbook.docx"/>
@@ -82,6 +133,10 @@
         <FILE id="u0u0gU" name="Base.xml" compile="0" resource="0" file="Source/Base.xml"/>
       </GROUP>
       <GROUP id="{EE3396D4-63E7-3125-CAA2-89B965F049FC}" name="Test">
+        <FILE id="A7wyrB" name="DatabaseHelper.cpp" compile="1" resource="0"
+              file="Source/DatabaseHelper.cpp"/>
+        <FILE id="c9PuX5" name="DatabaseHelper.h" compile="0" resource="0"
+              file="Source/DatabaseHelper.h"/>
         <FILE id="tGMw4c" name="GUIDesign.cpp" compile="1" resource="0" file="Source/GUIDesign.cpp"/>
         <FILE id="X6HhpH" name="GUIDesign.h" compile="0" resource="0" file="Source/GUIDesign.h"/>
       </GROUP>
@@ -100,14 +155,26 @@
         <MODULEPATH id="juce_events" path="../../../../../JUCE/modules"/>
         <MODULEPATH id="juce_graphics" path="../../../../../JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
   <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
 </JUCERPROJECT>

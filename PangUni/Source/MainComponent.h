@@ -13,6 +13,7 @@
 #include <JuceHeader.h>
 #include "PangMenuComponent.h"
 #include "SearchWindowMainComponent.h"
+#include "SearchDataStruct.h"
 
 //==============================================================================
 /*
@@ -26,6 +27,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    SearchDataStruct* newData;
     std::unique_ptr<PangMenuComponent> menu;
     std::unique_ptr<SearchWindowMainComponent> mainComp;
 

@@ -17,11 +17,11 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent()
     setSize(1000, 800);
 }
 
-DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
+DatabaseEditorMainComponent::DatabaseEditorMainComponent(DatabaseEditorDataStruct* newData)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    this->newFxDB = newFxDB;
+    this->newData = newData;
 
     autoCreateThumbnailCheckBox.reset(new juce::ToggleButton("autoCreateThumbnailCheckBox"));
     addAndMakeVisible(autoCreateThumbnailCheckBox.get());
@@ -29,11 +29,11 @@ DatabaseEditorMainComponent::DatabaseEditorMainComponent(FxDB* newFxDB)
     autoCreateThumbnailCheckBox->setToggleState(true, juce::NotificationType::dontSendNotification);
     autoCreateThumbnailCheckBox->addListener(this);
 
-    fxInfosTable.reset(new FxInfoTableModel(newFxDB, this));
+    fxInfosTable.reset(new FxInfoTableModel(newData, this));
     addAndMakeVisible(fxInfosTable.get());
     fxInfosTable->setName("fxInfosTable");
 
-    fxsTable.reset(new FxTableModel(newFxDB, this));
+    fxsTable.reset(new FxTableModel(newData, this));
     addAndMakeVisible(fxsTable.get());
     fxsTable->setName("fxsTable");
 
@@ -143,24 +143,24 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     else if (buttonThatWasClicked == addInfoButton.get())
     {
         fxInfosTable->AddNewFxInfo();
-        fxInfosTable->UpdateNewFxDB(newFxDB);
-        fxsTable->UpdateNewFxDB(newFxDB);
+        fxInfosTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == deleteInfoButton.get())
     {
         fxInfosTable->DeleteNewFxInfoDB();
-        fxInfosTable->UpdateNewFxDB(newFxDB);
-        fxsTable->UpdateNewFxDB(newFxDB);
+        fxInfosTable->UpdateNewFxDB();
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == addFxButton.get())
     {
         fxsTable->AddNewFx();
-        fxsTable->UpdateNewFxDB(newFxDB);
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == deleteFxButton.get())
     {
         fxsTable->DeleteNewFx();
-        fxsTable->UpdateNewFxDB(newFxDB);
+        fxsTable->UpdateNewFxDB();
     }
     else if (buttonThatWasClicked == importFxFromExcelButton.get())
     {
@@ -171,9 +171,9 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                 auto file = fc.getResult();
                 if (file != juce::File{})
                 {
-                    newFxDB = new FxDB(file, 1, true);
-                    fxInfosTable->UpdateNewFxDB(newFxDB);
-                    fxsTable->UpdateNewFxDB(newFxDB);
+                    newData->newFxDB = new FxDB(file, 1, true);
+                    fxInfosTable->UpdateNewFxDB();
+                    fxsTable->UpdateNewFxDB();
                 }
             });
     }
@@ -186,9 +186,9 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                 auto file = fc.getResult();
                 if (file != juce::File{})
                 {
-                    newFxDB = new FxDB(file, 1);
-                    fxInfosTable->UpdateNewFxDB(newFxDB);
-                    fxsTable->UpdateNewFxDB(newFxDB);
+                    newData->newFxDB = new FxDB(file, 1);
+                    fxInfosTable->UpdateNewFxDB();
+                    fxsTable->UpdateNewFxDB();
                 }
             });
     }
@@ -204,9 +204,9 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                     auto audioFiles = file.findChildFiles(file.findFiles, true, "*.wav");
                     for (auto af : audioFiles)
                     {
-                        newFxDB->Fxs.push_back(new Fx(af.getFullPathName(), ""));
+                        newData->newFxDB->Fxs.push_back(new Fx(af.getFullPathName(), ""));
                     }
-                    fxsTable->UpdateNewFxDB(newFxDB);
+                    fxsTable->UpdateNewFxDB();
                 }
             });
     }
@@ -219,7 +219,7 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                 auto file = fc.getResult();
                 if (file != juce::File{})
                 {
-                    newFxDB->Serialization(file);
+                    newData->newFxDB->Serialization(file);
                 }
             });
     }
@@ -234,21 +234,21 @@ void DatabaseEditorMainComponent::labelTextChanged(juce::Label* labelThatHasChan
     if (label != nullptr && label->OwnerType == OwnerTypeEnum::FxInfoTable && fxInfosTable->CheckNewFxInfoDB(label->getText()))
     {
         // New Fx Info
-        newFxDB->DBSchema[label->RowNumber]->HeaderName = label->getText();
+        newData->newFxDB->DBSchema[label->RowNumber]->HeaderName = label->getText();
     }
     else if (label != nullptr && label->OwnerType == OwnerTypeEnum::FxTable)
     {
         // New Fx
-        auto fx = newFxDB->Fxs[label->RowNumber];
+        auto fx = newData->newFxDB->Fxs[label->RowNumber];
         auto info = fx->GetInfoValueByColumnID(label->ColumnID);
         if (info == nullptr)
         {
-            auto newInfo = std::find_if(newFxDB->DBSchema.begin(), newFxDB->DBSchema.end(), [&](FxInfo* t) { return t->ColumnIndex == label->ColumnID; });
+            auto newInfo = std::find_if(newData->newFxDB->DBSchema.begin(), newData->newFxDB->DBSchema.end(), [&](FxInfo* t) { return t->ColumnIndex == label->ColumnID; });
             info = new FxInfo((*newInfo)->ColumnIndex, (*newInfo)->HeaderName, "");
             fx->Infos.push_back(info);
         }
         info->Value = label->getText();
     }
-    fxInfosTable->UpdateNewFxDB(newFxDB);
-    fxsTable->UpdateNewFxDB(newFxDB);
+    fxInfosTable->UpdateNewFxDB();
+    fxsTable->UpdateNewFxDB();
 }

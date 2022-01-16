@@ -13,6 +13,7 @@
 #include <JuceHeader.h>
 #include "FxTableModel.h"
 #include "FxInfoTableModel.h"
+#include "DatabaseEditorDataStruct.h"
 //==============================================================================
 /*
 */
@@ -20,14 +21,14 @@ class DatabaseEditorMainComponent : public juce::Component, public juce::Button:
 {
 public:
     DatabaseEditorMainComponent();
-    DatabaseEditorMainComponent(FxDB* newFxDB);
+    DatabaseEditorMainComponent(DatabaseEditorDataStruct* newData);
     ~DatabaseEditorMainComponent() override;
 
+    DatabaseEditorDataStruct* newData;
     void paint(juce::Graphics&) override;
     void resized() override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
     void labelTextChanged(juce::Label* labelThatHasChanged) override;
-    FxDB* newFxDB;
 
     std::unique_ptr<juce::ToggleButton> autoCreateThumbnailCheckBox;
     std::unique_ptr<FxInfoTableModel> fxInfosTable;

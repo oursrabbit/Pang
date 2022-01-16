@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 #include "BasicSettingsComponent.h"
 #include "SpotSettingsComponent.h"
+#include "AudioDeviceSettingsComponent.h"
 
 class SystemSettingsComponent : public juce::Component,public juce::Button::Listener
 {
@@ -15,8 +16,11 @@ public:
 
 private:
     std::unique_ptr<juce::TabbedComponent> tabsComp;
+    
     std::unique_ptr<BasicSettingsComponent> basicSettingsComp;
     std::unique_ptr<SpotSettingsComponent> spotSettingComp;
+    std::unique_ptr<AudioDeviceSettingsComponent> auidoDevSettingComp;
+
     std::unique_ptr<juce::TextButton> saveButton;
     std::unique_ptr<juce::TextButton> cancelButton;
     std::unique_ptr<juce::TextButton> closeButton;

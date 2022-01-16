@@ -11,7 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "FxDB.h"
+#include "DatabaseEditorDataStruct.h"
 #include "CustomTableCells.h"
 
 //==============================================================================
@@ -20,16 +20,16 @@
 class FxTableModel  : public juce::Component, public juce::TableListBoxModel
 {
 public:
-    FxDB* newFxDB;
+    DatabaseEditorDataStruct* newData;
     juce::Label::Listener* labeListener;
     std::unique_ptr<juce::TableListBox> table;
 
     FxTableModel();
-    FxTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener);
+    FxTableModel(DatabaseEditorDataStruct* newData, juce::Label::Listener* labeListener);
     ~FxTableModel() override;
     void AddNewFx();
     void DeleteNewFx();
-    void UpdateNewFxDB(FxDB* newFxDB);
+    void UpdateNewFxDB();
 
     void paint (juce::Graphics&) override;
     void resized() override;

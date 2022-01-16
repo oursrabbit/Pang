@@ -16,9 +16,9 @@ FxInfoTableModel::FxInfoTableModel()
 {
 }
 
-FxInfoTableModel::FxInfoTableModel(FxDB* newFxDB, juce::Label::Listener* labeListener)
+FxInfoTableModel::FxInfoTableModel(DatabaseEditorDataStruct* newData, juce::Label::Listener* labeListener)
 {
-    this->newFxDB = newFxDB;
+    this->newData = newData;
     this->labeListener = labeListener;
     newFxInfoId = 3;
 
@@ -36,21 +36,21 @@ FxInfoTableModel::~FxInfoTableModel()
 
 void FxInfoTableModel::AddNewFxInfo()
 {
-    newFxDB->DBSchema.push_back(new FxInfo(newFxInfoId, "NewFxInfo" + juce::String(newFxInfoId++), ""));
+    newData->newFxDB->DBSchema.push_back(new FxInfo(newFxInfoId, "NewFxInfo" + juce::String(newFxInfoId++), ""));
 }
 
 void FxInfoTableModel::DeleteNewFxInfoDB()
 {
     if (table->getSelectedRow() != -1 && table->getSelectedRow() != 0 && table->getSelectedRow() != 1)
     {
-        auto itr = newFxDB->DBSchema.begin() + table->getSelectedRow();
-        newFxDB->DBSchema.erase(itr);
+        auto itr = newData->newFxDB->DBSchema.begin() + table->getSelectedRow();
+        newData->newFxDB->DBSchema.erase(itr);
     }
 }
 
 bool FxInfoTableModel::CheckNewFxInfoDB(juce::String newName)
 {
-    for (auto itr = newFxDB->DBSchema.begin(); itr != newFxDB->DBSchema.end(); itr++)
+    for (auto itr = newData->newFxDB->DBSchema.begin(); itr != newData->newFxDB->DBSchema.end(); itr++)
     {
         if (newName == (*itr)->HeaderName)
             return false;
@@ -59,10 +59,9 @@ bool FxInfoTableModel::CheckNewFxInfoDB(juce::String newName)
     return temp.isValidXmlName(newName);
 }
 
-void FxInfoTableModel::UpdateNewFxDB(FxDB* newFxDB)
+void FxInfoTableModel::UpdateNewFxDB()
 {
-    this->newFxDB = newFxDB;
-    newFxInfoId += this->newFxDB->DBSchema.size();
+    newFxInfoId += this->newData->newFxDB->DBSchema.size();
     table->updateContent();
 }
 
@@ -78,7 +77,7 @@ void FxInfoTableModel::resized()
 
 int FxInfoTableModel::getNumRows()
 {
-    return newFxDB->DBSchema.size();
+    return newData->newFxDB->DBSchema.size();
 }
 
 void FxInfoTableModel::paintRowBackground(juce::Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
@@ -98,7 +97,7 @@ void FxInfoTableModel::paintCell(juce::Graphics& g, int rowNumber, int columnId,
 
 juce::Component* FxInfoTableModel::refreshComponentForCell(int rowNumber, int columnId, bool, Component* existingComponentToUpdate)
 {
-    if (rowNumber < newFxDB->DBSchema.size())
+    if (rowNumber < newData->newFxDB->DBSchema.size())
     {
         auto* textLabel = static_cast<DoubleClickedEditableLabel*> (existingComponentToUpdate);
         if (textLabel == nullptr)
@@ -107,10 +106,11 @@ juce::Component* FxInfoTableModel::refreshComponentForCell(int rowNumber, int co
             textLabel = new DoubleClickedEditableLabel(canEdit, rowNumber, columnId, OwnerTypeEnum::FxInfoTable, [this](int rowNumber, int columnID) {
                 table->selectRowsBasedOnModifierKeys(rowNumber, juce::ModifierKeys::noModifiers, false);
                 });
+            textLabel->addListener(this->labeListener);
         }
-        textLabel->setText(newFxDB->DBSchema[rowNumber]->HeaderName, juce::NotificationType::dontSendNotification);
-        textLabel->addListener(this->labeListener);
-
+        textLabel->RowNumber = rowNumber;
+        textLabel->ColumnID = columnId;
+        textLabel->setText(newData->newFxDB->DBSchema[rowNumber]->HeaderName, juce::NotificationType::dontSendNotification);
         return textLabel;
     }
     return existingComponentToUpdate;

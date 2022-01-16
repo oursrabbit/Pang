@@ -11,18 +11,22 @@
 #pragma once
 #include <JuceHeader.h>
 #include "SearchWindowMainComponent.h"
+#include "SearchDataStruct.h"
 
 class SearchWindow : public juce::DocumentWindow
 {
 public:
+    SearchDataStruct* newData;
+
     SearchWindow(juce::String name)
         : DocumentWindow(name,
             juce::Desktop::getInstance().getDefaultLookAndFeel()
             .findColour(juce::ResizableWindow::backgroundColourId),
             DocumentWindow::allButtons)
     {
+        newData = new SearchDataStruct();
         setUsingNativeTitleBar(true);
-        setContentOwned(new SearchWindowMainComponent(), true);
+        setContentOwned(new SearchWindowMainComponent(newData), true);
 
 #if JUCE_IOS || JUCE_ANDROID
         setFullScreen(true);
@@ -36,6 +40,7 @@ public:
 
     void closeButtonPressed() override
     {
+        delete newData;
         setVisible(false);
     }
 private:

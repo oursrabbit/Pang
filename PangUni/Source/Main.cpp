@@ -25,7 +25,6 @@ public:
     void initialise (const juce::String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
-        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
         SystemHelper::InitSystemHelper();
         mainWindow.reset(new MainWindow(getApplicationName()));
     }

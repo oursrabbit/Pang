@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 #include "SystemSettingsComponent.h"
+#include "SystemHelper.h"
 
 
 //==============================================================================
@@ -21,12 +22,16 @@ SystemSettingsComponent::SystemSettingsComponent()
     spotSettingComp.reset(new SpotSettingsComponent());
     spotSettingComp->OnValueChanged = [this]() {saveButton->setEnabled(true); };
 
+    auidoDevSettingComp.reset(new AudioDeviceSettingsComponent());
+    auidoDevSettingComp->OnValueChanged = [this]() {saveButton->setEnabled(true); };
+
     tabsComp.reset(new juce::TabbedComponent(juce::TabbedButtonBar::Orientation::TabsAtTop));
     addAndMakeVisible(tabsComp.get());
 
     auto bkc = getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId);
-    tabsComp->addTab("Basic", bkc, basicSettingsComp.get(), false, -1);
-    tabsComp->addTab("Spot", bkc, spotSettingComp.get(), false, -1);
+    tabsComp->addTab(TRANS("Basic"), bkc, basicSettingsComp.get(), false, -1);
+    tabsComp->addTab(TRANS("Spot"), bkc, spotSettingComp.get(), false, -1);
+    tabsComp->addTab(TRANS("Audio Device"), bkc, auidoDevSettingComp.get(), false, -1);
 
     saveButton.reset(new juce::TextButton("Save Button"));
     saveButton->setButtonText(TRANS("Save"));
@@ -55,6 +60,7 @@ SystemSettingsComponent::~SystemSettingsComponent()
 
     spotSettingComp = nullptr;
     basicSettingsComp = nullptr;
+    auidoDevSettingComp = nullptr;
     tabsComp = nullptr;
 }
 
@@ -75,9 +81,16 @@ void SystemSettingsComponent::buttonClicked(juce::Button* button)
 {
     if (button == saveButton.get())
     {
-        //SystemSettingsHelper::SetLanguage(TranslateHelper::GetLanguageByID(languageComboBox->getSelectedId()));
-        //SystemSettingsHelper::SetAppDataBasePath(appdataBasePathTextEditor->getText());
-        //SystemSettingsHelper::SetAutoTranslate(alwaysAutoTranslateToggleButton->getToggleState());
+        auto langID = basicSettingsComp->languageComboBox->getSelectedId();
+        auto langS = SystemHelper::Helper->languageHelper->GetLanguageEnumString(langID);
+        SystemHelper::Helper->systemSettingsHelper->SetLanguage(langS);
+        
+        auto appBasePath = basicSettingsComp->appdataBasePathTextEditor->getText();
+        SystemHelper::Helper->systemSettingsHelper->SetAppDataBasePath(appBasePath);
+        
+        auto autoTransLang = basicSettingsComp->alwaysAutoTranslateToggleButton->getToggleState();
+        SystemHelper::Helper->systemSettingsHelper->SetAutoTranslate(autoTransLang);
+        
         saveButton->setEnabled(false);
         juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon
             , TRANS("Message"), TRANS("Restart applicaiton to reload settings."));

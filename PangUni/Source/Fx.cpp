@@ -44,7 +44,7 @@ Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)
 
 juce::File Fx::GetAudioFile()
 {
-    return juce::File(GetInfoValueByName("FileName")->Value);
+    return juce::File::createFileWithoutCheckingPath(GetInfoValueByName("FileName")->Value);
 }
 
 juce::String Fx::GetAudioDescription()
