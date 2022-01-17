@@ -144,6 +144,7 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
         if (readerSource != nullptr && !transportSource.isPlaying())
         {
             // Check Audio Device
+            SystemHelper::Seting
             // Open Audio Device
             // Play Audio
             // transportSource.start();

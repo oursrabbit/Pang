@@ -48,5 +48,4 @@ void AudioDeviceSettingsComponent::paint (juce::Graphics& g)
 void AudioDeviceSettingsComponent::resized()
 {
     adsComp->setBounds(10, 10, getWidth(), getHeight());
-
 }
