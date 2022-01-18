@@ -27,6 +27,8 @@ public:
     std::unique_ptr<LanguageHelper> languageHelper;
     std::unique_ptr<BaiduAIHelper> baiduAIHelper;
 
+    std::unique_ptr<juce::AudioDeviceManager> audioDeviceManager;
+
     void OpenMainWindow();
     void OpenDatabaseEditorWindow();
     void OpenSystemSettingsWindow();

@@ -90,7 +90,9 @@ void SystemSettingsComponent::buttonClicked(juce::Button* button)
         
         auto autoTransLang = basicSettingsComp->alwaysAutoTranslateToggleButton->getToggleState();
         SystemHelper::Helper->systemSettingsHelper->SetAutoTranslate(autoTransLang);
-        
+
+        SystemHelper::Helper->systemSettingsHelper->SetAudioDevice(SystemHelper::Helper->audioDeviceManager.get());
+
         saveButton->setEnabled(false);
         juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon
             , TRANS("Message"), TRANS("Restart applicaiton to reload settings."));

@@ -11,6 +11,8 @@ void SystemHelper::_initSystemHelper()
     languageHelper.reset(new LanguageHelper());
     baiduAIHelper.reset(new BaiduAIHelper());
 
+    audioDeviceManager.reset(SystemHelper::Helper->systemSettingsHelper->GetAudioDevice());
+
     auto currentLangS = SystemHelper::Helper->systemSettingsHelper->GetLanguage();
     auto currentAppBasePath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBasePath();
     auto transFile = SystemHelper::Helper->languageHelper->GetTransFileByLanguage(currentAppBasePath, currentLangS);
@@ -37,6 +39,8 @@ void SystemHelper::_releaseSystemHelper()
     }
 
     systemSettingsWindow = nullptr;
+
+    audioDeviceManager = nullptr;
 
     systemSettingsHelper = nullptr;
     languageHelper = nullptr;

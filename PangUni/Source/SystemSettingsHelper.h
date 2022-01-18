@@ -7,6 +7,7 @@
 #define SettingsKey_Basic_AppDataBasePath "AppDataBasePath"
 #define SettingsKey_Basic_AutoTranslate "AutoTranslate"
 
+#define SettingsKey_AudioDevice_ManagerXML "AudioDeviceManagerXML"
 class SystemSettingsHelper
 {
 public:
@@ -23,6 +24,7 @@ public:
     juce::String GetLanguage();
     juce::uint64 GetSpotSampleRate();
     juce::uint32 GetSpotDepth();
+    juce::AudioDeviceManager* GetAudioDevice();
 
     // Set Settings
     void SetAppDataBasePath(juce::String basePath); // same as SetAppDataBaseFolder
@@ -31,4 +33,5 @@ public:
     void SetLanguage(juce::String language);
     void SetSpotSampleRate(juce::uint64 rate);
     void SetSpotDepth(juce::uint32 depth);
+    void SetAudioDevice(juce::AudioDeviceManager* audioDevice);
 };

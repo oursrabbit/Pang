@@ -66,7 +66,6 @@ AudioExportComponent::AudioExportComponent(SearchDataStruct* newData)
 
     setSize(600, 400);
 
-    setAudioChannels(0, 2);
     startTimer(40);
 }
 
@@ -144,7 +143,6 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
         if (readerSource != nullptr && !transportSource.isPlaying())
         {
             // Check Audio Device
-            SystemHelper::Seting
             // Open Audio Device
             // Play Audio
             // transportSource.start();

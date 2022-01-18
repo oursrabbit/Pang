@@ -40,13 +40,25 @@ juce::String SystemSettingsHelper::GetLanguage()
 {
     return AppPropertiesFile->getValue(SettingsKey_Basic_Language, "");
 }
+
 juce::uint64 SystemSettingsHelper::GetSpotSampleRate()
 {
     return 48000;
 }
+
 juce::uint32 SystemSettingsHelper::GetSpotDepth()
 {
     return 16;
+}
+
+juce::AudioDeviceManager* SystemSettingsHelper::GetAudioDevice()
+{
+    std::unique_ptr<juce::AudioDeviceManager> manager;
+    manager.reset(new juce::AudioDeviceManager());
+    auto stateXML = AppPropertiesFile->getXmlValue(SettingsKey_AudioDevice_ManagerXML);
+    auto error = manager->initialise(0, 2, stateXML.get(), false);
+    error = manager->initialiseWithDefaultDevices(0, 2);
+    return new juce::AudioDeviceManager();
 }
 //[/Get Settings]
 
@@ -73,10 +85,16 @@ void SystemSettingsHelper::SetLanguage(juce::String language)
     AppPropertiesFile->setValue(SettingsKey_Basic_Language, language);
     AppPropertiesFile->saveIfNeeded();
 }
+
 void SystemSettingsHelper::SetSpotSampleRate(juce::uint64 rate)
 {
 }
+
 void SystemSettingsHelper::SetSpotDepth(juce::uint32 depth)
+{
+}
+
+void SystemSettingsHelper::SetAudioDevice(juce::AudioDeviceManager* audioDevice)
 {
 }
 //[/Set Settings]
