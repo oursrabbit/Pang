@@ -26,8 +26,9 @@ public:
 
     std::function<void()> OnValueChanged;
     std::unique_ptr<juce::AudioDeviceSelectorComponent> adsComp;
+    std::unique_ptr<juce::TextEditor> setupResTextEditor;
 
-    juce::XmlElement* createStateXml();
+    juce::String getListOfActiveBits(const juce::BigInteger& b);
     virtual void changeListenerCallback(juce::ChangeBroadcaster* source) override;
 
 private:

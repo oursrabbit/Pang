@@ -9,7 +9,7 @@ AudioExportComponent::AudioExportComponent(SearchDataStruct* newData)
 {
     this->newData = newData;
     threadKey = 0;
-    timeCursorLineX = 0;
+    //timeCursorLineX = 0;
 
     preFileButton.reset(new juce::TextButton("preFileButton"));
     addAndMakeVisible(preFileButton.get());
@@ -52,21 +52,23 @@ AudioExportComponent::AudioExportComponent(SearchDataStruct* newData)
     addAndMakeVisible(waveImageLoadStateLabel.get());
     waveImageLoadStateLabel->addMouseListener(this, true);
 
-    selectionCover.reset(new ThumbnailCoverComponent());
-    addAndMakeVisible(selectionCover.get());
-    selectionCover->setBounds(-100, 40, 0, 200);
+    thumbnailComp.reset(new ThumbnailComponent(newData));
+    addAndMakeVisible(thumbnailComp.get());
+    thumbnailComp->selectionCoverEndX = 0;
+    thumbnailComp->selectionCoverStartX = 0;
+    thumbnailComp->transportSource = nullptr;
+    thumbnailComp->thumb = nullptr;
+    thumbnailComp->selectionCover->setBounds(-100, 40, 0, 200);
 
     manager.registerBasicFormats();
     thumb.addChangeListener(this);
-    ifSucceedLoaded = false;
+    //ifSucceedLoaded = false;
 
     transportSource.addChangeListener(this);
     readyToPlay = false;
     readerSource = nullptr;
 
     setSize(600, 400);
-
-    startTimer(40);
 }
 
 AudioExportComponent::AudioExportComponent()
@@ -84,25 +86,13 @@ AudioExportComponent::~AudioExportComponent()
     nextFileButton = nullptr;
     exportButton = nullptr;
     waveImageLoadStateLabel = nullptr;
-    selectionCover = nullptr;
+    thumbnailComp = nullptr;
+    //selectionCover = nullptr;
 }
 
 void AudioExportComponent::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    juce::Rectangle<int> thumbnailBounds(0, 40, getWidth(), 200);
-    g.setColour(juce::Colour(juce::uint8(48), 66, 37, 1.0f));
-    g.fillRect(thumbnailBounds);
-
-    if (ifSucceedLoaded && thumb.isFullyLoaded())
-    {
-        g.setColour(juce::Colour(juce::uint8(109), 170, 69, 1.0f));
-        thumb.drawChannels(g, thumbnailBounds, 0.0, thumb.getTotalLength(), 1.0f);
-
-        g.setColour(juce::Colours::white);
-        g.drawLine(timeCursorLineX, 40.0f, timeCursorLineX, 240.0f, 2.0f);
-    }
 }
 
 void AudioExportComponent::resized()
@@ -118,6 +108,7 @@ void AudioExportComponent::resized()
     autoPlayLabel->setBounds(100 + 10 + 100 + 10 + 100 + 10 + 100 + 10 + 25 + 10, 0, autoPlayLabelWidth, 30);
     exportButton->setBounds(getWidth() - 100, 0, 100, 30);
     clearSelectionButton->setBounds(getWidth() - 100 - 10 - 100, 0, 100, 30);
+    thumbnailComp->setBounds(0, 40, getWidth(), 200);
     waveImageLoadStateLabel->setBounds(0, 40, getWidth(), 200);
 }
 
@@ -142,10 +133,20 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     {
         if (readerSource != nullptr && !transportSource.isPlaying())
         {
+            auto device = SystemHelper::Helper->audioDeviceManager.get();
             // Check Audio Device
-            // Open Audio Device
-            // Play Audio
-            // transportSource.start();
+            if (device->getCurrentAudioDevice() != nullptr)
+            {
+                // Open Audio Device
+                device->updateXml();
+                auto stateXML = device->createStateXml();
+                if (stateXML != nullptr)
+                {
+                    setAudioChannels(0, 2, stateXML.get());
+                    // Play Audio
+                    transportSource.start();
+                }
+            }
         }
         else
             transportSource.stop();
@@ -156,10 +157,9 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == clearSelectionButton.get())
     {
-        selectionCoverStartX = 0;
-        selectionCoverEndX = 0;
-        selectionCover->setBounds(-100, 40, 0, 200);
-        repaint();
+        thumbnailComp->selectionCoverEndX = 0;
+        thumbnailComp->selectionCoverStartX = 0;
+        thumbnailComp->selectionCover->setBounds(-100, 40, 0, 200);
     }
     else if (buttonThatWasClicked == exportButton.get())
     {
@@ -196,13 +196,13 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 void AudioExportComponent::UpdataNewFx()
 {
     shutdownAudio();
-    timeCursorLineX = 0;
-    selectionCoverStartX = 0;
-    selectionCoverEndX = 0;
-    selectionCover->setBounds(-100, 40, 0, 200);
+    thumbnailComp->selectionCoverEndX = 0;
+    thumbnailComp->selectionCoverStartX = 0;
+    thumbnailComp->transportSource = nullptr;
+    thumbnailComp->thumb = nullptr;
+    thumbnailComp->selectionCover->setBounds(-100, 40, 0, 200);
     waveImageLoadStateLabel->setText("", juce::NotificationType::dontSendNotification);
     thumb.setSource(nullptr);
-    ifSucceedLoaded = false;
     repaint();
 
     long long int currentThreadKey = threadKey++;
@@ -214,6 +214,10 @@ void AudioExportComponent::UpdataNewFx()
         // Thumbnail
         waveImageLoadStateLabel->setText(TRANS("Loading Thumbnail Image..."), juce::NotificationType::dontSendNotification);
         ifSucceedLoaded = thumb.setSource(new juce::FileInputSource(this->newData->CurrentFx->GetAudioFile()));
+        if (ifSucceedLoaded)
+        {
+            thumbnailComp->thumb = &thumb;
+        }
         // Player
         juce::Thread::launch([this, currentThreadKey]() {
             auto* reader = manager.createReaderFor(this->newData->CurrentFx->GetAudioFile());
@@ -224,69 +228,27 @@ void AudioExportComponent::UpdataNewFx()
                 transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);       // [12]                                                   // [13]
                 readerSource.reset(newSource.release());
                 readyToPlay = true;
+                thumbnailComp->transportSource = &transportSource;
                 juce::MessageManagerLock mml;
                 if (autoPlayButton->getToggleState())
                 {
+                    auto device = SystemHelper::Helper->audioDeviceManager.get();
                     // Check Audio Device
-                    // Open Audio Device
-                    // Play Audio
-                    // transportSource.start();
+                    if (device->getCurrentAudioDevice() != nullptr)
+                    {
+                        // Open Audio Device
+                        device->updateXml();
+                        auto stateXML = device->createStateXml();
+                        if (stateXML != nullptr)
+                        {
+                            setAudioChannels(0, 2, stateXML.get());
+                            // Play Audio
+                            transportSource.start();
+                        }
+                    }
                 }
             }
             });
-    }
-}
-
-void AudioExportComponent::mouseDown(const juce::MouseEvent& event)
-{
-    if (ifSucceedLoaded && thumb.isFullyLoaded())
-    {
-        selectionCoverStartX = event.getPosition().x;
-        selectionCoverEndX = event.getPosition().x;
-        selectionCover->setBounds(selectionCoverStartX, 40, 0, 200);
-        repaint();
-    }
-}
-
-void AudioExportComponent::mouseDrag(const juce::MouseEvent& event)
-{
-    if (ifSucceedLoaded && thumb.isFullyLoaded())
-    {
-        selectionCoverEndX = event.getPosition().x;
-        auto start = selectionCoverEndX >= selectionCoverStartX ? selectionCoverStartX : selectionCoverEndX;
-        auto width = std::abs(selectionCoverStartX - selectionCoverEndX);
-        selectionCover->setBounds(start, 40, width, 200);
-        repaint();
-    }
-}
-
-void AudioExportComponent::mouseUp(const juce::MouseEvent& event)
-{
-    if (std::abs(selectionCoverStartX - selectionCoverEndX) < 5)
-    {
-        selectionCoverStartX = 0;
-        selectionCoverEndX = 0;
-        selectionCover->setBounds(-100, 40, 0, 200);
-        repaint();
-    }
-    if(std::abs(selectionCoverStartX - selectionCoverEndX) < 1) // click
-    {
-        if (ifSucceedLoaded && thumb.isFullyLoaded())
-        {
-            transportSource.setPosition(transportSource.getLengthInSeconds() * event.getPosition().getX() / getWidth());
-            repaint();
-        }
-    }
-}
-
-void AudioExportComponent::timerCallback()
-{
-    if (ifSucceedLoaded && thumb.isFullyLoaded())
-    {
-        auto audioPosition = transportSource.getCurrentPosition();
-        auto audioLength = thumb.getTotalLength();
-        timeCursorLineX = (float)(audioPosition / audioLength) * getWidth();
-        repaint();
     }
 }
 

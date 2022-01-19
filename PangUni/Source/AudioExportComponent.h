@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "SearchDataStruct.h"
+#include "ThumbnailComponent.h"
 #include "ThumbnailCoverComponent.h"
 
 //==============================================================================
@@ -9,7 +10,6 @@
 */
 class AudioExportComponent  : public juce::AudioAppComponent,
                               public juce::Button::Listener,
-                              public juce::Timer,
                               public juce::ChangeListener
 {
 public:
@@ -28,12 +28,6 @@ public:
     void resized() override;
     bool keyPressed(const juce::KeyPress& press) override;
     void buttonClicked(juce::Button* buttonThatWasClicked) override;
-    
-    void mouseDown(const juce::MouseEvent& event) override;
-    void mouseDrag(const juce::MouseEvent& event) override;
-    void mouseUp(const juce::MouseEvent& event) override;
-    // Inherited via Timer
-    virtual void timerCallback() override;
 
     // Inherited via ChangeListener
     virtual void changeListenerCallback(juce::ChangeBroadcaster* source) override;
@@ -52,14 +46,15 @@ public:
     std::unique_ptr<juce::Label> autoPlayLabel;
     int autoPlayLabelWidth;
     std::unique_ptr<juce::TextButton> exportButton;
-    std::unique_ptr<ThumbnailCoverComponent> selectionCover;
-    int selectionCoverStartX;
-    int selectionCoverEndX;
+    std::unique_ptr< ThumbnailComponent> thumbnailComp;
+    //std::unique_ptr<ThumbnailCoverComponent> selectionCover;
+    //int selectionCoverStartX;
+    //int selectionCoverEndX;
 
     juce::AudioFormatManager manager;
     juce::AudioThumbnailCache thumbCache;
     juce::AudioThumbnail thumb;
-    float timeCursorLineX;
+    //float timeCursorLineX;
     bool ifSucceedLoaded;
 
     std::unique_ptr<juce::AudioFormatReaderSource> readerSource;

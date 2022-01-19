@@ -11,7 +11,8 @@ void SystemHelper::_initSystemHelper()
     languageHelper.reset(new LanguageHelper());
     baiduAIHelper.reset(new BaiduAIHelper());
 
-    audioDeviceManager.reset(SystemHelper::Helper->systemSettingsHelper->GetAudioDevice());
+    audioDeviceManager.reset(new juce::AudioDeviceManager());
+    SystemHelper::Helper->systemSettingsHelper->GetAudioDevice(audioDeviceManager.get());
 
     auto currentLangS = SystemHelper::Helper->systemSettingsHelper->GetLanguage();
     auto currentAppBasePath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBasePath();

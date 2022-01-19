@@ -47,10 +47,34 @@
                 file="Source/PangMenuComponent.h"/>
         </GROUP>
         <GROUP id="{5DF8B6BA-73F0-C8AD-0D03-903F370302D9}" name="Search">
-          <FILE id="BcGGv2" name="FxMetaTableComponent.cpp" compile="1" resource="0"
-                file="Source/FxMetaTableComponent.cpp"/>
-          <FILE id="ASIt6x" name="FxMetaTableComponent.h" compile="0" resource="0"
-                file="Source/FxMetaTableComponent.h"/>
+          <GROUP id="{48D0973B-F92B-E5D9-48FA-A769CD17F301}" name="Meta">
+            <FILE id="BcGGv2" name="FxMetaTableComponent.cpp" compile="1" resource="0"
+                  file="Source/FxMetaTableComponent.cpp"/>
+            <FILE id="ASIt6x" name="FxMetaTableComponent.h" compile="0" resource="0"
+                  file="Source/FxMetaTableComponent.h"/>
+            <FILE id="E5BieG" name="AudioSearchComponent.cpp" compile="1" resource="0"
+                  file="Source/AudioSearchComponent.cpp"/>
+            <FILE id="KZiiTx" name="AudioSearchComponent.h" compile="0" resource="0"
+                  file="Source/AudioSearchComponent.h"/>
+            <FILE id="Cwpyrk" name="FxTableComponent.cpp" compile="1" resource="0"
+                  file="Source/FxTableComponent.cpp"/>
+            <FILE id="kArZmm" name="FxTableComponent.h" compile="0" resource="0"
+                  file="Source/FxTableComponent.h"/>
+          </GROUP>
+          <GROUP id="{183EF175-A093-30CC-98B0-6CA9BE532D0C}" name="Player">
+            <FILE id="EVDwPr" name="ThumbnailComponent.cpp" compile="1" resource="0"
+                  file="Source/ThumbnailComponent.cpp"/>
+            <FILE id="InFWYz" name="ThumbnailComponent.h" compile="0" resource="0"
+                  file="Source/ThumbnailComponent.h"/>
+            <FILE id="zAjNqz" name="ThumbnailCoverComponent.cpp" compile="1" resource="0"
+                  file="Source/ThumbnailCoverComponent.cpp"/>
+            <FILE id="Yd5J8K" name="ThumbnailCoverComponent.h" compile="0" resource="0"
+                  file="Source/ThumbnailCoverComponent.h"/>
+            <FILE id="d8wrHq" name="AudioExportComponent.cpp" compile="1" resource="0"
+                  file="Source/AudioExportComponent.cpp"/>
+            <FILE id="Pw9jt8" name="AudioExportComponent.h" compile="0" resource="0"
+                  file="Source/AudioExportComponent.h"/>
+          </GROUP>
           <FILE id="kd3BTI" name="SearchDataStruct.cpp" compile="1" resource="0"
                 file="Source/SearchDataStruct.cpp"/>
           <FILE id="PCLQjJ" name="SearchDataStruct.h" compile="0" resource="0"
@@ -60,22 +84,6 @@
           <FILE id="vI2vN8" name="SearchWindowMainComponent.h" compile="0" resource="0"
                 file="Source/SearchWindowMainComponent.h"/>
           <FILE id="k1ReV9" name="SearchWindow.h" compile="0" resource="0" file="Source/SearchWindow.h"/>
-          <FILE id="E5BieG" name="AudioSearchComponent.cpp" compile="1" resource="0"
-                file="Source/AudioSearchComponent.cpp"/>
-          <FILE id="KZiiTx" name="AudioSearchComponent.h" compile="0" resource="0"
-                file="Source/AudioSearchComponent.h"/>
-          <FILE id="Cwpyrk" name="FxTableComponent.cpp" compile="1" resource="0"
-                file="Source/FxTableComponent.cpp"/>
-          <FILE id="kArZmm" name="FxTableComponent.h" compile="0" resource="0"
-                file="Source/FxTableComponent.h"/>
-          <FILE id="zAjNqz" name="ThumbnailCoverComponent.cpp" compile="1" resource="0"
-                file="Source/ThumbnailCoverComponent.cpp"/>
-          <FILE id="Yd5J8K" name="ThumbnailCoverComponent.h" compile="0" resource="0"
-                file="Source/ThumbnailCoverComponent.h"/>
-          <FILE id="d8wrHq" name="AudioExportComponent.cpp" compile="1" resource="0"
-                file="Source/AudioExportComponent.cpp"/>
-          <FILE id="Pw9jt8" name="AudioExportComponent.h" compile="0" resource="0"
-                file="Source/AudioExportComponent.h"/>
         </GROUP>
         <GROUP id="{6688204C-4F63-A78F-AD2C-2B2775DFFA02}" name="DatabaseEditor">
           <FILE id="C6ACjZ" name="DatabaseEditorDataStruct.cpp" compile="1" resource="0"

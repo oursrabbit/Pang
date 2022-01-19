@@ -51,14 +51,20 @@ juce::uint32 SystemSettingsHelper::GetSpotDepth()
     return 16;
 }
 
-juce::AudioDeviceManager* SystemSettingsHelper::GetAudioDevice()
+void SystemSettingsHelper::GetAudioDevice(juce::AudioDeviceManager* audioDeviceManager)
 {
-    std::unique_ptr<juce::AudioDeviceManager> manager;
-    manager.reset(new juce::AudioDeviceManager());
     auto stateXML = AppPropertiesFile->getXmlValue(SettingsKey_AudioDevice_ManagerXML);
-    auto error = manager->initialise(0, 2, stateXML.get(), false);
-    error = manager->initialiseWithDefaultDevices(0, 2);
-    return new juce::AudioDeviceManager();
+    if (stateXML != nullptr)
+    {
+        audioDeviceManager->initialise(0, 2, stateXML.get(), true);
+    }
+    else
+    {
+        audioDeviceManager->initialiseWithDefaultDevices(0, 2);
+    }
+    if(audioDeviceManager->getCurrentAudioDevice() == nullptr)
+        juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon
+            , TRANS("Message"), TRANS("Can't open audio device.") +  "\r\n\r\n" + TRANS("Go to setting window to reset."));
 }
 //[/Get Settings]
 
@@ -94,7 +100,20 @@ void SystemSettingsHelper::SetSpotDepth(juce::uint32 depth)
 {
 }
 
-void SystemSettingsHelper::SetAudioDevice(juce::AudioDeviceManager* audioDevice)
+void SystemSettingsHelper::SetAudioDevice(juce::AudioDeviceManager* device)
 {
+    device->updateXml();
+    auto xml = device->createStateXml();
+    if (xml != nullptr)
+    {
+        auto xmlstring = xml->toString();
+        AppPropertiesFile->setValue(SettingsKey_AudioDevice_ManagerXML, xml.get());
+        AppPropertiesFile->saveIfNeeded();
+    }
+    else
+    {
+        AppPropertiesFile->setValue(SettingsKey_AudioDevice_ManagerXML, "");
+        AppPropertiesFile->saveIfNeeded();
+    }
 }
 //[/Set Settings]

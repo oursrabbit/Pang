@@ -24,20 +24,6 @@ public:
     void initialise (const juce::String& commandLine) override
     {
         // This method is where you should put your application's initialisation code..
-        auto basePath = new juce::FileSearchPath("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\");
-        auto allPaths = basePath->findChildFiles(juce::File::TypesOfFileToFind::findFilesAndDirectories, true, "*.wav");
-        juce::String outS = "";
-        for (auto path : allPaths)
-        {
-            auto manager = new juce::AudioFormatManager();
-            manager->registerBasicFormats();
-            auto reader = manager->createReaderFor(path);
-            for (auto key : reader->metadataValues.getAllKeys())
-            {
-                outS = outS + "Key: " + key + "\t\t\tValue: " + reader->metadataValues.getValue(key, "NULL") + "\n";
-            }
-            outS += "\n";
-        }
         mainWindow.reset (new MainWindow (getApplicationName()));
     }
 

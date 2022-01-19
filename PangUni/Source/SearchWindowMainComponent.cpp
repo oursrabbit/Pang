@@ -42,7 +42,7 @@ void SearchWindowMainComponent::paint (juce::Graphics& g)
 
 void SearchWindowMainComponent::resized()
 {
-    audioSearchComp->setBounds(10, 10, getWidth() - 20, getHeight() - 260);
+    audioSearchComp->setBounds(10, 10, getWidth() - 20, getHeight() - 270);
     audioExportComp->setBounds(10, getHeight() - 250, getWidth() - 20, 240);
 }
 
@@ -57,7 +57,7 @@ bool SearchWindowMainComponent::keyPressed(const juce::KeyPress& press)
         table->scrollToEnsureRowIsOnscreen(preIndex);
         return true;
     }
-    if (press == juce::KeyPress::downKey || press.getTextCharacter() == 's')
+    else if (press == juce::KeyPress::downKey || press.getTextCharacter() == 's')
     {
         auto preIndex = table->getSelectedRow() + 1;
         preIndex = preIndex >= audioSearchComp->fxListTable->getNumRows() ? preIndex - 1 : preIndex;
@@ -65,7 +65,7 @@ bool SearchWindowMainComponent::keyPressed(const juce::KeyPress& press)
         table->scrollToEnsureRowIsOnscreen(preIndex);
         return true;
     }
-    if (press == juce::KeyPress::leftKey || press.getTextCharacter() == 'a')
+    else if (press == juce::KeyPress::leftKey || press.getTextCharacter() == 'a')
     {
         auto preIndex = table->getSelectedRow() - 5;
         preIndex = preIndex <= 0 ? 0 : preIndex;
@@ -73,13 +73,17 @@ bool SearchWindowMainComponent::keyPressed(const juce::KeyPress& press)
         table->scrollToEnsureRowIsOnscreen(preIndex);
         return true;
     }
-    if (press == juce::KeyPress::rightKey || press.getTextCharacter() == 'd')
+    else if (press == juce::KeyPress::rightKey || press.getTextCharacter() == 'd')
     {
         auto preIndex = table->getSelectedRow() + 5;
         preIndex = preIndex >= audioSearchComp->fxListTable->getNumRows() ? audioSearchComp->fxListTable->getNumRows() - 1 : preIndex;
         table->selectRow(preIndex, true, true);
         table->scrollToEnsureRowIsOnscreen(preIndex);
         return true;
+    }
+    else if (press == juce::KeyPress::spaceKey)
+    {
+        audioExportComp->buttonClicked(audioExportComp->playOrPauseButton.get());
     }
     return false;
 }

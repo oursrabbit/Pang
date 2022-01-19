@@ -19,6 +19,15 @@ MainComponent::MainComponent()
         // Specify the number of input and output channels that we want to open
         setAudioChannels (2, 2);
     }
+
+
+    juce::File audioFile("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\TESTRES\\093 Brk Full Pow.wav");
+    juce::AudioFormatManager afm;
+    afm.registerBasicFormats();
+    auto reader = afm.createReaderFor(audioFile);
+    float* buffer = (float*)malloc(reader->lengthInSamples * sizeof(float));
+    reader->read(&buffer, 1, 0, reader->lengthInSamples);
+    afm.wri
 }
 
 MainComponent::~MainComponent()
