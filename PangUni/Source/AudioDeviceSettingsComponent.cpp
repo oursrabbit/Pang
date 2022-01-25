@@ -78,6 +78,11 @@ void AudioDeviceSettingsComponent::changeListenerCallback(juce::ChangeBroadcaste
     }
 }
 
+void AudioDeviceSettingsComponent::saveToPXML()
+{
+    SystemHelper::Helper->systemSettingsHelper->SetAudioDevice(SystemHelper::Helper->audioDeviceManager.get());
+}
+
 juce::String AudioDeviceSettingsComponent::getListOfActiveBits(const juce::BigInteger& b)
 {
     juce::StringArray bits;

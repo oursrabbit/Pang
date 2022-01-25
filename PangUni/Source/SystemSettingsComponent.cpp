@@ -81,19 +81,12 @@ void SystemSettingsComponent::buttonClicked(juce::Button* button)
 {
     if (button == saveButton.get())
     {
-        auto langID = basicSettingsComp->languageComboBox->getSelectedId();
-        auto langS = SystemHelper::Helper->languageHelper->GetLanguageEnumString(langID);
-        SystemHelper::Helper->systemSettingsHelper->SetLanguage(langS);
-        
-        auto appBasePath = basicSettingsComp->appdataBasePathTextEditor->getText();
-        SystemHelper::Helper->systemSettingsHelper->SetAppDataBasePath(appBasePath);
-        
-        auto autoTransLang = basicSettingsComp->alwaysAutoTranslateToggleButton->getToggleState();
-        SystemHelper::Helper->systemSettingsHelper->SetAutoTranslate(autoTransLang);
-
-        SystemHelper::Helper->systemSettingsHelper->SetAudioDevice(SystemHelper::Helper->audioDeviceManager.get());
-
+        basicSettingsComp->saveToPXML();
+        auidoDevSettingComp->saveToPXML();
+        spotSettingComp->saveToPXML();
+     
         saveButton->setEnabled(false);
+
         juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon
             , TRANS("Message"), TRANS("Restart applicaiton to reload settings."));
     }

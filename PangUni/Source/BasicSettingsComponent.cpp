@@ -107,6 +107,19 @@ void BasicSettingsComponent::SetDefaultComponentValue()
     alwaysAutoTranslateToggleButton->setToggleState(SystemHelper::Helper->systemSettingsHelper->GetAutoTranslate(), juce::NotificationType::dontSendNotification);
 }
 
+void BasicSettingsComponent::saveToPXML()
+{
+    auto langID = languageComboBox->getSelectedId();
+    auto langS = SystemHelper::Helper->languageHelper->GetLanguageEnumString(langID);
+    SystemHelper::Helper->systemSettingsHelper->SetLanguage(langS);
+
+    auto appBasePath = appdataBasePathTextEditor->getText();
+    SystemHelper::Helper->systemSettingsHelper->SetAppDataBasePath(appBasePath);
+
+    auto autoTransLang = alwaysAutoTranslateToggleButton->getToggleState();
+    SystemHelper::Helper->systemSettingsHelper->SetAutoTranslate(autoTransLang);
+}
+
 void BasicSettingsComponent::buttonClicked(juce::Button* button)
 {
     if (button == openAppdataBasePathButton.get())

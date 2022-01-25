@@ -33,7 +33,9 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class GUIDesign  : public juce::Component
+class GUIDesign  : public juce::Component,
+                   public juce::ComboBox::Listener,
+                   public juce::Button::Listener
 {
 public:
     //==============================================================================
@@ -46,6 +48,8 @@ public:
 
     void paint (juce::Graphics& g) override;
     void resized() override;
+    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
+    void buttonClicked (juce::Button* buttonThatWasClicked) override;
 
 
 
@@ -54,6 +58,17 @@ private:
     //[/UserVariables]
 
     //==============================================================================
+    std::unique_ptr<juce::ComboBox> samplerateComboBox;
+    std::unique_ptr<juce::ComboBox> bitDepthComboBox;
+    std::unique_ptr<juce::TextEditor> outputTextEditor;
+    std::unique_ptr<juce::ComboBox> resampleComboBox;
+    std::unique_ptr<juce::ComboBox> channelsComboBox;
+    std::unique_ptr<juce::Label> sampleRateLabel;
+    std::unique_ptr<juce::Label> bitDepthLabel;
+    std::unique_ptr<juce::Label> channelsLabel;
+    std::unique_ptr<juce::Label> outputLabel;
+    std::unique_ptr<juce::Label> resampleLabel;
+    std::unique_ptr<juce::TextButton> outputButton;
 
 
     //==============================================================================

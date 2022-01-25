@@ -46,10 +46,8 @@ public:
     std::unique_ptr<juce::Label> autoPlayLabel;
     int autoPlayLabelWidth;
     std::unique_ptr<juce::TextButton> exportButton;
-    std::unique_ptr< ThumbnailComponent> thumbnailComp;
-    //std::unique_ptr<ThumbnailCoverComponent> selectionCover;
-    //int selectionCoverStartX;
-    //int selectionCoverEndX;
+    std::unique_ptr<ThumbnailComponent> thumbnailComp;
+    std::unique_ptr <juce::AlertWindow> waitWindow;
 
     juce::AudioFormatManager manager;
     juce::AudioThumbnailCache thumbCache;

@@ -28,6 +28,7 @@ public:
     std::unique_ptr<juce::AudioDeviceSelectorComponent> adsComp;
     std::unique_ptr<juce::TextEditor> setupResTextEditor;
 
+    void saveToPXML();
     juce::String getListOfActiveBits(const juce::BigInteger& b);
     virtual void changeListenerCallback(juce::ChangeBroadcaster* source) override;
 

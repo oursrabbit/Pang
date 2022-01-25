@@ -23,7 +23,12 @@ SystemSettingsHelper::~SystemSettingsHelper()
 //[Get Settings]
 juce::String SystemSettingsHelper::GetAppDataBasePath()
 {
-    return AppPropertiesFile->getValue(SettingsKey_Basic_AppDataBasePath, juce::File::getSpecialLocation(juce::File::SpecialLocationType::userApplicationDataDirectory).getFullPathName());
+    auto path = AppPropertiesFile->getValue(SettingsKey_Basic_AppDataBasePath, "");
+    auto pathFile = juce::File::createFileWithoutCheckingPath(path);
+    if (pathFile.existsAsFile())
+        return juce::File::getSpecialLocation(juce::File::SpecialLocationType::userApplicationDataDirectory).getFullPathName();
+    else
+        return path;
 }
 
 juce::File SystemSettingsHelper::GetAppDataBaseFolder()
@@ -41,14 +46,34 @@ juce::String SystemSettingsHelper::GetLanguage()
     return AppPropertiesFile->getValue(SettingsKey_Basic_Language, "");
 }
 
-juce::uint64 SystemSettingsHelper::GetSpotSampleRate()
+int SystemSettingsHelper::GetSpotSampleRate()
 {
-    return 48000;
+    return AppPropertiesFile->getIntValue(SettingsKey_Spot_SampleRate, 48000);
 }
 
-juce::uint32 SystemSettingsHelper::GetSpotDepth()
+int SystemSettingsHelper::GetSpotDepth()
 {
-    return 16;
+    return AppPropertiesFile->getIntValue(SettingsKey_Spot_BitDepth, 24);
+}
+
+int SystemSettingsHelper::GetSpotChannels()
+{
+    return AppPropertiesFile->getIntValue(SettingsKey_Spot_Channels, 2);
+}
+
+juce::String SystemSettingsHelper::GetSpotOutputFolder()
+{
+    auto path = AppPropertiesFile->getValue(SettingsKey_Spot_OutputFolder, "");
+    auto pathFile = juce::File::createFileWithoutCheckingPath(path);
+    if (pathFile.existsAsFile())
+        return juce::File::getSpecialLocation(juce::File::SpecialLocationType::userDocumentsDirectory).getFullPathName();
+    else
+        return path;
+}
+
+juce::String SystemSettingsHelper::GetSpotResampleType()
+{
+    return AppPropertiesFile->getValue(SettingsKey_Spot_ResampleType, "LinearInterpolator");
 }
 
 void SystemSettingsHelper::GetAudioDevice(juce::AudioDeviceManager* audioDeviceManager)
@@ -92,12 +117,34 @@ void SystemSettingsHelper::SetLanguage(juce::String language)
     AppPropertiesFile->saveIfNeeded();
 }
 
-void SystemSettingsHelper::SetSpotSampleRate(juce::uint64 rate)
+void SystemSettingsHelper::SetSpotSampleRate(int rate)
 {
+    AppPropertiesFile->setValue(SettingsKey_Spot_SampleRate, rate);
+    AppPropertiesFile->saveIfNeeded();
 }
 
-void SystemSettingsHelper::SetSpotDepth(juce::uint32 depth)
+void SystemSettingsHelper::SetSpotDepth(int depth)
 {
+    AppPropertiesFile->setValue(SettingsKey_Spot_BitDepth, depth);
+    AppPropertiesFile->saveIfNeeded();
+}
+
+void SystemSettingsHelper::SetSpotChannels(int channels)
+{
+    AppPropertiesFile->setValue(SettingsKey_Spot_Channels, channels);
+    AppPropertiesFile->saveIfNeeded();
+}
+
+void SystemSettingsHelper::SetSpotOutputFolder(juce::String path)
+{
+    AppPropertiesFile->setValue(SettingsKey_Spot_OutputFolder, path);
+    AppPropertiesFile->saveIfNeeded();
+}
+
+void SystemSettingsHelper::SetSpotResampleType(juce::String typeName)
+{
+    AppPropertiesFile->setValue(SettingsKey_Spot_ResampleType, typeName);
+    AppPropertiesFile->saveIfNeeded();
 }
 
 void SystemSettingsHelper::SetAudioDevice(juce::AudioDeviceManager* device)

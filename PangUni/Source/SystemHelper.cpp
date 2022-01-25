@@ -7,9 +7,11 @@ SystemHelper::SystemHelper()
 
 void SystemHelper::_initSystemHelper()
 {
+    userPerposeSpotDAW = "";
     systemSettingsHelper.reset(new SystemSettingsHelper());
     languageHelper.reset(new LanguageHelper());
     baiduAIHelper.reset(new BaiduAIHelper());
+    spotHelper.reset(new SpotHelper());
 
     audioDeviceManager.reset(new juce::AudioDeviceManager());
     SystemHelper::Helper->systemSettingsHelper->GetAudioDevice(audioDeviceManager.get());
@@ -25,6 +27,8 @@ void SystemHelper::_initSystemHelper()
 
     searchWindows.clear();
     databaseEditorWindows.clear();
+    audioConvertorWindows.clear();
+    riffEditorWindows.clear();
 }
 
 void SystemHelper::_releaseSystemHelper()
@@ -39,6 +43,16 @@ void SystemHelper::_releaseSystemHelper()
         itr->reset(nullptr);
     }
 
+    for (auto itr = audioConvertorWindows.begin(); itr != audioConvertorWindows.end(); itr++)
+    {
+        itr->reset(nullptr);
+    }
+
+    for (auto itr = riffEditorWindows.begin(); itr != riffEditorWindows.end(); itr++)
+    {
+        itr->reset(nullptr);
+    }
+
     systemSettingsWindow = nullptr;
 
     audioDeviceManager = nullptr;
@@ -46,6 +60,7 @@ void SystemHelper::_releaseSystemHelper()
     systemSettingsHelper = nullptr;
     languageHelper = nullptr;
     baiduAIHelper = nullptr;
+    spotHelper = nullptr;
 }
 
 void SystemHelper::InitSystemHelper()
@@ -73,4 +88,14 @@ void SystemHelper::OpenDatabaseEditorWindow()
 void SystemHelper::OpenSystemSettingsWindow()
 {
     systemSettingsWindow.reset(new SystemSettingsWindow("Pang Uni System Settings"));
+}
+
+void SystemHelper::OpenAudioConvertorWindow()
+{
+    audioConvertorWindows.push_back(std::unique_ptr<AudioConvertorWindow>(new AudioConvertorWindow("Pang Uni Audio Convertor")));
+}
+
+void SystemHelper::OpenRIFFEditorWindow()
+{
+    riffEditorWindows.push_back(std::unique_ptr<RIFFEditorWindow>(new RIFFEditorWindow("Pang Uni RIFF Editor")));
 }

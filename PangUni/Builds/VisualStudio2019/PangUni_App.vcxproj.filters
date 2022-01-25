@@ -5,6 +5,9 @@
     <Filter Include="PangUni\Source\Model">
       <UniqueIdentifier>{5D66DEDE-DFA0-65C5-F660-46584FF63B17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PangUni\Source\Windows\Tools">
+      <UniqueIdentifier>{2644C749-1143-7D90-B2A5-EDAD8DBF48BA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PangUni\Source\Windows\SystemSetting">
       <UniqueIdentifier>{71E443E5-FD04-9386-93FB-0032B32D4AA7}</UniqueIdentifier>
     </Filter>
@@ -26,8 +29,11 @@
     <Filter Include="PangUni\Source\Windows">
       <UniqueIdentifier>{6D17B273-279D-BD32-0426-1F85C262C232}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PangUni\Source\Utilities\SpotToPT">
-      <UniqueIdentifier>{F5E802FF-82F8-6435-F662-C5A123CDA2DD}</UniqueIdentifier>
+    <Filter Include="PangUni\Source\Utilities\AuidoFileReader">
+      <UniqueIdentifier>{8D542541-FE1A-B6FD-787C-2B033ACBA21A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Utilities\Spot">
+      <UniqueIdentifier>{CA12059E-B4AB-27A8-98DF-9F1363034981}</UniqueIdentifier>
     </Filter>
     <Filter Include="PangUni\Source\Utilities\BaiduAI">
       <UniqueIdentifier>{FACFAF85-D0BC-0B77-9969-28CB4A147107}</UniqueIdentifier>
@@ -37,6 +43,15 @@
     </Filter>
     <Filter Include="PangUni\Source\Utilities">
       <UniqueIdentifier>{6978AB77-9380-DFB1-A298-1FC742AD8B99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Resource\Pang\DB">
+      <UniqueIdentifier>{E197A3E3-CF15-88BE-E1DF-83815810CA54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Resource\Pang\TRANS">
+      <UniqueIdentifier>{484FD2FE-3EB4-974D-D3E4-449CB0D0D926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PangUni\Source\Resource\Pang">
+      <UniqueIdentifier>{6F156860-C866-5FFC-7C45-3CD296A09187}</UniqueIdentifier>
     </Filter>
     <Filter Include="PangUni\Source\Resource">
       <UniqueIdentifier>{D8AD2B23-D27B-191C-FCD1-55DC28A92D6A}</UniqueIdentifier>
@@ -490,6 +505,12 @@
     <ClCompile Include="..\..\Source\FxInfo.cpp">
       <Filter>PangUni\Source\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\AudioConvertorMainComponent.cpp">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\RIFFEditorMainComponent.cpp">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\AudioDeviceSettingsComponent.cpp">
       <Filter>PangUni\Source\Windows\SystemSetting</Filter>
     </ClCompile>
@@ -547,8 +568,17 @@
     <ClCompile Include="..\..\Source\FxTableModel.cpp">
       <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\RegionSpotter.cpp">
-      <Filter>PangUni\Source\Utilities\SpotToPT</Filter>
+    <ClCompile Include="..\..\Source\AudioFileReaderHelper.cpp">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\RIFFFormatPangEx.cpp">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\WAVFormatPangEx.cpp">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SpotHelper.cpp">
+      <Filter>PangUni\Source\Utilities\Spot</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\BaiduAIHelper.cpp">
       <Filter>PangUni\Source\Utilities\BaiduAI</Filter>
@@ -2670,6 +2700,18 @@
     <ClInclude Include="..\..\Source\FxInfo.h">
       <Filter>PangUni\Source\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\AudioConvertorMainComponent.h">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\AudioConvertorWindow.h">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\RIFFEditorMainComponent.h">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\RIFFEditorWindow.h">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\AudioDeviceSettingsComponent.h">
       <Filter>PangUni\Source\Windows\SystemSetting</Filter>
     </ClInclude>
@@ -2736,8 +2778,20 @@
     <ClInclude Include="..\..\Source\FxTableModel.h">
       <Filter>PangUni\Source\Windows\DatabaseEditor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\RegionSpotter.h">
-      <Filter>PangUni\Source\Utilities\SpotToPT</Filter>
+    <ClInclude Include="..\..\Source\AudioFileReaderHelper.h">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\HexConvertor.h">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\RIFFFormatPangEx.h">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\WAVFormatPangEx.h">
+      <Filter>PangUni\Source\Utilities\AuidoFileReader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SpotHelper.h">
+      <Filter>PangUni\Source\Utilities\Spot</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\BaiduAI.h">
       <Filter>PangUni\Source\Utilities\BaiduAI</Filter>
@@ -5141,13 +5195,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\Pang\DB\00_BOP_Metadata.pxml">
+      <Filter>PangUni\Source\Resource\Pang\DB</Filter>
+    </None>
+    <None Include="..\..\Source\Pang\DB\123.pxml">
+      <Filter>PangUni\Source\Resource\Pang\DB</Filter>
+    </None>
+    <None Include="..\..\Source\Pang\TRANS\zh.txt">
+      <Filter>PangUni\Source\Resource\Pang\TRANS</Filter>
+    </None>
     <None Include="..\..\Source\Handbook.docx">
       <Filter>PangUni\Source\Resource</Filter>
     </None>
     <None Include="..\..\Source\juce_icon.png">
-      <Filter>PangUni\Source\Resource</Filter>
-    </None>
-    <None Include="..\..\Source\Base.xml">
       <Filter>PangUni\Source\Resource</Filter>
     </None>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt">

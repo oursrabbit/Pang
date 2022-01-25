@@ -34,6 +34,7 @@ public:
     std::unique_ptr<juce::FileChooser> chooser;
 
     void SetDefaultComponentValue();
+    void saveToPXML();
 
     virtual void buttonClicked(juce::Button* button) override;
     virtual void textEditorTextChanged(juce::TextEditor& textEditor) override;

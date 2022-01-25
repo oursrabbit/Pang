@@ -1,7 +1,6 @@
 #include <JuceHeader.h>
 #include "AudioExportComponent.h"
 #include "SystemHelper.h"
-#include "RegionSpotter.h"
 
 //==============================================================================
 AudioExportComponent::AudioExportComponent(SearchDataStruct* newData)
@@ -87,7 +86,7 @@ AudioExportComponent::~AudioExportComponent()
     exportButton = nullptr;
     waveImageLoadStateLabel = nullptr;
     thumbnailComp = nullptr;
-    //selectionCover = nullptr;
+    waitWindow = nullptr;
 }
 
 void AudioExportComponent::paint (juce::Graphics& g)
@@ -163,33 +162,104 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == exportButton.get())
     {
-        //if (DatabaseHelper::CurrentFx != nullptr)
-        //{
-        //    juce::AlertWindow waitWindow(TRANS("Export..."), "", juce::MessageBoxIconType::WarningIcon);
-        //    waitWindow.enterModalState();
-        //    auto* reader = manager.createReaderFor(DatabaseHelper::CurrentFx->GetAudioFile());
-        //    if (reader != nullptr)
-        //    {
-        //        // Export All Audio
-        //        if (selectionCover->getBounds().getX() < 0)
-        //        {
-        //            RegionSpotter::Spot(0, reader->lengthInSamples);
-        //        }
-        //        // Export Selection
-        //        else
-        //        {
-        //            float totalLength = (float)getWidth();
-        //            auto startPoint = selectionCover->getBounds().getX();
-        //            auto endPoint = selectionCover->getBounds().getX() + selectionCover->getBounds().getWidth();
-        //            auto totalSamples = reader->lengthInSamples;
-        //            auto startSample = (int)(totalSamples * startPoint / totalLength);
-        //            auto endSample = (int)(totalSamples * endPoint / totalLength);
-        //            RegionSpotter::Spot(startSample, endSample);
-        //        }
-        //        delete reader;
-        //    }
-        //    waitWindow.exitModalState(0);
-        //}
+        if (this->newData->CurrentFx != nullptr && SystemHelper::Helper->userPerposeSpotDAW != "")
+        {
+            auto* reader = manager.createReaderFor(this->newData->CurrentFx->GetAudioFile());
+            if (reader != nullptr)
+            {
+                waitWindow.reset(new juce::AlertWindow(TRANS("Export..."), "", juce::MessageBoxIconType::WarningIcon));
+                waitWindow->enterModalState();
+                // Convert Create
+                auto outSampleRate = SystemHelper::Helper->systemSettingsHelper->GetSpotSampleRate();
+                auto outBitDepth = SystemHelper::Helper->systemSettingsHelper->GetSpotDepth();
+                auto outChannels = SystemHelper::Helper->systemSettingsHelper->GetSpotChannels();
+                auto outFolderPath = SystemHelper::Helper->systemSettingsHelper->GetSpotOutputFolder();
+                auto outResampleTypeString = SystemHelper::Helper->systemSettingsHelper->GetSpotResampleType();
+
+                float totalLength = (float)getWidth();
+                auto startPoint = this->thumbnailComp->selectionCover->getBounds().getX();
+                auto endPoint = this->thumbnailComp->selectionCover->getBounds().getX() + this->thumbnailComp->selectionCover->getBounds().getWidth();
+                auto totalSamples = reader->lengthInSamples;
+                auto startSample = (int)(totalSamples * startPoint / totalLength);
+                auto endSample = (int)(totalSamples * endPoint / totalLength);
+                auto exportSamples = endSample - startSample;
+                if (this->thumbnailComp->selectionCover->getBounds().getX() < 0)
+                {
+                    startSample = 0;
+                    exportSamples = reader->lengthInSamples;
+                }
+                double ratio = reader->sampleRate / outSampleRate;
+                double outSize = exportSamples / ratio;
+                int outSizeInt = outSize + 1;
+                juce::AudioBuffer<float> buffer = juce::AudioBuffer<float>(reader->numChannels, exportSamples);
+                juce::AudioBuffer<float> outbuffer = juce::AudioBuffer<float>(outChannels, outSizeInt);
+
+                // Read IN
+                reader->read(&buffer, 0, exportSamples, startSample, true, true);
+
+                // Convert
+                if (outResampleTypeString == "WindowedSincInterpolator")
+                {
+                    juce::WindowedSincInterpolator resample;
+                    for (int i = 0; (i < reader->numChannels) | (i < outChannels); i++)
+                        resample.process(ratio, buffer.getReadPointer(i, 0), outbuffer.getWritePointer(i, 0), outSizeInt);
+                }
+                else if (outResampleTypeString == "LagrangeInterpolator")
+                {
+                    juce::LagrangeInterpolator resample;
+                    for (int i = 0; (i < reader->numChannels) | (i < outChannels); i++)
+                        resample.process(ratio, buffer.getReadPointer(i, 0), outbuffer.getWritePointer(i, 0), outSizeInt);
+                }
+                else if (outResampleTypeString == "CatmullRomInterpolator")
+                {
+                    juce::CatmullRomInterpolator resample;
+                    for (int i = 0; (i < reader->numChannels) | (i < outChannels); i++)
+                        resample.process(ratio, buffer.getReadPointer(i, 0), outbuffer.getWritePointer(i, 0), outSizeInt);
+                }
+                else if (outResampleTypeString == "LinearInterpolator")
+                {
+                    juce::LinearInterpolator resample;
+                    for (int i = 0; (i < reader->numChannels) | (i < outChannels); i++)
+                        resample.process(ratio, buffer.getReadPointer(i, 0), outbuffer.getWritePointer(i, 0), outSizeInt);
+                }
+                else  // if(outResampleTypeString == "ZeroOrderHoldInterpolator")
+                {
+                    juce::ZeroOrderHoldInterpolator resample;
+                    for (int i = 0; (i < reader->numChannels) | (i < outChannels); i++)
+                        resample.process(ratio, buffer.getReadPointer(i, 0), outbuffer.getWritePointer(i, 0), outSizeInt);
+                }
+
+                // Write OUT
+                juce::File outFileFolder(outFolderPath);
+                int createTimes = 0;
+                juce::File outFile = outFileFolder.getChildFile(
+                    this->newData->CurrentFx->GetAudioFile().getFileNameWithoutExtension()
+                    + (createTimes == 0 ? "" : "(" + juce::String(createTimes) + ")")
+                    + this->newData->CurrentFx->GetAudioFile().getFileExtension());
+                while (outFile.existsAsFile())
+                {
+                    createTimes++;
+                    outFile = outFileFolder.getChildFile(
+                        this->newData->CurrentFx->GetAudioFile().getFileNameWithoutExtension()
+                        + (createTimes == 0 ? "" : "(" + juce::String(createTimes) + ")")
+                        + this->newData->CurrentFx->GetAudioFile().getFileExtension());
+                }
+                juce::WavAudioFormat waf;
+                auto writer = waf.createWriterFor(new juce::FileOutputStream(outFile), outSampleRate, outChannels, outBitDepth, reader->metadataValues, 0);
+                writer->writeFromAudioSampleBuffer(outbuffer, 0, outSizeInt);
+                delete writer;
+                delete reader;
+
+                if (SystemHelper::Helper->userPerposeSpotDAW == "ProTools")
+                {
+                    SystemHelper::Helper->spotHelper->SpotToProTools(outFile, 0, outSizeInt);
+                }
+
+                waitWindow->exitModalState(0);
+                waitWindow.reset(nullptr);
+                juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Export Successfully"));
+            }
+        }
     }
 }
 

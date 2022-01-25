@@ -12,9 +12,13 @@
 #include "DatabaseEditorWindow.h"
 #include "SearchWindow.h"
 #include "SystemSettingsWindow.h"
+#include "AudioConvertorWindow.h"
+#include "RIFFEditorWindow.h"
+
 #include "SystemSettingsHelper.h"
 #include "LanguageHelper.h"
 #include "BaiduAIHelper.h"
+#include "SpotHelper.h"
 
 class SystemHelper
 {
@@ -26,17 +30,23 @@ public:
     std::unique_ptr<SystemSettingsHelper> systemSettingsHelper;
     std::unique_ptr<LanguageHelper> languageHelper;
     std::unique_ptr<BaiduAIHelper> baiduAIHelper;
+    std::unique_ptr<SpotHelper> spotHelper;
 
     std::unique_ptr<juce::AudioDeviceManager> audioDeviceManager;
+    juce::String userPerposeSpotDAW;
 
     void OpenMainWindow();
     void OpenDatabaseEditorWindow();
     void OpenSystemSettingsWindow();
+    void OpenAudioConvertorWindow();
+    void OpenRIFFEditorWindow();
 
 private:
     std::unique_ptr<SystemSettingsWindow> systemSettingsWindow;
     std::vector<std::unique_ptr<SearchWindow>> searchWindows;
     std::vector<std::unique_ptr<DatabaseEditorWindow>> databaseEditorWindows;
+    std::vector<std::unique_ptr<AudioConvertorWindow>> audioConvertorWindows;
+    std::vector<std::unique_ptr<RIFFEditorWindow>> riffEditorWindows;
 
     SystemHelper();
     void _initSystemHelper();

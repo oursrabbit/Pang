@@ -142,6 +142,8 @@
     <ClCompile Include="..\..\Source\Fx.cpp"/>
     <ClCompile Include="..\..\Source\FxDB.cpp"/>
     <ClCompile Include="..\..\Source\FxInfo.cpp"/>
+    <ClCompile Include="..\..\Source\AudioConvertorMainComponent.cpp"/>
+    <ClCompile Include="..\..\Source\RIFFEditorMainComponent.cpp"/>
     <ClCompile Include="..\..\Source\AudioDeviceSettingsComponent.cpp"/>
     <ClCompile Include="..\..\Source\BasicSettingsComponent.cpp"/>
     <ClCompile Include="..\..\Source\SpotSettingsComponent.cpp"/>
@@ -161,7 +163,10 @@
     <ClCompile Include="..\..\Source\DatabaseEditorMainComponent.cpp"/>
     <ClCompile Include="..\..\Source\FxInfoTableModel.cpp"/>
     <ClCompile Include="..\..\Source\FxTableModel.cpp"/>
-    <ClCompile Include="..\..\Source\RegionSpotter.cpp"/>
+    <ClCompile Include="..\..\Source\AudioFileReaderHelper.cpp"/>
+    <ClCompile Include="..\..\Source\RIFFFormatPangEx.cpp"/>
+    <ClCompile Include="..\..\Source\WAVFormatPangEx.cpp"/>
+    <ClCompile Include="..\..\Source\SpotHelper.cpp"/>
     <ClCompile Include="..\..\Source\BaiduAIHelper.cpp"/>
     <ClCompile Include="..\..\Source\CustomTableCells.cpp"/>
     <ClCompile Include="..\..\Source\SystemHelper.cpp"/>
@@ -2119,6 +2124,10 @@
     <ClInclude Include="..\..\Source\Fx.h"/>
     <ClInclude Include="..\..\Source\FxDB.h"/>
     <ClInclude Include="..\..\Source\FxInfo.h"/>
+    <ClInclude Include="..\..\Source\AudioConvertorMainComponent.h"/>
+    <ClInclude Include="..\..\Source\AudioConvertorWindow.h"/>
+    <ClInclude Include="..\..\Source\RIFFEditorMainComponent.h"/>
+    <ClInclude Include="..\..\Source\RIFFEditorWindow.h"/>
     <ClInclude Include="..\..\Source\AudioDeviceSettingsComponent.h"/>
     <ClInclude Include="..\..\Source\BasicSettingsComponent.h"/>
     <ClInclude Include="..\..\Source\SpotSettingsComponent.h"/>
@@ -2141,7 +2150,11 @@
     <ClInclude Include="..\..\Source\DatabaseEditorWindow.h"/>
     <ClInclude Include="..\..\Source\FxInfoTableModel.h"/>
     <ClInclude Include="..\..\Source\FxTableModel.h"/>
-    <ClInclude Include="..\..\Source\RegionSpotter.h"/>
+    <ClInclude Include="..\..\Source\AudioFileReaderHelper.h"/>
+    <ClInclude Include="..\..\Source\HexConvertor.h"/>
+    <ClInclude Include="..\..\Source\RIFFFormatPangEx.h"/>
+    <ClInclude Include="..\..\Source\WAVFormatPangEx.h"/>
+    <ClInclude Include="..\..\Source\SpotHelper.h"/>
     <ClInclude Include="..\..\Source\BaiduAI.h"/>
     <ClInclude Include="..\..\Source\BaiduAIHelper.h"/>
     <ClInclude Include="..\..\Source\CustomTableCells.h"/>
@@ -2944,9 +2957,11 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\Pang\DB\00_BOP_Metadata.pxml"/>
+    <None Include="..\..\Source\Pang\DB\123.pxml"/>
+    <None Include="..\..\Source\Pang\TRANS\zh.txt"/>
     <None Include="..\..\Source\Handbook.docx"/>
     <None Include="..\..\Source\juce_icon.png"/>
-    <None Include="..\..\Source\Base.xml"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="..\..\..\..\..\..\..\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>

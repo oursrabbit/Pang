@@ -15,6 +15,20 @@
         <FILE id="dKOMjG" name="FxInfo.h" compile="0" resource="0" file="Source/FxInfo.h"/>
       </GROUP>
       <GROUP id="{4B2C2ACC-8E9A-62EE-7D6B-82D3A4E25F7F}" name="Windows">
+        <GROUP id="{35BE81BA-FC24-E8ED-DE9B-428FFF7698FB}" name="Tools">
+          <FILE id="kVA7sw" name="AudioConvertorMainComponent.cpp" compile="1"
+                resource="0" file="Source/AudioConvertorMainComponent.cpp"/>
+          <FILE id="DFfW6F" name="AudioConvertorMainComponent.h" compile="0"
+                resource="0" file="Source/AudioConvertorMainComponent.h"/>
+          <FILE id="NCbcVT" name="AudioConvertorWindow.h" compile="0" resource="0"
+                file="Source/AudioConvertorWindow.h"/>
+          <FILE id="IvFZEM" name="RIFFEditorMainComponent.cpp" compile="1" resource="0"
+                file="Source/RIFFEditorMainComponent.cpp"/>
+          <FILE id="vrx5gp" name="RIFFEditorMainComponent.h" compile="0" resource="0"
+                file="Source/RIFFEditorMainComponent.h"/>
+          <FILE id="YdNcZU" name="RIFFEditorWindow.h" compile="0" resource="0"
+                file="Source/RIFFEditorWindow.h"/>
+        </GROUP>
         <GROUP id="{6F5415A4-26D3-FDDB-827D-C31D40AA15C5}" name="SystemSetting">
           <FILE id="UYZMoB" name="AudioDeviceSettingsComponent.cpp" compile="1"
                 resource="0" file="Source/AudioDeviceSettingsComponent.cpp"/>
@@ -106,10 +120,24 @@
         </GROUP>
       </GROUP>
       <GROUP id="{16F86DE0-AC00-7E11-E79F-4078E1F3E029}" name="Utilities">
-        <GROUP id="{053B81C3-210F-5B4E-B9E9-EC741AA2502A}" name="SpotToPT">
-          <FILE id="VdCqQQ" name="RegionSpotter.cpp" compile="1" resource="0"
-                file="Source/RegionSpotter.cpp"/>
-          <FILE id="T96t9L" name="RegionSpotter.h" compile="0" resource="0" file="Source/RegionSpotter.h"/>
+        <GROUP id="{B557F0B5-234A-5AC4-6F13-88E627CA69EF}" name="AuidoFileReader">
+          <FILE id="sm81OG" name="AudioFileReaderHelper.cpp" compile="1" resource="0"
+                file="Source/AudioFileReaderHelper.cpp"/>
+          <FILE id="BzBtXI" name="AudioFileReaderHelper.h" compile="0" resource="0"
+                file="Source/AudioFileReaderHelper.h"/>
+          <FILE id="iKePGb" name="HexConvertor.h" compile="0" resource="0" file="Source/HexConvertor.h"/>
+          <FILE id="QfcwyI" name="RIFFFormatPangEx.cpp" compile="1" resource="0"
+                file="Source/RIFFFormatPangEx.cpp"/>
+          <FILE id="WKWIEM" name="RIFFFormatPangEx.h" compile="0" resource="0"
+                file="Source/RIFFFormatPangEx.h"/>
+          <FILE id="tlOP6S" name="WAVFormatPangEx.cpp" compile="1" resource="0"
+                file="Source/WAVFormatPangEx.cpp"/>
+          <FILE id="DBEBDv" name="WAVFormatPangEx.h" compile="0" resource="0"
+                file="Source/WAVFormatPangEx.h"/>
+        </GROUP>
+        <GROUP id="{053B81C3-210F-5B4E-B9E9-EC741AA2502A}" name="Spot">
+          <FILE id="IPyALO" name="SpotHelper.cpp" compile="1" resource="0" file="Source/SpotHelper.cpp"/>
+          <FILE id="SSGIzG" name="SpotHelper.h" compile="0" resource="0" file="Source/SpotHelper.h"/>
         </GROUP>
         <GROUP id="{2FF48405-A1A6-6889-3868-C4769D4504D6}" name="BaiduAI">
           <FILE id="yidNd1" name="BaiduAI.h" compile="0" resource="0" file="Source/BaiduAI.h"/>
@@ -136,9 +164,18 @@
               file="Source/LanguageHelper.h"/>
       </GROUP>
       <GROUP id="{4A9EA792-6F57-2AB7-5B26-C20651FF0CF4}" name="Resource">
+        <GROUP id="{B008BE9B-FD25-83EB-C9A6-D61575DAA672}" name="Pang">
+          <GROUP id="{97C27A7C-297E-C0BF-31F7-90AE12C2F568}" name="DB">
+            <FILE id="T1Hi45" name="00_BOP_Metadata.pxml" compile="0" resource="0"
+                  file="Source/Pang/DB/00_BOP_Metadata.pxml"/>
+            <FILE id="UhYl6Q" name="123.pxml" compile="0" resource="0" file="Source/Pang/DB/123.pxml"/>
+          </GROUP>
+          <GROUP id="{DA8ACA7E-8255-D2F5-C822-60B5530452EC}" name="TRANS">
+            <FILE id="BSahB4" name="zh.txt" compile="0" resource="0" file="Source/Pang/TRANS/zh.txt"/>
+          </GROUP>
+        </GROUP>
         <FILE id="VOq9us" name="Handbook.docx" compile="0" resource="0" file="Source/Handbook.docx"/>
         <FILE id="CcpD3M" name="juce_icon.png" compile="0" resource="0" file="Source/juce_icon.png"/>
-        <FILE id="u0u0gU" name="Base.xml" compile="0" resource="0" file="Source/Base.xml"/>
       </GROUP>
       <GROUP id="{EE3396D4-63E7-3125-CAA2-89B965F049FC}" name="Test">
         <FILE id="A7wyrB" name="DatabaseHelper.cpp" compile="1" resource="0"

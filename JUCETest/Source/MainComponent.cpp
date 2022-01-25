@@ -1,33 +1,68 @@
 #include "MainComponent.h"
 
+int ConvertToInt(char* buffer)
+{
+    return (int)((int)(buffer[0] << 0) & 0x000000FF)
+        + (int)((int)(buffer[1] << 8) & 0x0000FF00)
+        + (int)((int)(buffer[2] << 16) & 0x00FF0000)
+        + (int)((int)(buffer[3] << 24) & 0xFF000000);
+}
+
 //==============================================================================
 MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
     // you add any child components.
-    setSize (800, 600);
+    setSize(800, 600);
 
     // Some platforms require permissions to open input channels so request that here
-    if (juce::RuntimePermissions::isRequired (juce::RuntimePermissions::recordAudio)
-        && ! juce::RuntimePermissions::isGranted (juce::RuntimePermissions::recordAudio))
+    if (juce::RuntimePermissions::isRequired(juce::RuntimePermissions::recordAudio)
+        && !juce::RuntimePermissions::isGranted(juce::RuntimePermissions::recordAudio))
     {
-        juce::RuntimePermissions::request (juce::RuntimePermissions::recordAudio,
-                                           [&] (bool granted) { setAudioChannels (granted ? 2 : 0, 2); });
+        juce::RuntimePermissions::request(juce::RuntimePermissions::recordAudio,
+            [&](bool granted) { setAudioChannels(granted ? 2 : 0, 2); });
     }
     else
     {
         // Specify the number of input and output channels that we want to open
-        setAudioChannels (2, 2);
+        setAudioChannels(2, 2);
     }
 
 
-    juce::File audioFile("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\TESTRES\\093 Brk Full Pow.wav");
-    juce::AudioFormatManager afm;
-    afm.registerBasicFormats();
-    auto reader = afm.createReaderFor(audioFile);
-    float* buffer = (float*)malloc(reader->lengthInSamples * sizeof(float));
-    reader->read(&buffer, 1, 0, reader->lengthInSamples);
-    afm.wri
+    juce::WavAudioFormat waf;
+
+    juce::File* audioFile = new juce::File("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\TESTRES\\093 Brk Full Pow.wav");
+    juce::FileInputStream* inFileStream = new juce::FileInputStream(*audioFile);
+    auto reader = waf.createReaderFor(inFileStream, true);
+    juce::AudioBuffer<float> buffer = juce::AudioBuffer<float>(2, reader->lengthInSamples);
+    reader->read(&buffer, 0, reader->lengthInSamples, 0, true, true);
+    juce::String metaString = "";
+    auto copyright = reader->metadataValues.getDescription();
+    copyright = reader->metadataValues.getValue("riffInfoCopyright", "23");
+    for (auto mvk : reader->metadataValues.getAllKeys())
+    {
+        metaString += mvk + " | " + reader->metadataValues.getValue(mvk, "") + "\r\n";
+    }
+    reader->metadataValues.set("riffInfoCopyright", "Pang C++");
+
+    double ratio = reader->sampleRate / 48000.0;
+    double outSize = reader->lengthInSamples / ratio;
+    int outSizeInt = outSize + 1;
+    juce::AudioBuffer<float> outbuffer = juce::AudioBuffer<float>(2, outSizeInt);
+    outbuffer.clear();
+
+    juce::LinearInterpolator resample;
+    resample.process(ratio, buffer.getReadPointer(0, 0), outbuffer.getWritePointer(0, 0), outSizeInt);
+    resample.process(ratio, buffer.getReadPointer(1, 0), outbuffer.getWritePointer(1, 0), outSizeInt);
+
+    juce::File* outFile = new juce::File("C:\\Users\\YC\\Desktop\\out.wav");
+    juce::FileOutputStream* outFileStream = new juce::FileOutputStream(*outFile);
+    auto writer = waf.createWriterFor(outFileStream, 48000, 2, 16, reader->metadataValues, 0);
+    writer->writeFromAudioSampleBuffer(outbuffer, 0, outSizeInt);
+    delete writer;
+    delete outFile;
+    delete reader;
+    delete audioFile;
 }
 
 MainComponent::~MainComponent()
