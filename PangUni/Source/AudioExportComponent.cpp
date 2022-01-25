@@ -234,14 +234,14 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
                 int createTimes = 0;
                 juce::File outFile = outFileFolder.getChildFile(
                     this->newData->CurrentFx->GetAudioFile().getFileNameWithoutExtension()
-                    + (createTimes == 0 ? "" : "(" + juce::String(createTimes) + ")")
+                    + (createTimes == 0 ? "_Pang" : "_Pang(" + juce::String(createTimes) + ")")
                     + this->newData->CurrentFx->GetAudioFile().getFileExtension());
                 while (outFile.existsAsFile())
                 {
                     createTimes++;
                     outFile = outFileFolder.getChildFile(
                         this->newData->CurrentFx->GetAudioFile().getFileNameWithoutExtension()
-                        + (createTimes == 0 ? "" : "(" + juce::String(createTimes) + ")")
+                        + (createTimes == 0 ? "_Pang" : "_Pang(" + juce::String(createTimes) + ")")
                         + this->newData->CurrentFx->GetAudioFile().getFileExtension());
                 }
                 juce::WavAudioFormat waf;

@@ -68,6 +68,10 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
         menu.addItem(404, TRANS("Audio Convertor"), false);
         menu.addItem(405, TRANS("RIFF Editor"), false);
     }
+    else if(menuName == TRANS("?Help"))
+    {
+        menu.addItem(501, TRANS("Open Handbook"));
+    }
     return menu;
 }
 
@@ -96,6 +100,9 @@ void PangMenuComponent::menuItemSelected(int menuItemID, int)
     case 404: // Tools/Audio Convertor
         break;
     case 405: // Tools/RIFF Editor
+        break;
+    case 501: // ?Help/Open Handbook
+        SystemHelper::Helper->OpenHandBookFile();
         break;
     default:
         break;

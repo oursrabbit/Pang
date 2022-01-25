@@ -23,7 +23,16 @@ void SystemHelper::_initSystemHelper()
     {
         juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
     }
-    juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
+    
+    // Only For Chinese
+    if(currentLangS == "Chinese")
+    {
+#ifdef WIN32
+        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
+#else
+        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("STHeiti");
+#endif //WIN32
+    }
 
     searchWindows.clear();
     databaseEditorWindows.clear();
@@ -98,4 +107,17 @@ void SystemHelper::OpenAudioConvertorWindow()
 void SystemHelper::OpenRIFFEditorWindow()
 {
     riffEditorWindows.push_back(std::unique_ptr<RIFFEditorWindow>(new RIFFEditorWindow("Pang Uni RIFF Editor")));
+}
+
+void SystemHelper::OpenHandBookFile()
+{
+    auto handbookFile = SystemHelper::Helper->systemSettingsHelper->GetAppDataBaseFolder().getChildFile("Handbook.pdf");
+    if(handbookFile.existsAsFile())
+    {
+#ifdef WIN32
+#else
+        auto command = "open " + handbookFile.getFullPathName();
+        system(command.getCharPointer());
+#endif //WIN32
+    }
 }

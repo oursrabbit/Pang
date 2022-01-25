@@ -40,6 +40,7 @@ public:
     void OpenSystemSettingsWindow();
     void OpenAudioConvertorWindow();
     void OpenRIFFEditorWindow();
+    void OpenHandBookFile();
 
 private:
     std::unique_ptr<SystemSettingsWindow> systemSettingsWindow;

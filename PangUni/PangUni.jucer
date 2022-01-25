@@ -208,6 +208,31 @@
         <MODULEPATH id="juce_audio_formats" path="../../../../../JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
+    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="curl&#10;jsoncpp"
+               hardenedRuntime="1" hardenedRuntimeOptions="com.apple.security.automation.apple-events"
+               sendAppleEventsPermissionNeeded="1" sendAppleEventsPermissionText="Hi~I'm Pang~"
+               customPList="&lt;plist version=&quot;1.0&quot;&gt;&#10;    &lt;dict&gt;&#10;    &lt;key&gt;LSPrefersCarbon&lt;/key&gt; &lt;!-- USING CARBON ENVIRONMENT --!&gt;&#10;    &lt;true/&gt;&#10;    &lt;key&gt;NSAppleEventsUsageDescription&lt;/key&gt;&#10;    &lt;string&gt;something...&lt;/string&gt;&#10;    &lt;/dict&gt;&#10;&lt;/plist&gt;"
+               smallIcon="CcpD3M" bigIcon="CcpD3M">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="PangUni-d" headerPath="/Users/yangcan/vcpkg/installed/x64-osx/include"
+                       libraryPath="/Users/yangcan/vcpkg/installed/x64-osx/debug/lib"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="PangUni-r" headerPath="/Users/yangcan/vcpkg/installed/x64-osx/include"
+                       libraryPath="/Users/yangcan/vcpkg/installed/x64-osx/lib"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
+        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
+        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
+        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
+        <MODULEPATH id="juce_audio_utils" path="../../juce"/>
+        <MODULEPATH id="juce_core" path="../../juce"/>
+        <MODULEPATH id="juce_data_structures" path="../../juce"/>
+        <MODULEPATH id="juce_events" path="../../juce"/>
+        <MODULEPATH id="juce_graphics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
+        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
   </EXPORTFORMATS>
   <MODULES>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Pang>
+  <SoundEffect>
+    <FileName/>
+    <Description/>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 HiHat Lp Bel.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 Hat+Snr1 Bel.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 mLP Bass Bel.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 mLP Mixx Bel.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 Brk Full Pow.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+  <SoundEffect>
+    <FileName>/Users/yangcan/Desktop/Pang/PantTestDB/TESTRES/093 mLP Mixx Pow.wav</FileName>
+    <Description></Description>
+  </SoundEffect>
+</Pang>
