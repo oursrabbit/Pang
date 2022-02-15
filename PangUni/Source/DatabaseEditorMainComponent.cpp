@@ -165,7 +165,7 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
     else if (buttonThatWasClicked == importFxFromExcelButton.get())
     {
         chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.txt");
-        auto chooserFlags = juce::FileBrowserComponent::openMode;
+        auto chooserFlags = juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles;
         chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
             {
                 auto file = fc.getResult();
