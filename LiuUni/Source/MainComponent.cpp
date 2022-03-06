@@ -1,46 +1,44 @@
 #include "MainComponent.h"
-#include "WavAudioFormatPangEx.h"
-
-int ConvertToInt(char* buffer)
-{
-    return (int)((int)(buffer[0] << 0) & 0x000000FF)
-        + (int)((int)(buffer[1] << 8) & 0x0000FF00)
-        + (int)((int)(buffer[2] << 16) & 0x00FF0000)
-        + (int)((int)(buffer[3] << 24) & 0xFF000000);
-}
 
 //==============================================================================
 MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
     // you add any child components.
-    setSize(800, 600);
+    setSize (400, 400);
 
     // Some platforms require permissions to open input channels so request that here
-    if (juce::RuntimePermissions::isRequired(juce::RuntimePermissions::recordAudio)
-        && !juce::RuntimePermissions::isGranted(juce::RuntimePermissions::recordAudio))
+    if (juce::RuntimePermissions::isRequired (juce::RuntimePermissions::recordAudio)
+        && ! juce::RuntimePermissions::isGranted (juce::RuntimePermissions::recordAudio))
     {
-        juce::RuntimePermissions::request(juce::RuntimePermissions::recordAudio,
-            [&](bool granted) { setAudioChannels(granted ? 2 : 0, 2); });
+        juce::RuntimePermissions::request (juce::RuntimePermissions::recordAudio,
+                                           [&] (bool granted) { setAudioChannels (granted ? 2 : 0, 2); });
     }
     else
     {
         // Specify the number of input and output channels that we want to open
-        setAudioChannels(2, 2);
+        setAudioChannels (2, 2);
     }
 
+    CreateDBButton.addListener(this);
+    CompDBButton.addListener(this);
 
-    juce::File* audioFile = new juce::File("C:\\Users\\YC\\Desktop\\Pang\\PantTestDB\\TESTRES\\093 HiHat Lp Bel.wav");
-    juce::FileInputStream* inFileStream = new juce::FileInputStream(*audioFile);
-    WavAudioFormatPangEx* wfpe = new WavAudioFormatPangEx(inFileStream);
+    CreateDBButton.setButtonText(TRANS("Create Database"));
+    CompDBButton.setButtonText(TRANS("Compare Database"));
 
-    delete audioFile;
+    addAndMakeVisible(CreateDBButton);
+    addAndMakeVisible(CompDBButton);
 }
 
 MainComponent::~MainComponent()
 {
     // This shuts down the audio device and clears the audio source.
     shutdownAudio();
+
+    for (size_t i = 0; i < CreateDBComps.size(); i++)
+    {
+        CreateDBComps[i].reset(nullptr);
+    }
 }
 
 //==============================================================================
@@ -88,4 +86,18 @@ void MainComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
+
+    CreateDBButton.setBounds(10, 10, 380, 185);
+    CompDBButton.setBounds(10, 205, 380, 185);
+}
+
+void MainComponent::buttonClicked(juce::Button* btn)
+{
+    if (btn == &CreateDBButton)
+    {
+        CreateDBComps.push_back(std::unique_ptr<CreateDBWindow>(new CreateDBWindow("Liu Create DB")));
+    }
+    else if (btn == &CompDBButton)
+    {
+    }
 }

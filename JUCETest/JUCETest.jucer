@@ -4,6 +4,10 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="J7XUJs" name="JUCETest">
     <GROUP id="{59023410-8CF7-D78B-D7BF-A7EECEA883B2}" name="Source">
+      <FILE id="ooKjPw" name="WavAudioFormatPangEx.cpp" compile="1" resource="0"
+            file="Source/WavAudioFormatPangEx.cpp"/>
+      <FILE id="WkOM8u" name="WavAudioFormatPangEx.h" compile="0" resource="0"
+            file="Source/WavAudioFormatPangEx.h"/>
       <FILE id="a2QoRk" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="yTfN8H" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="Dckt7a" name="MainComponent.cpp" compile="1" resource="0"
