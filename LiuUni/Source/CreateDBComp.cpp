@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "CreateDBComp.h"
-
+#include "MediaInfo/MediaInfo.h"
 //==============================================================================
 CreateDBComp::CreateDBComp()
 {
@@ -49,6 +49,75 @@ CreateDBComp::CreateDBComp()
 CreateDBComp::~CreateDBComp()
 {
     chooser = nullptr;
+}
+
+void CreateDBComp::createDB()
+{
+    if (suffixTextEditor.getText().isNotEmpty() && outputPathTextEditor.getText().isNotEmpty() && sourceListBox.SourcePaths.size() != 0)
+    {
+        juce::String outputString = "FileName\tDuration\tFullPath\tKeyWords\n";
+        std::vector<MediaFileInfo> mediafiles;
+        mediafiles.clear();
+        for (size_t i = 0; i < sourceListBox.SourcePaths.size(); i++)
+        {
+            auto path = sourceListBox.SourcePaths[i];
+            auto dir = juce::File::createFileWithoutCheckingPath(path);
+            juce::StringArray suffixs;
+            suffixs.addTokens(suffixTextEditor.getText(), "|", "");
+            for (size_t j = 0; j < suffixs.size(); j++)
+            {
+                auto files = dir.findChildFiles(juce::File::findFiles, true, suffixs[j]);
+                for (size_t k = 0; k < files.size(); k++)
+                {
+                    auto file = files[k];
+                    juce::String duration = "";
+                    MediaInfoLib::MediaInfo MI;
+                    MediaInfoLib::String MIPath = file.getFullPathName().toStdString();
+                    MI.Open(MIPath);
+                    auto inof = MI.Inform();
+                    //juce::AudioFormatManager manager;
+                    //manager.registerBasicFormats();
+                    //auto reader = manager.createReaderFor(file);
+                    
+                    //if (reader != nullptr)
+                    //{
+                    //    int seconds = reader->lengthInSamples / reader->sampleRate;
+                    //    int min = seconds / 60;
+                    //    seconds = seconds % 60;
+                    //    duration = juce::String(min) + "'" + juce::String(seconds);
+                    //    delete reader;
+                    //}
+                    //else
+                    //{
+                    //    juce::VideoComponent videocomp(false);
+                    //    addAndMakeVisible(videocomp);
+                    //    auto res = videocomp.load(file);
+                    //    if (res.wasOk())
+                    //    {
+                    //        int seconds = videocomp.getVideoDuration();
+                    //        int min = seconds / 60;
+                    //        seconds = seconds % 60;
+                    //        duration = juce::String(min) + "'" + juce::String(seconds);
+                    //    }
+                    //}
+                    outputString +=
+                        file.getFileName() + "\t" +
+                        duration + "\t" +
+                        file.getFullPathName() + "\t" +
+                        "" /* Key Words */ + "\n";
+                }
+            }
+        }
+        auto outputdir = juce::File::createFileWithoutCheckingPath(outputPathTextEditor.getText());
+        auto outputfile = outputdir.getChildFile("liuuni.txt");
+        auto times = 1;
+        while (outputfile.existsAsFile())
+            outputfile = outputdir.getChildFile("liuuni(" + juce::String(times++) + ").txt");
+        juce::FileOutputStream outputfilestream(outputfile);
+        outputfilestream.writeString(outputString);
+        outputfilestream.flush();
+        juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Done"));
+    }
 }
 
 void CreateDBComp::paint (juce::Graphics& g)
@@ -97,13 +166,29 @@ void CreateDBComp::buttonClicked(juce::Button* btn)
                 auto file = fc.getResult();
                 if (file != juce::File{} && file.isDirectory())
                 {
-                    auto audioFiles = file.findChildFiles(file.findFiles, true, "*.wav");
-                    for (auto af : audioFiles)
-                    {
-                        newData->newFxDB->Fxs.push_back(new Fx(af.getFullPathName(), ""));
-                    }
-                    fxsTable->UpdateNewFxDB();
+                    outputPathTextEditor.setText(file.getFullPathName(), false);
                 }
             });
+    }
+    else if (btn == &addSourceButton)
+    {
+        chooser = std::make_unique<juce::FileChooser>(TRANS("Open"));
+        auto chooserFlags = juce::FileBrowserComponent::canSelectDirectories | juce::FileBrowserComponent::useTreeView;
+        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+            {
+                auto file = fc.getResult();
+                if (file != juce::File{} && file.isDirectory())
+                {
+                    sourceListBox.updateList(file.getFullPathName());
+                }
+            });
+    }
+    else if (btn == &deleteSourceButton)
+    {
+        sourceListBox.updateList("", false);
+    }
+    else if (btn == &createButton)
+    {
+        createDB();
     }
 }

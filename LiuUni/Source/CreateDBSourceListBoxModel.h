@@ -24,6 +24,8 @@ public:
     CreateDBSourceListBoxModel();
     ~CreateDBSourceListBoxModel() override;
 
+    void updateList(juce::String fullPath, bool isAdd = true);
+
     void paint(juce::Graphics& g) override;
     void resized() override;
 

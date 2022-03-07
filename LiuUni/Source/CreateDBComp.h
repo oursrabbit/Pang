@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "CreateDBSourceListBoxModel.h"
+#include "MediaFileInfo.h"
 
 //==============================================================================
 /*
@@ -21,6 +22,8 @@ class CreateDBComp  : public juce::Component, public juce::Button::Listener
 public:
     CreateDBComp();
     ~CreateDBComp() override;
+
+    void createDB();
 
     void paint (juce::Graphics&) override;
     void resized() override;

@@ -57,7 +57,7 @@ juce::File LanguageHelper::GetTransFileByLanguage(juce::File appDataPath, Langua
 	juce::File file;
 	if (language == LanguageEnum::Chinese)
 	{
-		file = appDataPath.getChildFile("TRANS").getChildFile("zh.txt");
+		juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
 	}
 	return file;
 }
