@@ -10,7 +10,8 @@
 
 #include <JuceHeader.h>
 #include "CreateDBComp.h"
-#include "MediaInfo/MediaInfo.h"
+#include "vlc/libvlc.h"
+#include "vlc/libvlc_media.h"
 //==============================================================================
 CreateDBComp::CreateDBComp()
 {
@@ -58,6 +59,10 @@ void CreateDBComp::createDB()
         juce::String outputString = "FileName\tDuration\tFullPath\tKeyWords\n";
         std::vector<MediaFileInfo> mediafiles;
         mediafiles.clear();
+
+        /* Load the VLC engine */
+        auto inst = libvlc_new(0, NULL);
+
         for (size_t i = 0; i < sourceListBox.SourcePaths.size(); i++)
         {
             auto path = sourceListBox.SourcePaths[i];
@@ -71,10 +76,10 @@ void CreateDBComp::createDB()
                 {
                     auto file = files[k];
                     juce::String duration = "";
-                    MediaInfoLib::MediaInfo MI;
-                    MediaInfoLib::String MIPath = file.getFullPathName().toStdString();
-                    MI.Open(MIPath);
-                    auto inof = MI.Inform();
+                    //Create a new item
+                    auto m = libvlc_media_new_path(inst, file.getFullPathName().toRawUTF8());
+                    //auto media = VLC::Media(instance,file.getFullPathName().toStdString(), VLC::Media::FromPath);
+                    //media.duration();
                     //juce::AudioFormatManager manager;
                     //manager.registerBasicFormats();
                     //auto reader = manager.createReaderFor(file);
