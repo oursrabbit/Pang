@@ -10,8 +10,7 @@
 
 #include <JuceHeader.h>
 #include "CreateDBComp.h"
-#include "vlc/libvlc.h"
-#include "vlc/libvlc_media.h"
+#include <vlc/vlc.h>
 //==============================================================================
 CreateDBComp::CreateDBComp()
 {
@@ -60,8 +59,10 @@ void CreateDBComp::createDB()
         std::vector<MediaFileInfo> mediafiles;
         mediafiles.clear();
 
-        /* Load the VLC engine */
-        auto inst = libvlc_new(0, NULL);
+        libvlc_instance_t* inst;
+        libvlc_media_t* m;
+
+        inst = libvlc_new(0, NULL);
 
         for (size_t i = 0; i < sourceListBox.SourcePaths.size(); i++)
         {
@@ -77,34 +78,13 @@ void CreateDBComp::createDB()
                     auto file = files[k];
                     juce::String duration = "";
                     //Create a new item
-                    auto m = libvlc_media_new_path(inst, file.getFullPathName().toRawUTF8());
-                    //auto media = VLC::Media(instance,file.getFullPathName().toStdString(), VLC::Media::FromPath);
-                    //media.duration();
-                    //juce::AudioFormatManager manager;
-                    //manager.registerBasicFormats();
-                    //auto reader = manager.createReaderFor(file);
-                    
-                    //if (reader != nullptr)
-                    //{
-                    //    int seconds = reader->lengthInSamples / reader->sampleRate;
-                    //    int min = seconds / 60;
-                    //    seconds = seconds % 60;
-                    //    duration = juce::String(min) + "'" + juce::String(seconds);
-                    //    delete reader;
-                    //}
-                    //else
-                    //{
-                    //    juce::VideoComponent videocomp(false);
-                    //    addAndMakeVisible(videocomp);
-                    //    auto res = videocomp.load(file);
-                    //    if (res.wasOk())
-                    //    {
-                    //        int seconds = videocomp.getVideoDuration();
-                    //        int min = seconds / 60;
-                    //        seconds = seconds % 60;
-                    //        duration = juce::String(min) + "'" + juce::String(seconds);
-                    //    }
-                    //}
+                    m = libvlc_media_new_path(inst, file.getFullPathName().toRawUTF8());
+                    libvlc_media_parse(m);
+                    auto time = libvlc_media_get_duration(m) / 1000; // s
+                    libvlc_media_release(m);
+                    int min = time / 60;
+                    int seconds = time % 60;
+                    duration = juce::String(min) + "'" + juce::String(seconds);
                     outputString +=
                         file.getFileName() + "\t" +
                         duration + "\t" +
@@ -121,6 +101,7 @@ void CreateDBComp::createDB()
         juce::FileOutputStream outputfilestream(outputfile);
         outputfilestream.writeString(outputString);
         outputfilestream.flush();
+        libvlc_release(inst);
         juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Done"));
     }
 }

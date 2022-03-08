@@ -88,7 +88,7 @@ void MainComponent::resized()
     // update their positions.
 
     CreateDBButton.setBounds(10, 10, 380, 185);
-    CompDBButton.setBounds(10, 205, 380, 185);
+    //CompDBButton.setBounds(10, 205, 380, 185);
 }
 
 void MainComponent::buttonClicked(juce::Button* btn)
