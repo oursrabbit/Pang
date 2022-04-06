@@ -57,7 +57,7 @@ juce::File LanguageHelper::GetTransFileByLanguage(juce::File appDataPath, Langua
 	juce::File file;
 	if (language == LanguageEnum::Chinese)
 	{
-		juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
+		//juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
 	}
 	return file;
 }
