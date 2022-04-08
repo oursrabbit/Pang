@@ -53,6 +53,8 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
     {
         menu.addItem(201, TRANS("Export Excel Text Template"));
         menu.addItem(202, TRANS("Import Excel Text File"));
+        menu.addItem(203, TRANS("Import Database File"));
+        menu.addItem(204, TRANS("Edit Database"));
     }
     else if (menuName == TRANS("Windows"))
     {
@@ -83,10 +85,14 @@ void PangMenuComponent::menuItemSelected(int menuItemID, int)
     case 101: // System/System Settings...
         SystemHelper::Helper->OpenSystemSettingsWindow();
         break;
-    case 201: // Database/Edit Database
+    case 201: // Database/Export Excel Text Template
         //SystemHelper::Helper->OpenDatabaseEditorWindow();
         break;
-    case 202: // Database/Edit Database
+    case 202: // Database/Import Excel Text File
+        break;
+    case 203: // Database/Import Database File
+        break;
+    case 204: // Database/Edit Database
         break;
     case 301: // Windows/New Search Window
         SystemHelper::Helper->OpenMainWindow();

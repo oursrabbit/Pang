@@ -1,0 +1,2 @@
+说明（此行勿删）：FileFullPath、FileName及Description列必须存在，且顺序不可改变，其他列可自行添加，保存时格式选择为“文本文档（制表符间隔）（*.txt）”格式		
+FileFullPath	FileName	Description

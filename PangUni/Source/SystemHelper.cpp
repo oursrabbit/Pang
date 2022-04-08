@@ -16,23 +16,23 @@ void SystemHelper::_initSystemHelper()
     audioDeviceManager.reset(new juce::AudioDeviceManager());
     SystemHelper::Helper->systemSettingsHelper->GetAudioDevice(audioDeviceManager.get());
 
-    auto currentLangS = SystemHelper::Helper->systemSettingsHelper->GetLanguage();
-    auto currentAppBasePath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBasePath();
-    auto transFile = SystemHelper::Helper->languageHelper->GetTransFileByLanguage(currentAppBasePath, currentLangS);
-    if (transFile.existsAsFile())
-    {
-        juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
-    }
-    
-    // Only For Chinese
-    if(currentLangS == "Chinese")
-    {
-#ifdef WIN32
-        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
-#else
-        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("STHeiti");
-#endif //WIN32
-    }
+//    auto currentLangS = SystemHelper::Helper->systemSettingsHelper->GetLanguage();
+//    auto currentAppBasePath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBasePath();
+//    auto transFile = SystemHelper::Helper->languageHelper->GetTransFileByLanguage(currentAppBasePath, currentLangS);
+//    if (transFile.existsAsFile())
+//    {
+//        juce::LocalisedStrings::setCurrentMappings(new juce::LocalisedStrings(transFile, false));
+//    }
+//    
+//    // Only For Chinese
+//    if(currentLangS == "Chinese")
+//    {
+//#ifdef WIN32
+//        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("YaHei");
+//#else
+//        juce::LookAndFeel_V4::getDefaultLookAndFeel().setDefaultSansSerifTypefaceName("STHeiti");
+//#endif //WIN32
+//    }
 
     searchWindows.clear();
     databaseEditorWindows.clear();

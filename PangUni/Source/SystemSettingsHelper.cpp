@@ -24,11 +24,13 @@ SystemSettingsHelper::~SystemSettingsHelper()
 juce::String SystemSettingsHelper::GetAppDataBasePath()
 {
     auto path = AppPropertiesFile->getValue(SettingsKey_Basic_AppDataBasePath, "");
-    auto pathFile = juce::File::createFileWithoutCheckingPath(path);
-    if (pathFile.existsAsFile())
-        return juce::File::getSpecialLocation(juce::File::SpecialLocationType::userApplicationDataDirectory).getFullPathName();
-    else
-        return path;
+    auto appDBRootFolder = juce::File::createFileWithoutCheckingPath(path);
+    if (!appDBRootFolder.exists() || appDBRootFolder.existsAsFile())
+    {
+        this->SetAppDataBasePath(juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getFullPathName() + "\\Pang\\");
+        path = AppPropertiesFile->getValue(SettingsKey_Basic_AppDataBasePath, "");
+    }
+    return path;
 }
 
 juce::File SystemSettingsHelper::GetAppDataBaseFolder()
