@@ -12,13 +12,15 @@ public:
 
     FxDB();
     // file: excel txt
-    // id: combobox itemid, Start from 1, CANNOT BE 0
-    FxDB(juce::File file, int id, bool none);
+    FxDB(juce::File excelFile);
 
     // file: pxml
     // id: combobox itemid, Start from 1, CANNOT BE 0
-    FxDB(juce::File file, int id);
-    void Serialization(juce::File file);
+    FxDB(juce::File pxmlFile, int id);
+    void LoadFxDBFromExcel(juce::File excelFile);
+    void LoadFxDBFromPXML(juce::File pxmlFile, int id);
+    void SerializationToPXML(juce::File pxmlFile);
+    void SerializationToExcel(juce::File excelFile);
 
     // FxDB =============================================================================================
 

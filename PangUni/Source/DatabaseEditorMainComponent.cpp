@@ -171,7 +171,7 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                 auto file = fc.getResult();
                 if (file != juce::File{})
                 {
-                    newData->newFxDB = new FxDB(file, 1, true);
+                    newData->newFxDB = new FxDB(file);
                     fxInfosTable->UpdateNewFxDB();
                     fxsTable->UpdateNewFxDB();
                 }
@@ -219,7 +219,7 @@ void DatabaseEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClick
                 auto file = fc.getResult();
                 if (file != juce::File{})
                 {
-                    newData->newFxDB->Serialization(file);
+                    newData->newFxDB->SerializationToPXML(file);
                 }
             });
     }

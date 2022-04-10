@@ -52,9 +52,9 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
     else if (menuName == TRANS("Database"))
     {
         menu.addItem(201, TRANS("Export Excel Text Template"));
-        menu.addItem(202, TRANS("Import Excel Text File"));
-        menu.addItem(203, TRANS("Import Database File"));
-        menu.addItem(204, TRANS("Edit Database"));
+        menu.addItem(202, TRANS("Convert Excel Text File to Database File"));
+        menu.addItem(203, TRANS("Convert Database File to Excel Text File"));
+        menu.addItem(204, TRANS("Import Database File"));
     }
     else if (menuName == TRANS("Windows"))
     {
@@ -64,9 +64,9 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
     {
         juce::StringArray daw;
         SystemHelper::Helper->spotHelper->GetDAWName(daw);
-        menu.addItem(401, TRANS("Spot to ProTools"), daw.contains("ProTools"), SystemHelper::Helper->userPerposeSpotDAW == "ProTools");
-        menu.addItem(402, TRANS("Spot to Cubase"), daw.contains("Cubase"), SystemHelper::Helper->userPerposeSpotDAW == "Cubase");
-        menu.addItem(403, TRANS("Spot to wWise"), daw.contains("wWise"), SystemHelper::Helper->userPerposeSpotDAW == "wWise");
+        menu.addItem(401, TRANS("Spot to ProTools"), daw.contains("ProTools"), SystemHelper::Helper->userPurposeSpotDAW == "ProTools");
+        menu.addItem(402, TRANS("Spot to Cubase"), daw.contains("Cubase"), SystemHelper::Helper->userPurposeSpotDAW == "Cubase");
+        menu.addItem(403, TRANS("Spot to wWise"), daw.contains("wWise"), SystemHelper::Helper->userPurposeSpotDAW == "wWise");
         menu.addSeparator();
         menu.addItem(404, TRANS("Audio Convertor"), false);
         menu.addItem(405, TRANS("RIFF Editor"), false);
@@ -86,25 +86,28 @@ void PangMenuComponent::menuItemSelected(int menuItemID, int)
         SystemHelper::Helper->OpenSystemSettingsWindow();
         break;
     case 201: // Database/Export Excel Text Template
-        //SystemHelper::Helper->OpenDatabaseEditorWindow();
+        SystemHelper::Helper->ExportDBTPFile();
         break;
-    case 202: // Database/Import Excel Text File
+    case 202: // Database/Convert Excel Text File to Database File
+        SystemHelper::Helper->ConvertExcelToPXML();
         break;
-    case 203: // Database/Import Database File
+    case 203: // Database/Convert Database File to Excel Text File
+        SystemHelper::Helper->ConvertPXMLToExcel();
         break;
-    case 204: // Database/Edit Database
+    case 204: // Database/Import Database File
+        SystemHelper::Helper->ImportDB();
         break;
     case 301: // Windows/New Search Window
         SystemHelper::Helper->OpenMainWindow();
         break;
     case 401: // Tools/Spot/ProTools
-        SystemHelper::Helper->userPerposeSpotDAW = "ProTools";
+        SystemHelper::Helper->userPurposeSpotDAW = "ProTools";
         break;
     case 402: // Tools/Spot/Cubase
-        SystemHelper::Helper->userPerposeSpotDAW = "Cubase";
+        SystemHelper::Helper->userPurposeSpotDAW = "Cubase";
         break;
     case 403: // Tools/Spot/wWise
-        SystemHelper::Helper->userPerposeSpotDAW = "wWise";
+        SystemHelper::Helper->userPurposeSpotDAW = "wWise";
         break;
     case 404: // Tools/Audio Convertor
         break;

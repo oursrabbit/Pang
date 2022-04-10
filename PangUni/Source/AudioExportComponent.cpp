@@ -162,7 +162,7 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
     }
     else if (buttonThatWasClicked == exportButton.get())
     {
-        if (this->newData->CurrentFx != nullptr && SystemHelper::Helper->userPerposeSpotDAW != "")
+        if (this->newData->CurrentFx != nullptr && SystemHelper::Helper->userPurposeSpotDAW != "")
         {
             auto* reader = manager.createReaderFor(this->newData->CurrentFx->GetAudioFile());
             if (reader != nullptr)
@@ -250,7 +250,7 @@ void AudioExportComponent::buttonClicked(juce::Button* buttonThatWasClicked)
                 delete writer;
                 delete reader;
 
-                if (SystemHelper::Helper->userPerposeSpotDAW == "ProTools")
+                if (SystemHelper::Helper->userPurposeSpotDAW == "ProTools")
                 {
                     SystemHelper::Helper->spotHelper->SpotToProTools(outFile, 0, outSizeInt);
                 }

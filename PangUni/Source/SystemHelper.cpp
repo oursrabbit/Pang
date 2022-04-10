@@ -7,7 +7,7 @@ SystemHelper::SystemHelper()
 
 void SystemHelper::_initSystemHelper()
 {
-    userPerposeSpotDAW = "";
+    userPurposeSpotDAW = "";
     systemSettingsHelper.reset(new SystemSettingsHelper());
     languageHelper.reset(new LanguageHelper());
     baiduAIHelper.reset(new BaiduAIHelper());
@@ -70,6 +70,7 @@ void SystemHelper::_releaseSystemHelper()
     languageHelper = nullptr;
     baiduAIHelper = nullptr;
     spotHelper = nullptr;
+    chooser = nullptr;
 }
 
 void SystemHelper::InitSystemHelper()
@@ -89,11 +90,6 @@ void SystemHelper::OpenMainWindow()
     searchWindows.push_back(std::unique_ptr<SearchWindow>(new SearchWindow("Pang Uni Search")));
 }
 
-void SystemHelper::OpenDatabaseEditorWindow()
-{
-    databaseEditorWindows.push_back(std::unique_ptr<DatabaseEditorWindow>(new DatabaseEditorWindow("Pang Uni Database Editor")));
-}
-
 void SystemHelper::OpenSystemSettingsWindow()
 {
     systemSettingsWindow.reset(new SystemSettingsWindow("Pang Uni System Settings"));
@@ -107,6 +103,75 @@ void SystemHelper::OpenAudioConvertorWindow()
 void SystemHelper::OpenRIFFEditorWindow()
 {
     riffEditorWindows.push_back(std::unique_ptr<RIFFEditorWindow>(new RIFFEditorWindow("Pang Uni RIFF Editor")));
+}
+
+void SystemHelper::ExportDBTPFile()
+{
+    chooser = std::make_unique<juce::FileChooser>(TRANS("Export Excel Text Template"), juce::File(), "*.txt");
+    auto chooserFlags = juce::FileBrowserComponent::saveMode;
+    chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+        {
+            auto desFile = fc.getResult();
+            if (desFile != juce::File{})
+            {
+                auto resFile = SystemHelper::Helper->systemSettingsHelper->GetAppDataBaseFolder().getChildFile("RES").getChildFile("DBTP.txt");
+                if (resFile.existsAsFile())
+                {
+                    resFile.copyFileTo(desFile);
+                }
+            }
+        });
+}
+
+void SystemHelper::ConvertExcelToPXML()
+{
+    chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.txt");
+    auto chooserFlags = juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles;
+    chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+        {
+            auto excelFile = fc.getResult();
+            if (excelFile != juce::File{})
+            {
+                auto newDB = new FxDB(excelFile);
+                auto pxmlFile = excelFile.getParentDirectory().getChildFile(excelFile.getFileNameWithoutExtension() + ".pxml");
+                newDB->SerializationToPXML(pxmlFile);
+                juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Output into same folder."));
+            }
+        });
+}
+
+void SystemHelper::ConvertPXMLToExcel()
+{
+    chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.pxml");
+    auto chooserFlags = juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles;
+    chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+        {
+            auto pxmlFile = fc.getResult();
+            if (pxmlFile != juce::File{})
+            {
+                auto newDB = new FxDB(pxmlFile, -1);
+                auto excelFile = pxmlFile.getParentDirectory().getChildFile(pxmlFile.getFileNameWithoutExtension() + ".txt");
+                newDB->SerializationToExcel(excelFile);
+                juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Output into same folder."));
+            }
+        });
+}
+
+void SystemHelper::ImportDB()
+{
+    chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.pxml");
+    auto chooserFlags = juce::FileBrowserComponent::openMode | juce::FileBrowserComponent::canSelectFiles;
+    chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
+        {
+            auto pxmlFile = fc.getResult();
+            if (pxmlFile != juce::File{})
+            {
+                auto dbPath = SystemHelper::Helper->systemSettingsHelper->GetAppDataBaseFolder().getChildFile("DB")
+                    .getChildFile(pxmlFile.getFileName());
+                pxmlFile.copyFileTo(dbPath);
+                juce::AlertWindow::showMessageBoxAsync(juce::MessageBoxIconType::InfoIcon, "", TRANS("Restart application to reload database."));
+            }
+        });
 }
 
 void SystemHelper::OpenHandBookFile()

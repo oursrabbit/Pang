@@ -33,13 +33,19 @@ public:
     std::unique_ptr<SpotHelper> spotHelper;
 
     std::unique_ptr<juce::AudioDeviceManager> audioDeviceManager;
-    juce::String userPerposeSpotDAW;
+    juce::String userPurposeSpotDAW;
+
+    std::unique_ptr<juce::FileChooser> chooser;
 
     void OpenMainWindow();
-    void OpenDatabaseEditorWindow();
     void OpenSystemSettingsWindow();
     void OpenAudioConvertorWindow();
     void OpenRIFFEditorWindow();
+
+    void ExportDBTPFile();
+    void ConvertExcelToPXML();
+    void ConvertPXMLToExcel();
+    void ImportDB();
     void OpenHandBookFile();
 
 private:
