@@ -7,7 +7,7 @@ SystemSettingsHelper::SystemSettingsHelper()
     options.applicationName = ProjectInfo::projectName;
     options.filenameSuffix = ".pxml";
     options.osxLibrarySubFolder = "Application Support";
-    options.folderName = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getFullPathName() + "\\Pang\\";
+    options.folderName = juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile("Pang").getFullPathName();
     options.storageFormat = juce::PropertiesFile::storeAsXML;
     AppProperties->setStorageParameters(options);
 
@@ -27,7 +27,7 @@ juce::String SystemSettingsHelper::GetAppDataBasePath()
     auto appDBRootFolder = juce::File::createFileWithoutCheckingPath(path);
     if (!appDBRootFolder.exists() || appDBRootFolder.existsAsFile())
     {
-        this->SetAppDataBasePath(juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getFullPathName() + "\\Pang\\");
+        this->SetAppDataBasePath(juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile("Pang").getFullPathName());
         path = AppPropertiesFile->getValue(SettingsKey_Basic_AppDataBasePath, "");
     }
     return path;
@@ -66,11 +66,13 @@ int SystemSettingsHelper::GetSpotChannels()
 juce::String SystemSettingsHelper::GetSpotOutputFolder()
 {
     auto path = AppPropertiesFile->getValue(SettingsKey_Spot_OutputFolder, "");
-    auto pathFile = juce::File::createFileWithoutCheckingPath(path);
-    if (pathFile.existsAsFile())
-        return juce::File::getSpecialLocation(juce::File::SpecialLocationType::userDocumentsDirectory).getFullPathName();
-    else
-        return path;
+    auto spotFolder = juce::File::createFileWithoutCheckingPath(path);
+    if (!spotFolder.exists() || spotFolder.existsAsFile())
+    {
+        this->SetSpotOutputFolder(juce::File::getSpecialLocation(juce::File::userDocumentsDirectory).getChildFile("Pang").getChildFile("Spot").getFullPathName());
+        path = AppPropertiesFile->getValue(SettingsKey_Spot_OutputFolder, "");
+    }
+    return path;
 }
 
 juce::String SystemSettingsHelper::GetSpotResampleType()

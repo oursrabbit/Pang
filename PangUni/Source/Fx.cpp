@@ -7,6 +7,7 @@ Fx::Fx()
 
     Infos.push_back(new FxInfo(1, "FileName", "Absolute Path At Here"));
     Infos.push_back(new FxInfo(2, "Description", "Some Description Text, Ignore Case"));
+    Infos.push_back(new FxInfo(2, "FileFullPath", "Some Description Text, Ignore Case"));
 }
 
 Fx::Fx(juce::String exceltxt, std::vector<FxInfo* > dbSchema)
@@ -27,6 +28,7 @@ Fx::Fx(juce::String absolutePath, juce::String description)
 
     Infos.push_back(new FxInfo(1, "FileName", absolutePath));
     Infos.push_back(new FxInfo(2, "Description", description));
+    Infos.push_back(new FxInfo(2, "FileFullPath", ""));
 }
 
 Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)
@@ -44,12 +46,20 @@ Fx::Fx(juce::XmlElement* infosXMLNode, std::vector<FxInfo* > dbSchema)
 
 juce::File Fx::GetAudioFile()
 {
-    return juce::File::createFileWithoutCheckingPath(GetInfoValueByName("FileName")->Value);
+    auto pathInfo = GetInfoValueByName("FileFullPath");
+    if (pathInfo != nullptr)
+        return juce::File::createFileWithoutCheckingPath(pathInfo->Value);
+    else
+        return juce::File();
 }
 
 juce::String Fx::GetAudioDescription()
 {
-    return juce::String(GetInfoValueByName("Description")->Value);
+    auto desInfo = GetInfoValueByName("Description");
+    if (desInfo != nullptr)
+        return juce::String(desInfo->Value);
+    else
+        return "";
 }
 
 FxInfo* Fx::GetInfoValueByColumnID(int id)
