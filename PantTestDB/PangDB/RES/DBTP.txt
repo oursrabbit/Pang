@@ -1,0 +1,2 @@
+说明（此行勿删）：默认使用FileFullPath列表示文件所在位置，可自行添加列，但只能使用英文字符，Excel打开与保存时格式选择为"Unicode(*.txt)"，编码为"UTF-8"或"Unicode"	
+FileFullPath

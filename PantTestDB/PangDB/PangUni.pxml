@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PROPERTIES>
+  <VALUE name="AppDataBasePath" val="C:\Users\YC\Documents\Pang\"/>
+  <VALUE name="SpotOutputFolder" val="C:\Users\YC\Documents\Pang\Spot"/>
+  <VALUE name="Language" val="Chinese"/>
+  <VALUE name="AutoTranslate" val="0"/>
+  <VALUE name="AudioDeviceManagerXML">
+    <DEVICESETUP deviceType="Windows Audio" audioOutputDeviceName="&#25196;&#22768;&#22120; (Realtek(R) Audio)"
+                 audioInputDeviceName="" audioDeviceRate="48000.0"/>
+  </VALUE>
+  <VALUE name="SpotSampleRate" val="48000"/>
+  <VALUE name="SpotBitDepth" val="24"/>
+  <VALUE name="SpotChannels" val="2"/>
+  <VALUE name="SpotResampleType" val="LinearInterpolator"/>
+</PROPERTIES>
