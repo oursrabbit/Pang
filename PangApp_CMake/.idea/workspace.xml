@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Pang" targetName="Pang" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=/Users/yangcan/vcpkg/scripts/buildsystems/vcpkg.cmake" ENABLED="true" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="157b3b5d-dcb2-4194-ba3c-ce6a4f893140" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/PangApp_CMake.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SpotToRegion/.idea/SpotToRegion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/Fx.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/Fx.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/FxDB.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/FxDB.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/FxDB.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/FxDB.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/AudioSearch/AudioSearchComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/UI/AudioSearch/AudioSearchComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/AudioSearch/AudioSearchComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/UI/AudioSearch/AudioSearchComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Menu/ApplicationSettingComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Menu/ApplicationSettingComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Menu/ApplicationSettingComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Menu/ApplicationSettingComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/BaiduAI/BaiduAI.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/BaiduAI/BaiduAI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/DatabaseHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/DatabaseHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/SpotToDAW/ProTools/RegionSpotter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/SpotToDAW/ProTools/RegionSpotter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/SpotToDAW/ProTools/RegionSpotter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/SpotToDAW/ProTools/RegionSpotter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/SystemSettingsHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/SystemSettingsHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/SystemSettingsHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/SystemSettingsHelper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/TranslateHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/TranslateHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/TranslateHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/TranslateHelper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/DB/TESTRES（Local）.pxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/DB/Z_BOP_Metadata.pxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 Hat+Snr1 Bel.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 Hat+Snr1 Bel.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 KikSnrLp Pow.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 mLP Mixx Bel.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 mLP Mixx Bel.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 mLP Mixx Pow.wav" beforeDir="false" afterPath="$PROJECT_DIR$/../PantTestDB/TESTRES/093 mLP Mixx Pow.wav" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="22dBkWqzTRt3sv98pLWQ5ENZOy7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Pang" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pang" TARGET_NAME="Pang" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Pang" RUN_TARGET_NAME="Pang">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="157b3b5d-dcb2-4194-ba3c-ce6a4f893140" name="Default Changelist" comment="" />
+      <created>1640157730853</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640157730853</updated>
+      <workItem from="1640157734846" duration="636000" />
+      <workItem from="1640233054027" duration="13545000" />
+      <workItem from="1640320042306" duration="5193000" />
+      <workItem from="1640658479080" duration="91000" />
+      <workItem from="1640659530928" duration="1937000" />
+      <workItem from="1640668062958" duration="5337000" />
+      <workItem from="1640696508767" duration="1553000" />
+      <workItem from="1640751975320" duration="99000" />
+      <workItem from="1640764003093" duration="1500000" />
+      <workItem from="1640839157302" duration="398000" />
+      <workItem from="1640927756534" duration="3073000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
