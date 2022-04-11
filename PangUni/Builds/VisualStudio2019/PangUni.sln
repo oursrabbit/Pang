@@ -1,6 +1,5 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio Version 16
+# Visual Studio 2019
 
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PangUni - App", "PangUni_App.vcxproj", "{192CA842-02E2-8761-9DA9-1E83AAB3E238}"
 EndProject
