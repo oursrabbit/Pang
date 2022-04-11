@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Pang>
+  <SoundEffect>
+    <FileFullPath/>
+    <Description/>
+    <CD No./>
+    <Track/>
+    <Filename/>
+    <Time/>
+    <name/>
+    <Index/>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track01.wav</FileFullPath>
+    <Description>Forest Ambience 1; Happy Light Bird Chirps / Calls Medium Distant. Flies Buzz By.</Description>
+    <CD No.>PE01</CD No.>
+    <Track>1</Track>
+    <Filename>ForestAmbienceBird PE010101.wav</Filename>
+    <Time>3:02</Time>
+    <name>PE010101.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track02.wav</FileFullPath>
+    <Description>&quot;Forest Ambience 2 [special Mix]; Happy Bird Chirps And Calls, Close And Distant Perspective With Light Wind.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>2</Track>
+    <Filename>ForestAmbienceMix PE010201.wav</Filename>
+    <Time>1:56</Time>
+    <name>PE010201.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track03.wav</FileFullPath>
+    <Description>Forest Ambience 3; Distant Birds And Frogs With A Few Close Bird Calls. Wind Through Grass / Trees.</Description>
+    <CD No.>PE01</CD No.>
+    <Track>3</Track>
+    <Filename>ForestAmbienceDis PE010301.wav</Filename>
+    <Time>2:42</Time>
+    <name>PE010301.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track04.wav</FileFullPath>
+    <Description>&quot;Birds Chirp, Close To Distant Perspective. Morning Dove, Insects, Dog Barks In Background; Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>4</Track>
+    <Filename>BirdsChirpCloseDis PE010401.wav</Filename>
+    <Time>1:36</Time>
+    <name>PE010401.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track05.wav</FileFullPath>
+    <Description>&quot;Morning Park Birds Medium Distant, With One Bird Chirping, Close Perspective; Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>5</Track>
+    <Filename>MorningParkBirdsMe PE010501.wav</Filename>
+    <Time>2:33</Time>
+    <name>PE010501.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track06.wav</FileFullPath>
+    <Description>&quot;Geese And Ducks In Pond, Medium Distant Perspective; Very Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>6</Track>
+    <Filename>GeeseDucksPondMedi PE010601.wav</Filename>
+    <Time>3:29</Time>
+    <name>PE010601.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track07.wav</FileFullPath>
+    <Description>&quot;Mountain Ambience; Insects In Close Perspective. Coyote, Dog, Frog And Crickets In Background.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>7</Track>
+    <Filename>MountainAmbienceIn PE010701.wav</Filename>
+    <Time>3:45</Time>
+    <name>PE010701.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track08.wav</FileFullPath>
+    <Description>&quot;Jungle Ambience [special Mix]; Exotic Bird Background With Calls, Monkey Screams, And Insects; Very Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>8</Track>
+    <Filename>JungleAmbiencespe PE010801.wav</Filename>
+    <Time>4:03</Time>
+    <name>PE010801.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track09.wav</FileFullPath>
+    <Description>Amazon Jungle Ambience 1; Bird Calls Medium And Distant Perspective. Distant Insect Hum With A Few Close Flying Insect Buzzes. Single Cricket Close Perspective; Active.</Description>
+    <CD No.>PE01</CD No.>
+    <Track>9</Track>
+    <Filename>AmazonJungleAmbien PE010901.wav</Filename>
+    <Time>2:08</Time>
+    <name>PE010901.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track10.wav</FileFullPath>
+    <Description>&quot;Amazon Jungle Ambience 2; Bird Calls Medium And Distant Perspectives. Loud Insect Hum, Medium Distant. Tree Cracks And Falls Into Water Near Tail. [note; This Effect Has A Lot Of Out Of Phase Sign&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>10</Track>
+    <Filename>AmazonJungleAmbien PE011001.wav</Filename>
+    <Time>2:57</Time>
+    <name>PE011001.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track11.wav</FileFullPath>
+    <Description>Night Jungle Ambience 1; Unusual Bird Calls Medium And Distant Perspectives. Insect Swells Close Perspective; Very Active.</Description>
+    <CD No.>PE01</CD No.>
+    <Track>11</Track>
+    <Filename>NightJungleAmbienc PE011101.wav</Filename>
+    <Time>1:59</Time>
+    <name>PE011101.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track12.wav</FileFullPath>
+    <Description>&quot;Night Jungle Ambience 2; Distant, High-pitched Insects And Crickets; Calm.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>12</Track>
+    <Filename>NightJungleAmbienc PE011201.wav</Filename>
+    <Time>3:05</Time>
+    <name>PE011201.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track13.wav</FileFullPath>
+    <Description>&quot;Night Jungle Ambience 3; Heavy Bed Of Medium Distant, High-pitched Insects And Crickets; More Active Than Fx 12.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>13</Track>
+    <Filename>NightJungleAmbienc PE011301.wav</Filename>
+    <Time>2:23</Time>
+    <name>PE011301.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track14.wav</FileFullPath>
+    <Description>&quot;Night Jungle Ambience 4; Heavy, Distant, High- Pitched Insects And Steady Cicada Buzz.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>14</Track>
+    <Filename>NightJungleAmbienc PE011401.wav</Filename>
+    <Time>2:34</Time>
+    <name>PE011401.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track15.wav</FileFullPath>
+    <Description>&quot;Night Ambience 1; Light, High-pitched Crickets Rhythmic Chirps And Occasional Insects Buzz Medium Close Perspective. Dogs Bark And Traffic Distant Perspective.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>15</Track>
+    <Filename>NightAmbienceLight PE011501.wav</Filename>
+    <Time>2:06</Time>
+    <name>PE011501.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track16.wav</FileFullPath>
+    <Description>&quot;Night Ambience 2; Heavy Bed Of Mid-range And High-pitched Crickets Hum And Chirp, Close Perspective; Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>16</Track>
+    <Filename>NightAmbienceHeavy PE011601.wav</Filename>
+    <Time>1:22</Time>
+    <name>PE011601.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track17.wav</FileFullPath>
+    <Description>&quot;Night Ambience 3; Light And Calm Mid-range Crickets Rhythmic Chirps, Close To Distant Perspective. [note; This Effect Has A Lot Of Out Of Phase In It.].&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>17</Track>
+    <Filename>NightAmbienceLight PE011701.wav</Filename>
+    <Time>1:44</Time>
+    <name>PE011701.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track18.wav</FileFullPath>
+    <Description>&quot;Night Ambience 4; Calm, Distant Bed Of High-pitched Crickets Hum And Buzz, With A Single, Sporadic Cricket; Close Perspective. [note This Effect Has A Lot Of Out Of Phase In It.].&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>18</Track>
+    <Filename>NightAmbienceCalm PE011801.wav</Filename>
+    <Time>3:33</Time>
+    <name>PE011801.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track19.wav</FileFullPath>
+    <Description>&quot;Night Ambience 5; Large Bed Of High-pitched And Mid-range Crickets And Insects Loud Hum And Rhythmic Chirps, Medium Perspective; Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>19</Track>
+    <Filename>NightAmbienceLarg PE011901.wav</Filename>
+    <Time>3:30</Time>
+    <name>PE011901.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track20.wav</FileFullPath>
+    <Description>&quot;Single Cricket, Sporadic Chirps; Close Perspective. [note This Effect Has A Lot Of Out Of Phase In It.].&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>20</Track>
+    <Filename>SingleCricketSpora PE012001.wav</Filename>
+    <Time>1:18</Time>
+    <name>PE012001.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track21.wav</FileFullPath>
+    <Description>&quot;Swarm Of Flies, Close Perspective; Very Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>21</Track>
+    <Filename>SwarmFliesClosePer PE012101.wav</Filename>
+    <Time>0:21</Time>
+    <name>PE012101.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track22.wav</FileFullPath>
+    <Description>&quot;Country Night Ambience 1; Wide Perspective Crickets And Insects Chirp And Buzz, Medium Perspective, With A Few At Close Perspective. Busy, Squawky Frogs At Close To Medium Perspective. Very Distant&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>22</Track>
+    <Filename>CountryNightAmbien PE012201.wav</Filename>
+    <Time>2:06</Time>
+    <name>PE012201.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track23.wav</FileFullPath>
+    <Description>&quot;Country Night Ambience 2; Crickets And Insects Chirp, Medium To Distant Perspective, With A Few Intermittent, Close Perspective. Squawky Frogs Close To Medium Perspective. Distant Traffic Roar. Ca&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>23</Track>
+    <Filename>CountryNightAmbien PE012301.wav</Filename>
+    <Time>2:33</Time>
+    <name>PE012301.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track24.wav</FileFullPath>
+    <Description>&quot;Swamp Ambience 1; Large Chorus Of High And Low Pitched Frogs Croak, Close Perspective. Insects Chirp, Medium Distant Perspective; Active.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>24</Track>
+    <Filename>SwampAmbienceLarg PE012401.wav</Filename>
+    <Time>4:06</Time>
+    <name>PE012401.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track25.wav</FileFullPath>
+    <Description>&quot;Swamp Ambience 2 [special Mix]; Light Chorus Of Frogs Croak, Distant Perspective, With Insects Lazy Chirps, Medium Distant Perspective.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>25</Track>
+    <Filename>SwampAmbienceMix PE012501.wav</Filename>
+    <Time>2:36</Time>
+    <name>PE012501.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track26.wav</FileFullPath>
+    <Description>&quot;Swamp Ambience 3 [special Mix]; Light Chorus Of Frogs Croak, Close Perspective. Crickets And Insects Chirp, Distant Perspective; Calm.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>26</Track>
+    <Filename>SwampAmbienceMix PE012601.wav</Filename>
+    <Time>2:33</Time>
+    <name>PE012601.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track27.wav</FileFullPath>
+    <Description>&quot;Marsh Ambience; Large Bed Of High-pitched Insect Hum, Medium Close Perspective, With Light Chorus Of Frogs, Distant Perspective. Intermittent Exotic Bird Calls, Close Perspective.&quot;</Description>
+    <CD No.>PE01</CD No.>
+    <Track>27</Track>
+    <Filename>MarshAmbienceLarge PE012701.wav</Filename>
+    <Time>3:15</Time>
+    <name>PE012701.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+  <SoundEffect>
+    <FileFullPath>/Volumes/Data/SoundEffect/Premiere.Edition.1.SFX/CD01/Track28.wav</FileFullPath>
+    <Description>Exotic Rain Forest [special Mix]; Insects Chirp Close To Medium Perspective. Intermittent Unusual Bird And Gorilla Calls With Some Echo Medium To Distant Perspective. Small River Is Babbling Close P</Description>
+    <CD No.>PE01</CD No.>
+    <Track>28</Track>
+    <Filename>ExoticRainForest PE012801.wav</Filename>
+    <Time>3:26</Time>
+    <name>PE012801.wav</name>
+    <Index>1</Index>
+  </SoundEffect>
+</Pang>
