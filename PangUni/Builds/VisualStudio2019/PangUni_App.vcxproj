@@ -144,6 +144,7 @@
     <ClCompile Include="..\..\Source\FxInfo.cpp"/>
     <ClCompile Include="..\..\Source\AudioConvertorMainComponent.cpp"/>
     <ClCompile Include="..\..\Source\RIFFEditorMainComponent.cpp"/>
+    <ClCompile Include="..\..\Source\RIFFTableComponent.cpp"/>
     <ClCompile Include="..\..\Source\AudioDeviceSettingsComponent.cpp"/>
     <ClCompile Include="..\..\Source\BasicSettingsComponent.cpp"/>
     <ClCompile Include="..\..\Source\SpotSettingsComponent.cpp"/>
@@ -2137,6 +2138,7 @@
     <ClInclude Include="..\..\Source\AudioConvertorWindow.h"/>
     <ClInclude Include="..\..\Source\RIFFEditorMainComponent.h"/>
     <ClInclude Include="..\..\Source\RIFFEditorWindow.h"/>
+    <ClInclude Include="..\..\Source\RIFFTableComponent.h"/>
     <ClInclude Include="..\..\Source\AudioDeviceSettingsComponent.h"/>
     <ClInclude Include="..\..\Source\BasicSettingsComponent.h"/>
     <ClInclude Include="..\..\Source\SpotSettingsComponent.h"/>

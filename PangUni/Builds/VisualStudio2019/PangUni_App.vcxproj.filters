@@ -511,6 +511,9 @@
     <ClCompile Include="..\..\Source\RIFFEditorMainComponent.cpp">
       <Filter>PangUni\Source\Windows\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\RIFFTableComponent.cpp">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\AudioDeviceSettingsComponent.cpp">
       <Filter>PangUni\Source\Windows\SystemSetting</Filter>
     </ClCompile>
@@ -2719,6 +2722,9 @@
       <Filter>PangUni\Source\Windows\Tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\RIFFEditorWindow.h">
+      <Filter>PangUni\Source\Windows\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\RIFFTableComponent.h">
       <Filter>PangUni\Source\Windows\Tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\AudioDeviceSettingsComponent.h">

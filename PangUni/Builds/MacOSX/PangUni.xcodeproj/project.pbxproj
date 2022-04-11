@@ -37,6 +37,7 @@
 		738CFB7E3DFA86E2368E3BBE /* include_juce_gui_extra.mm */ = {isa = PBXBuildFile; fileRef = FA9AA1484EE93A986A58B3B4; };
 		74FBF43921286980D1BD1384 /* Carbon.framework */ = {isa = PBXBuildFile; fileRef = D42303900533154594C16F3D; };
 		797DD1D28C0657218A006BB2 /* ThumbnailCoverComponent.cpp */ = {isa = PBXBuildFile; fileRef = 7AE4DCE51F6821283E9EB957; };
+		79EF9489C223497238B6B554 /* RIFFTableComponent.cpp */ = {isa = PBXBuildFile; fileRef = ECA4CFD81C45E1CC130DE04E; };
 		7CE5E6D95F92EF10936C333D /* Cocoa.framework */ = {isa = PBXBuildFile; fileRef = A003099159836468438D9D31; };
 		7F4AA876C2492066EA3A5048 /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = 3748B30126CEB61642A54646; };
 		85BBC04EC81D584A4A8BB620 /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = A989BA2CD4CC2CF2EAF60CF1; };
@@ -111,6 +112,7 @@
 		3E29F2D9FF732662ED4CD5DD /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3F394AF9578DC5CA42AFC5A1 /* ThumbnailComponent.h */ /* ThumbnailComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ThumbnailComponent.h; path = ../../Source/ThumbnailComponent.h; sourceTree = SOURCE_ROOT; };
 		40375675BC47DC1FE8DFFF82 /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
+		412D32F3537866AC9F37E31F /* RIFFTableComponent.h */ /* RIFFTableComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RIFFTableComponent.h; path = ../../Source/RIFFTableComponent.h; sourceTree = SOURCE_ROOT; };
 		41F48D359D80F045B38FA0CA /* CustomTableCells.cpp */ /* CustomTableCells.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CustomTableCells.cpp; path = ../../Source/CustomTableCells.cpp; sourceTree = SOURCE_ROOT; };
 		460FF9E4F8240A3FDEE04B47 /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
 		47814CD2F5178945B0BA3C13 /* Fx.cpp */ /* Fx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Fx.cpp; path = ../../Source/Fx.cpp; sourceTree = SOURCE_ROOT; };
@@ -185,6 +187,7 @@
 		E90FD6A0484C23C6C66501A0 /* ThumbnailComponent.cpp */ /* ThumbnailComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ThumbnailComponent.cpp; path = ../../Source/ThumbnailComponent.cpp; sourceTree = SOURCE_ROOT; };
 		EAFED9A003444249C6754574 /* include_juce_events.mm */ /* include_juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_events.mm; path = ../../JuceLibraryCode/include_juce_events.mm; sourceTree = SOURCE_ROOT; };
 		EBBB85A3FDDB69763E149CBE /* BaiduAIHelper.h */ /* BaiduAIHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BaiduAIHelper.h; path = ../../Source/BaiduAIHelper.h; sourceTree = SOURCE_ROOT; };
+		ECA4CFD81C45E1CC130DE04E /* RIFFTableComponent.cpp */ /* RIFFTableComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RIFFTableComponent.cpp; path = ../../Source/RIFFTableComponent.cpp; sourceTree = SOURCE_ROOT; };
 		EF4ED7D8ECCDB837A28028A5 /* SearchWindowMainComponent.cpp */ /* SearchWindowMainComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SearchWindowMainComponent.cpp; path = ../../Source/SearchWindowMainComponent.cpp; sourceTree = SOURCE_ROOT; };
 		F090DFECA3838016D956ACEB /* MainComponent.cpp */ /* MainComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainComponent.cpp; path = ../../Source/MainComponent.cpp; sourceTree = SOURCE_ROOT; };
 		F3227AFD9DA9B9BFAC8D431D /* FxTableModel.cpp */ /* FxTableModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FxTableModel.cpp; path = ../../Source/FxTableModel.cpp; sourceTree = SOURCE_ROOT; };
@@ -296,6 +299,8 @@
 				DB0C5BBEFC682E03C0542201,
 				D841D6D5581168FA2B154DAF,
 				D462BF3E9923C5DBDF43F7B5,
+				ECA4CFD81C45E1CC130DE04E,
+				412D32F3537866AC9F37E31F,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				6D4725162F6B563D27306743,
 				15F332744EA99438F0CFA8BF,
 				878880AE7D47E067657DE295,
+				79EF9489C223497238B6B554,
 				BEF807B619DB8771E5178832,
 				49670A24A60EEC39C6A53378,
 				C2DE0EFEAD4AF3644E171514,

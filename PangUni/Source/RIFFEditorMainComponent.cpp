@@ -14,18 +14,52 @@
 //==============================================================================
 RIFFEditorMainComponent::RIFFEditorMainComponent()
 {
-    openFileButton.reset(new juce::TextButton(""));
-    openFileButton->setButtonText(TRANS("Open"));
-    openFileButton->addListener(this);
-    addAndMakeVisible(openFileButton.get());
+    //[Constructor_pre] You can add your own custom stuff here..
+    //[/Constructor_pre]
 
-    setSize(1000, 600);
+    resFileLabel.reset(new juce::Label("resFileLabel",
+        TRANS("Resource File:")));
+    addAndMakeVisible(resFileLabel.get());
+    resFileLabel->setFont(juce::Font(15.00f, juce::Font::plain).withTypefaceStyle("Regular"));
+    resFileLabel->setJustificationType(juce::Justification::centredLeft);
+    resFileLabel->setEditable(false, false, false);
+    resFileLabel->setColour(juce::TextEditor::textColourId, juce::Colours::black);
+    resFileLabel->setColour(juce::TextEditor::backgroundColourId, juce::Colour(0x00000000));
+
+    resFileLabel->setBounds(24, 16, 100, 24);
+
+    openResFileButton.reset(new juce::TextButton("openResFileButton"));
+    addAndMakeVisible(openResFileButton.get());
+    openResFileButton->setButtonText(TRANS("..."));
+    openResFileButton->addListener(this);
+
+    openResFileButton->setBounds(504, 16, 40, 24);
+
+    resTextEditor.reset(new juce::TextEditor("resTextEditor"));
+    addAndMakeVisible(resTextEditor.get());
+    resTextEditor->setMultiLine(false);
+    resTextEditor->setReturnKeyStartsNewLine(false);
+    resTextEditor->setReadOnly(false);
+    resTextEditor->setScrollbarsShown(true);
+    resTextEditor->setCaretVisible(true);
+    resTextEditor->setPopupMenuEnabled(true);
+    resTextEditor->setText(juce::String());
+
+    resTextEditor->setBounds(144, 16, 328, 24);
+
+    riffInfoTable.reset(new RIFFTableComponent());
+    addAndMakeVisible(riffInfoTable.get());
+    riffInfoTable->setBounds(32, 64, 512, 472);
+
+    setSize(600, 400);
 }
 
 RIFFEditorMainComponent::~RIFFEditorMainComponent()
 {
-    openFileButton = nullptr;
-    chooser = nullptr;
+    resFileLabel = nullptr;
+    openResFileButton = nullptr;
+    resTextEditor = nullptr;
+    riffInfoTable = nullptr;
 }
 
 void RIFFEditorMainComponent::paint(juce::Graphics& g)
@@ -35,27 +69,16 @@ void RIFFEditorMainComponent::paint(juce::Graphics& g)
 
 void RIFFEditorMainComponent::resized()
 {
-    openFileButton->setBounds(100, 100, 100, 100);
+    resFileLabel->setBounds(8, 8, 100, 30);
+    resTextEditor->setBounds(8 + 100 + 8, 8, getWidth() - 8 - 100 - 8 - 8 - 40 - 8, 30);
+    openResFileButton->setBounds(getWidth() - 8 - 40, 8, 40, 30);
+
+    riffInfoTable->setBounds(8, 8 + 30 + 8, getWidth() - 8 - 8, getHeight() - 8 - 30 - 8 - 8);
 }
 
-void RIFFEditorMainComponent::buttonClicked(juce::Button* btn)
+void RIFFEditorMainComponent::buttonClicked(juce::Button* buttonThatWasClicked)
 {
-    if (btn == openFileButton.get())
+    if (buttonThatWasClicked == openResFileButton.get())
     {
-        chooser = std::make_unique<juce::FileChooser>(TRANS("Open"), juce::File{}, "*.wav");
-        auto chooserFlags = juce::FileBrowserComponent::openMode;
-        chooser->launchAsync(chooserFlags, [this](const juce::FileChooser& fc)
-            {
-                auto file = fc.getResult();
-                if (file != juce::File{} && file.existsAsFile())
-                {
-                    if (file.getFileExtension() == ".wav")
-                    {
-                        auto wavExFormate = new WavAudioFormatPangEx(new juce::FileInputStream(file));
-                        
-                        delete wavExFormate;
-                    }
-                }
-            });
     }
 }

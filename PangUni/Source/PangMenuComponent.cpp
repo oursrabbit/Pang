@@ -68,8 +68,8 @@ juce::PopupMenu PangMenuComponent::getMenuForIndex(int, const juce::String& menu
         menu.addItem(402, TRANS("Spot to Cubase"), daw.contains("Cubase"), SystemHelper::Helper->userPurposeSpotDAW == "Cubase");
         menu.addItem(403, TRANS("Spot to wWise"), daw.contains("wWise"), SystemHelper::Helper->userPurposeSpotDAW == "wWise");
         menu.addSeparator();
-        menu.addItem(404, TRANS("Audio Convertor"), false);
-        menu.addItem(405, TRANS("RIFF Editor"), false);
+        menu.addItem(404, TRANS("Audio Convertor"));
+        menu.addItem(405, TRANS("RIFF Editor"));
     }
     else if(menuName == TRANS("?Help"))
     {
@@ -110,8 +110,10 @@ void PangMenuComponent::menuItemSelected(int menuItemID, int)
         SystemHelper::Helper->userPurposeSpotDAW = "wWise";
         break;
     case 404: // Tools/Audio Convertor
+        SystemHelper::Helper->OpenAudioConvertorWindow();
         break;
     case 405: // Tools/RIFF Editor
+        SystemHelper::Helper->OpenRIFFEditorWindow();
         break;
     case 501: // ?Help/Open Handbook
         SystemHelper::Helper->OpenHandBookFile();

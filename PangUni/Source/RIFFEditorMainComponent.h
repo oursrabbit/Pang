@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "WAVFormatPangEx.h"
+#include "RIFFTableComponent.h"
 
 //==============================================================================
 /*
@@ -24,11 +25,12 @@ public:
 
     void paint(juce::Graphics&) override;
     void resized() override;
+    void buttonClicked(juce::Button* buttonThatWasClicked) override;
 
-    virtual void buttonClicked(juce::Button*) override;
-
-    std::unique_ptr<juce::TextButton> openFileButton;
-    std::unique_ptr<juce::FileChooser> chooser;
+    std::unique_ptr<juce::Label> resFileLabel;
+    std::unique_ptr<juce::TextButton> openResFileButton;
+    std::unique_ptr<juce::TextEditor> resTextEditor;
+    std::unique_ptr<RIFFTableComponent> riffInfoTable;
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(RIFFEditorMainComponent)

@@ -28,6 +28,10 @@
                 file="Source/RIFFEditorMainComponent.h"/>
           <FILE id="YdNcZU" name="RIFFEditorWindow.h" compile="0" resource="0"
                 file="Source/RIFFEditorWindow.h"/>
+          <FILE id="XrZT1K" name="RIFFTableComponent.cpp" compile="1" resource="0"
+                file="Source/RIFFTableComponent.cpp"/>
+          <FILE id="HSEv2i" name="RIFFTableComponent.h" compile="0" resource="0"
+                file="Source/RIFFTableComponent.h"/>
         </GROUP>
         <GROUP id="{6F5415A4-26D3-FDDB-827D-C31D40AA15C5}" name="SystemSetting">
           <FILE id="UYZMoB" name="AudioDeviceSettingsComponent.cpp" compile="1"
