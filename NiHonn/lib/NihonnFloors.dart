@@ -43,6 +43,32 @@ class NihonnFloors {
   }
 }
 
+class NihonnFloorsListWidgetStateless extends StatelessWidget {
+  const NihonnFloorsListWidgetStateless({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const title = "階（かい）";
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(title),
+      ),
+      body: ListView.builder(
+        // Let the ListView know how many items it needs to build.
+        itemCount: NihonnFloors.floorElements.length,
+        // Provide a builder function. This is where the magic happens.
+        // Convert each item into a widget based on the type of item it is.
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text("${NihonnFloors.floorElements.values.elementAt(index)} 階"),
+            subtitle: Text("${NihonnFloors.floorElements.keys.elementAt(index)} 层"),
+          );
+        },
+      ),
+    );
+  }
+}
+
 class NihonnFloorsListWidget extends StatefulWidget {
   const NihonnFloorsListWidget({Key? key}) : super(key: key);
 
@@ -56,36 +82,33 @@ class NihonnFloorsListState extends State {
   @override
   Widget build(BuildContext context) {
     const title = "階（かい）";
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
-        ),
-        body: ListView.builder(
-          // Let the ListView know how many items it needs to build.
-          itemCount: items.length,
-          // Provide a builder function. This is where the magic happens.
-          // Convert each item into a widget based on the type of item it is.
-          itemBuilder: (context, index) {
-            final item = items[index];
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(title),
+      ),
+      body: ListView.builder(
+        // Let the ListView know how many items it needs to build.
+        itemCount: items.length,
+        // Provide a builder function. This is where the magic happens.
+        // Convert each item into a widget based on the type of item it is.
+        itemBuilder: (context, index) {
+          final item = items[index];
 
-            return ListTile(
-              title: Text(item.show ? "${item.chinese}\n${item.nihonngo}\n" : "${item.chinese}\n\n"),
-              subtitle: const TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "Input Here",
-                ),
+          return ListTile(
+            title: Text(item.show ? "${item.chinese}\n${item.nihonngo}\n" : "${item.chinese}\n\n"),
+            subtitle: const TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Input Here",
               ),
-              onTap: () {
-                setState(() {
-                  item.show = !item.show;
-                });
-              },
-            );
-          },
-        ),
+            ),
+            onTap: () {
+              setState(() {
+                item.show = !item.show;
+              });
+            },
+          );
+        },
       ),
     );
   }
